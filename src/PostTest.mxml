@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" 
+			   xmlns:s="library://ns.adobe.com/flex/spark" 
+			   xmlns:mx="library://ns.adobe.com/flex/mx" minWidth="397" minHeight="298">
+	
+	<fx:Script>
+		<![CDATA[
+			private function toggleFullScreen(e:Event):void {
+				try {
+					switch ( stage.displayState ) {
+						case StageDisplayState.FULL_SCREEN:
+							/* If already in full screen mode, switch to normal mode. */
+							stage.displayState = StageDisplayState.NORMAL;
+							break;
+						default:
+							/* If not in full screen mode, switch to full screen mode. */
+							stage.displayState = StageDisplayState.FULL_SCREEN;
+							break;
+					}
+				} catch (err:SecurityError) {
+					// ignore
+				}
+			}
+			
+			
+		]]>
+	</fx:Script>
+	
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	
+	
+	<s:Rect width="100%" height="100%">
+		<s:fill>
+			<s:SolidColor color="0x333333"/>
+		</s:fill>
+	</s:Rect>
+	
+	<s:Label text="helloworld" />
+	
+	
+</s:Application>
