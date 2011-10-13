@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx" width="100%" height="100%"
+		 creationComplete="componentCreationComplete(event)">
+	<fx:Script>
+		<![CDATA[
+			import mx.events.FlexEvent;
+			
+			import spark.events.IndexChangeEvent;
+			
+			protected function entryLog_changeHandler(event:IndexChangeEvent):void
+			{
+				// TODO Auto-generated method stub
+				
+			}
+			
+			protected function componentCreationComplete(event:FlexEvent):void
+			{
+				var altview:AltViewsMediator = new AltViewsMediator();
+				altview.register(this);
+				
+			}
+			
+		]]>
+	</fx:Script>
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	
+	<s:Image  x="0" y="0" source="@Embed('assets/alt-viewsPanel-bkg.png')" />
+	<s:List id="altViewList" width="100%" x="80" y="0" 
+			borderVisible="false" contentBackgroundAlpha="0"
+			itemRenderer="com.virid.fbcheckout.view.smallviews.AltViewItemRenderer"
+			change="entryLog_changeHandler(event)">
+		<s:layout>
+			<s:HorizontalLayout gap="0" paddingBottom="0" paddingLeft="0" paddingRight="0"/>
+		</s:layout>
+	</s:List>
+</s:Group>

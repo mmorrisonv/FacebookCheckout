@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx"
+		 width="100%" height="100%">
+	<fx:Script>
+		<![CDATA[
+			import mx.core.UIComponent;
+			import mx.events.FlexEvent;
+			
+			private var _backcolor:uint;
+			private var _text:String;
+			[Bindable]private var _textColor:uint;
+			
+			public function set textColor(value:uint):void
+			{
+				_textColor = value;
+				
+				
+			}
+
+			public function set text(value:String):void
+			{
+				_text = value;
+				this.label.text = _text;
+			}
+
+			public function set backColor(value:uint):void
+			{
+				_backcolor = value;
+				this.backFill.color = _backcolor;
+			}
+
+		]]>
+	</fx:Script>
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	<s:Rect id="back" width="100%" height="100%" alpha=".5">
+		<s:fill>
+			<s:SolidColor id="backFill" />
+		</s:fill>
+	</s:Rect>
+	<s:Label id="label" color="{_textColor}" verticalCenter="0" fontSize="10" styleName="lubalin"/>
+</s:Group>
