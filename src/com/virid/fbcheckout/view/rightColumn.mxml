@@ -1,14 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
 		 xmlns:s="library://ns.adobe.com/flex/spark" 
-		 xmlns:mx="library://ns.adobe.com/flex/mx" width="154" height="100%" xmlns:smallviews="com.virid.fbcheckout.view.smallviews.*">
+		 xmlns:mx="library://ns.adobe.com/flex/mx" width="154" height="100%" xmlns:smallviews="com.virid.fbcheckout.view.smallviews.*"
+		 creationComplete="creationComplete(event)" xmlns:view="com.virid.fbcheckout.view.*">
 	<fx:Script>
 		<![CDATA[
+			import mx.events.FlexEvent;
+			
 			import spark.events.IndexChangeEvent;
 			
 			protected function ratingChanged(event:IndexChangeEvent):void
 			{
 				// TODO Auto-generated method stub
+				
+			}
+			
+			protected function creationComplete(event:FlexEvent):void
+			{
+				var myMediator:RightColumnMediator = new RightColumnMediator();
+				myMediator.register(this);
+				
+			}
+			
+			protected function sizeSelectClick(event:MouseEvent):void
+			{
+				this.sizeSelect.visible =  !this.sizeSelect.visible;
+				//this.colorSelect.includeInLayout = true;
+				
+			}
+			
+			protected function colorSelectClick(event:MouseEvent):void
+			{
+				this.colorSelect.visible = !this.colorSelect.visible;
 				
 			}
 			
@@ -38,19 +61,31 @@
 			</s:List>
 			
 			<s:Label id="prodName" y="20" x="20" maxWidth="120"
-					 text="productname here" 
+					 text="---" 
 					 fontSize="12" color="0xffffff" styleName="lubalin"/>	
+			<s:Group  y="70" width="100%">
+				
+				<s:Group click="sizeSelectClick(event)" width="100%">
+					<smallviews:OpaqueFullWidthHeading text="Select a Size" 
+													   textColor="0x000000" backColor="0xffffff"											  
+													   width="100%" height="16" x="3"  />
+					<s:Label id="selectedSize" styleName="lubalin" text="Selected Size" 
+							 color="0xffffff" fontSize="16" y="23" x="20"/>						
+				</s:Group>
 			
-			<smallviews:OpaqueFullWidthHeading text="Select a Size" 
-											   textColor="0x000000" backColor="0xffffff"											  
-											   width="100%" height="16" x="3" y="60" />
-			<s:Label id="selectedSize" styleName="lubalin" text="Selected Size" 
-					 color="0xffffff" fontSize="16" y="85" x="20"/>
-			<smallviews:OpaqueFullWidthHeading text="Select a Color" 
-											   textColor="0x000000" backColor="0xffffff"											  
-											   width="100%" height="16" x="3" y="110" />
-			<s:Label id="selectedColor" styleName="lubalin" text="Selected Color" 
-					 color="0xffffff" fontSize="16" y="135" x="20" />
+			
+			  	<s:Group click="colorSelectClick(event)" width="100%" y="44">
+					<smallviews:OpaqueFullWidthHeading text="Select a Color" 
+													   textColor="0x000000" backColor="0xffffff"											  
+													   width="100%" height="16" x="3" />
+					<s:Label id="selectedColor" styleName="lubalin" text="Selected Color" 
+							 color="0xffffff" fontSize="16" y="24" x="20" />	
+				</s:Group>
+			
+			</s:Group>
+
+			<view:PopupColorSelect id="colorSelect" visible="false" includeInLayout="false" y="90"/>
+			<view:PopupSizeSelect id="sizeSelect" visible="false" includeInLayout="false" y="60"/>
 		</s:Group>
 		
 		<s:Group width="100%">

@@ -1,6 +1,7 @@
 package com.virid.fbcheckout.model
 {
 	import com.virid.fbcheckout.model.vo.AltViewVO;
+	import com.virid.fbcheckout.model.vo.ProductVO;
 
 	public class Context
 	{
@@ -13,10 +14,14 @@ package com.virid.fbcheckout.model
 		
 		private function buildMainProduct():void
 		{
-			model.MainProduct.name = "Womens Osiris NYC 83 Slim Skate Shoe - White/Zebra";
-			model.MainProduct.color= "0xfcfcfc";
-			model.MainProduct.sku  = "we234";
-			model.MainProduct.source = "assets/images/data/prodimage.jpg";
+			var Product:ProductVO = new ProductVO();
+			
+			Product.name = "Womens Osiris NYC 83 Slim Skate Shoe - White/Zebra";
+			Product.color= "0xfcfcfc";
+			Product.sku  = "we234";
+			Product.source = "assets/images/data/prodimage.jpg";
+			
+			model.MainProduct = Product;
 		}
 		
 		private function buildTestAltViews():void{
