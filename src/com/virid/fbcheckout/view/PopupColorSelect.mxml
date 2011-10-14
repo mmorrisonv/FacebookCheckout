@@ -14,9 +14,10 @@
 		</s:Line>
 		<s:Label id="gender" text=" Women's Men's Kidz" fontSize="12" styleName="lubalin" />
 
-		<s:List left="10" right="10" bottom="10">
+		<s:List left="10" right="10" bottom="10"
+				itemRenderer="com.virid.fbcheckout.view.smallviews.SizeItemRenderer">
 			<s:layout>
-				<s:TileLayout />
+				<s:TileLayout columnWidth="45" />
 			</s:layout>
 			</s:List>
 	</s:VGroup>

@@ -28,5 +28,6 @@ package com.virid.fbcheckout.model
 		
 		public var AltViews:ArrayCollection = new ArrayCollection();
 		public var MainProduct:ProductVO = new ProductVO();
+		
 	}	
 }
