@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx" width="153" height="80">
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	<s:VGroup>
+		<s:Label text="Select A Size" />
+		<s:Line width="2">
+			<s:stroke>
+				<s:SolidColorStroke color="0xffffff"/>
+			</s:stroke>
+		</s:Line>
+		<s:Label id="gender" text=" Women's Men's Kidz" fontSize="12" styleName="lubalin" />
+
+		<s:List left="10" right="10" bottom="10">
+			<s:layout>
+				<s:TileLayout />
+			</s:layout>
+			</s:List>
+	</s:VGroup>
+	
+</s:Group>
