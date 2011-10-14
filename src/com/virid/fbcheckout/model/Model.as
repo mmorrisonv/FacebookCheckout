@@ -3,9 +3,11 @@ package com.virid.fbcheckout.model
 	import com.virid.fbcheckout.model.Model;
 	import com.virid.fbcheckout.model.vo.ProductVO;
 	
+	import flash.events.EventDispatcher;
+	
 	import mx.collections.ArrayCollection;
 
-	public class Model
+	public class Model extends EventDispatcher
 	{
 		
 		/*Singelton Model code*/
@@ -27,7 +29,20 @@ package com.virid.fbcheckout.model
 		
 		
 		public var AltViews:ArrayCollection = new ArrayCollection();
-		public var MainProduct:ProductVO = new ProductVO();
+		private var _MainProduct:ProductVO = new ProductVO();
+
+		public function get MainProduct():ProductVO
+		{
+			return _MainProduct;
+		}
+
+		public function set MainProduct(value:ProductVO):void
+		{
+			_MainProduct = value;
+			//this.dispatchEvent();
+			
+		}
+
 		
 	}	
 }
