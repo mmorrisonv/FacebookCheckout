@@ -1,24 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
 <s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
 		 xmlns:s="library://ns.adobe.com/flex/spark" 
-		 xmlns:mx="library://ns.adobe.com/flex/mx" width="153" height="120">
+		 xmlns:mx="library://ns.adobe.com/flex/mx" width="153" height="120" 
+		 show="popupShown(event)" creationComplete="componentCreationComplete(event)">
+	<fx:Script>
+		<![CDATA[
+			import mx.core.UIComponent;
+			import mx.events.FlexEvent;
+			
+			private var stageClickCount = 0;
+			
+			protected function popupShown(event:FlexEvent):void
+			{
+				
+				this.stageClickCount = 0;
+				this.stage.addEventListener(MouseEvent.CLICK,onStageClick);
+			
+			}
+			
+			protected function onStageClick(event:MouseEvent):void
+			{
+				stageClickCount++;
+				
+				//if we are clicking the actual component return
+				if(event.target == this || stageClickCount <= 1)
+					return;
+				//search for 'THIS' in parentDocument tree, ensuring we arent clicking on a child of this popup
+				var currTest:UIComponent = event.target as UIComponent;
+				while(currTest.parentDocument != null && currTest != parentApplication)
+				{
+					currTest = currTest.parentDocument as UIComponent;
+					if(currTest == this)
+						return
+				}
+				//close the popup if we reach this code
+				this.visible = false;
+				this.stage.removeEventListener(MouseEvent.CLICK,onStageClick);
+				
+
+			}
+			
+			protected function componentCreationComplete(event:FlexEvent):void
+			{
+				var mediator:PopupColorSelectMediator = new PopupColorSelectMediator();
+				mediator.register(this);
+				
+			}
+		]]>
+	</fx:Script>
 	<fx:Declarations>
 		<!-- Place non-visual elements (e.g., services, value objects) here -->
 	</fx:Declarations>
-	<s:VGroup>
-		<s:Rect width="100%" height="100%">
-			<s:fill>
-				<s:SolidColor color="0xaaaaaa" />
-			</s:fill>
-		</s:Rect>
-		<s:Label id="gender" text=" Select a Color" fontSize="12" styleName="lubalin" />
+	<s:Rect width="100%" height="100%">
+		<s:fill>
+			<s:SolidColor color="0xaaaaaa" />
+		</s:fill>
+	</s:Rect>
+	<s:Group width="100%" height="100%">
+		<s:Label id="gender" text=" Select a Color" 
+				 top="4"
+				 fontSize="12" styleName="lubalin" />
 
-		<s:List left="10" right="10" bottom="10"
+		<s:List id="colorSelect" 
+				width="100%"
+				top="16" left="8" right="8" bottom="8"
 				itemRenderer="com.virid.fbcheckout.view.smallviews.ColorItemRenderer">
 			<s:layout>
 				<s:TileLayout columnWidth="45" />
 			</s:layout>
 			</s:List>
-	</s:VGroup>
+	</s:Group>
 	
 </s:Group>

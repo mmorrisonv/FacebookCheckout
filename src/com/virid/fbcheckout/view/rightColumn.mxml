@@ -84,8 +84,7 @@
 			
 			</s:Group>
 
-			<view:PopupColorSelect id="colorSelect" visible="false" includeInLayout="false" y="90"/>
-			<view:PopupSizeSelect id="sizeSelect" visible="false" includeInLayout="false" y="60"/>
+
 		</s:Group>
 		
 		<s:Group width="100%">
@@ -108,7 +107,8 @@
 
 		</s:Group>
 
-
+		<view:PopupColorSelect id="colorSelect" visible="false" includeInLayout="false" y="90"/>
+		<view:PopupSizeSelect id="sizeSelect" visible="false" includeInLayout="false" y="60"/>
 		
 	</s:VGroup>
 

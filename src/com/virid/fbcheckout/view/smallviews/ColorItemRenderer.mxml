@@ -2,8 +2,28 @@
 <s:ItemRenderer xmlns:fx="http://ns.adobe.com/mxml/2009" 
 				xmlns:s="library://ns.adobe.com/flex/spark" 
 				xmlns:mx="library://ns.adobe.com/flex/mx" 
-				autoDrawBackground="true">
+				autoDrawBackground="true" creationComplete="itemrenderer1_creationCompleteHandler(event)">
+	<fx:Script>
+		<![CDATA[
+			import mx.events.FlexEvent;
+			
+			protected function itemrenderer1_creationCompleteHandler(event:FlexEvent):void
+			{
+				// TODO Auto-generated method stub
+				
+			}
+			
+			override public function set data(value:Object):void { 
+				super.data = value; 
+				this.img.source = data.imageTB;
+				//this.img.source = 'assets/logo.png';
+				
+				
+
+			} 
+		]]>
+	</fx:Script>
 	
-	<s:Image source="{data}" width="40" height="40"/>
+	<s:Image id="img"  width="45" height="45"/>
 	
 </s:ItemRenderer>

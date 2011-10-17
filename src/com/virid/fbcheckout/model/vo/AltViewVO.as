@@ -7,7 +7,8 @@ package com.virid.fbcheckout.model.vo
 		public var name : String;
 		public var styleid : String;
 		public var color : String;
-		public var source : String;
+		[Bindable]
+		public var source : String = "";
 		public var thumb : String;
 		public var main : Boolean;
 		public var success : Boolean;

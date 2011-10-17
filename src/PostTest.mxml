@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" 
 			   xmlns:s="library://ns.adobe.com/flex/spark" 
-			   xmlns:mx="library://ns.adobe.com/flex/mx" width="397" height="298" xmlns:view="com.virid.fbcheckout.view.*">
+			   xmlns:mx="library://ns.adobe.com/flex/mx" width="397" height="298" xmlns:view="com.virid.fbcheckout.view.*" addedToStage="component_addedToStageHandler(event)">
 	
 	<fx:Script>
 		<![CDATA[
@@ -26,6 +26,16 @@
 				}
 			}
 			
+			
+			protected function component_addedToStageHandler(event:Event):void
+			{
+				this.stage.addEventListener(MouseEvent.CLICK,stageOnClick);
+			}
+			
+			protected function stageOnClick(event:MouseEvent):void
+			{
+				
+			}
 			
 		]]>
 	</fx:Script>

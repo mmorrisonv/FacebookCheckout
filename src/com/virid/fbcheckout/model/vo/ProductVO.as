@@ -2,6 +2,8 @@ package com.virid.fbcheckout.model.vo
 {
 	import flash.events.EventDispatcher;
 	
+	import mx.collections.ArrayCollection;
+	
 	public class ProductVO extends EventDispatcher
 	{
 		public var name : String;
@@ -14,5 +16,8 @@ package com.virid.fbcheckout.model.vo
 		
 		//meta
 		public var rating:Number;
+		
+		//lists
+		public var Colors:ArrayCollection;
 	}
 }
