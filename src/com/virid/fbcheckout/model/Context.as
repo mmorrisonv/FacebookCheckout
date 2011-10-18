@@ -11,8 +11,8 @@ package com.virid.fbcheckout.model
 		private var model:Model = Model.getInstance();
 		public function Context()
 		{
+			buildTestColors();
 			buildTestAltViews();
-			
 			buildMainProduct();
 		}
 		
@@ -21,16 +21,19 @@ package com.virid.fbcheckout.model
 		{
 			var Product:ProductVO = new ProductVO();
 			
+			
+			var tcolor: ColorVO = this.model.Colors[1];
 			Product.name = "Womens Osiris NYC 83 Slim Skate Shoe - White/Zebra";
-			Product.color= "0xfcfcfc";
+			Product.colorObj = tcolor;
+			Product.colorName= tcolor.name;
 			Product.sku  = "we234";
 			Product.source = "assets/images/data/prodimage.jpg";
 			
-			Product.Colors = new ArrayCollection();
+			
 			
 			model.MainProduct = Product;
 			
-			buildTestColors();
+			
 		}
 		
 		private function buildTestAltViews():void{
@@ -56,7 +59,7 @@ package com.virid.fbcheckout.model
 			color.imageFS = 'assets/data/colors/1_198001_FS.jpg';
 			color.hex = '53874a';
 			color.styleid = '471219';
-			model.MainProduct.Colors.addItem(color);
+			model.Colors.addItem(color);
 			
 			//add item to main product
 			color = new ColorVO();
@@ -65,7 +68,7 @@ package com.virid.fbcheckout.model
 			color.imageFS = 'assets/data/colors/1_167758_FS.jpg';
 			color.hex = 'd4326b';
 			color.styleid = '471180';
-			model.MainProduct.Colors.addItem(color);
+			model.Colors.addItem(color);
 			
 			color = new ColorVO();
 			//add item to main product
@@ -74,7 +77,7 @@ package com.virid.fbcheckout.model
 			color.imageFS = 'assets/data/colors/1_167748_FS.jpg';
 			color.hex = 'c6323e';
 			color.styleid = '471177';
-			model.MainProduct.Colors.addItem(color);
+			model.Colors.addItem(color);
 
 			color = new ColorVO();
 			//add item to main product
@@ -83,7 +86,7 @@ package com.virid.fbcheckout.model
 			color.imageFS = 'assets/data/colors/1_182022_FS.jpg';
 			color.hex = '6dc9f0';
 			color.styleid = '471192';
-			model.MainProduct.Colors.addItem(color);
+			model.Colors.addItem(color);
 		}
 		
 	}

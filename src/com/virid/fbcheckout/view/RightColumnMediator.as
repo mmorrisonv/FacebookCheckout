@@ -16,13 +16,14 @@ package com.virid.fbcheckout.view
 		public function register(_ui:rightColumn):void
 		{
 			this.ui = _ui;
-			model.addEventListener("MainProductChanged",onProductChange);
+			this.model.addEventListener(Model.MainProductChanged,onProductChange);
 			onProductChange(null);
 		}
 		
 		protected function onProductChange(event:Event):void
 		{
 			ui.prodName.text = model.MainProduct.name;
+			ui.selectedColor.text = model.MainProduct.colorObj.name;
 		}
 	}
 }

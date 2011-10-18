@@ -6,6 +6,8 @@
 		<![CDATA[
 			import mx.core.UIComponent;
 			import mx.events.FlexEvent;
+			
+			import spark.events.IndexChangeEvent;
 			private var stageClickCount = 0;
 			protected function popupShown(event:FlexEvent):void
 			{
@@ -36,6 +38,7 @@
 			}
 			
 			
+
 		]]>
 	</fx:Script>
 	<fx:Declarations>
@@ -49,7 +52,7 @@
 	<s:VGroup width="100%" paddingLeft="8" paddingRight="8" paddingBottom="8" paddingTop="8">
 
 		
-		<s:Label text="Select A Size" styleName="lubalin"/>
+		<s:Label text="Select A Size" styleName="lubalin" height="8"/>
 		
 		<s:Line width="100%"><s:stroke><s:SolidColorStroke color="0xffffff" weight="2"/></s:stroke></s:Line>
 		

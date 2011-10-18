@@ -17,10 +17,9 @@
 				super.data = value; 
 				this.img.source = data.imageTB;
 				//this.img.source = 'assets/logo.png';
-				
-				
-
 			} 
+			
+			
 		]]>
 	</fx:Script>
 	

@@ -30,7 +30,7 @@ package com.virid.fbcheckout.model
 		
 		
 		/*
-		 *Events  
+		 *Event Definition
 		*/
 		public static const MainProductChanged:String = "MPC";
 		
@@ -38,6 +38,7 @@ package com.virid.fbcheckout.model
 		 * */
 		public var AltViews:ArrayCollection = new ArrayCollection();
 		private var _MainProduct:ProductVO = new ProductVO();
+		public var Colors:ArrayCollection = new ArrayCollection();
 
 		public function get MainProduct():ProductVO
 		{
