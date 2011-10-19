@@ -15,8 +15,6 @@
 			public function set textColor(value:uint):void
 			{
 				_textColor = value;
-				
-				
 			}
 
 			public function set text(value:String):void
@@ -29,6 +27,16 @@
 			{
 				_backcolor = value;
 				this.backFill.color = _backcolor;
+			}
+			
+			public function set centerAlignContent(value:Boolean):void
+			{
+				this.label.horizontalCenter = 0;
+			}
+			
+			public function set marginLeftContent(value:Number):void
+			{
+				this.label.left = value;
 			}
 
 		]]>

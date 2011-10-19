@@ -3,6 +3,9 @@ package com.virid.fbcheckout.model
 	import com.virid.fbcheckout.model.vo.AltViewVO;
 	import com.virid.fbcheckout.model.vo.ColorVO;
 	import com.virid.fbcheckout.model.vo.ProductVO;
+	import com.virid.fbcheckout.model.vo.SizeVO;
+	
+	import flash.sampler.NewObjectSample;
 	
 	import mx.collections.ArrayCollection;
 
@@ -12,8 +15,9 @@ package com.virid.fbcheckout.model
 		public function Context()
 		{
 			buildTestColors();
-			buildTestAltViews();
+			buildSKUs();
 			buildMainProduct();
+			buildTestAltViews();
 		}
 		
 
@@ -25,8 +29,7 @@ package com.virid.fbcheckout.model
 			var tcolor: ColorVO = this.model.Colors[1];
 			Product.name = "Womens Osiris NYC 83 Slim Skate Shoe - White/Zebra";
 			Product.colorObj = tcolor;
-			Product.colorName= tcolor.name;
-			Product.sku  = "we234";
+			//Product.sku  = null;
 			Product.source = "assets/images/data/prodimage.jpg";
 			
 			
@@ -43,9 +46,9 @@ package com.virid.fbcheckout.model
 			{
 				var testView:AltViewVO = new AltViewVO();
 				testView.source = "assets/data/alt-view"+i+".jpg";
-				model.AltViews.addItem(testView);
+				testView.thumb = testView.source;
+				model.MainProduct.altViews.addItem(testView);
 			}
-			
 		}
 		
 		private function buildTestColors():void
@@ -59,7 +62,9 @@ package com.virid.fbcheckout.model
 			color.imageFS = 'assets/data/colors/1_198001_FS.jpg';
 			color.hex = '53874a';
 			color.styleid = '471219';
+			build471219AltViews(color);
 			model.Colors.addItem(color);
+			
 			
 			//add item to main product
 			color = new ColorVO();
@@ -77,6 +82,7 @@ package com.virid.fbcheckout.model
 			color.imageFS = 'assets/data/colors/1_167748_FS.jpg';
 			color.hex = 'c6323e';
 			color.styleid = '471177';
+			color.defaultColor = true;
 			model.Colors.addItem(color);
 
 			color = new ColorVO();
@@ -87,6 +93,37 @@ package com.virid.fbcheckout.model
 			color.hex = '6dc9f0';
 			color.styleid = '471192';
 			model.Colors.addItem(color);
+		}
+		
+		private function build471219AltViews(color:ColorVO):void
+		{
+			var thumbs:Array = new Array('assets/data/alt-views/1_201046_SW.JPG','assets/data/alt-views/1_201046_SW_BACK.JPG','assets/data/alt-views/1_201046_SW_FRONT.JPG','assets/data/alt-views/1_201046_SW_SIDE.JPG','assets/data/alt-views/1_201046_SW_TOP.JPG');
+			var fullsize:Array = new Array('assets/data/alt-views/1_201046_FS.JPG','assets/data/alt-views/1_201046_FS_BACK.JPG','assets/data/alt-views/1_201046_FS_FRONT.JPG','assets/data/alt-views/1_201046_FS_SIDE.JPG','assets/data/alt-views/1_201046_FS_TOP.JPG');
+			for(var i:uint = 0; i < thumbs.length; i++)
+			{
+				var newAltView:AltViewVO = new AltViewVO();
+				newAltView.thumb = thumbs[i];
+				newAltView.source = fullsize[i];
+				color.AltViews.addItem(newAltView);
+			}
+		}
+		
+		private function buildSKUs():void
+		{
+			var sizes:Array = new Array('XS','S','M','L','XL');
+			for each(var c:ColorVO in model.Colors)
+			{
+				for( var i:Number = 0; i < 5; i++){
+					var nSKU:SizeVO = new SizeVO();
+					nSKU.index = i;
+					nSKU.name = sizes[i];
+					nSKU.size = nSKU.name;
+					nSKU.sku = i + '_' + c.styleid;
+					c.SKUs.addItem(nSKU);
+				}
+				
+				c.currentSKU = c.SKUs[0];
+			}
 		}
 		
 	}

@@ -14,7 +14,7 @@
 			
 			import spark.events.IndexChangeEvent;
 			
-			private var stageClickCount = 0;
+			private var stageClickCount:Number = 0;
 			
 			/*
 			*Event Definition
@@ -22,7 +22,12 @@
 			
 			public static const COLOR_CHANGED:String = "cC";
 			
-			
+			protected function componentCreationComplete(event:FlexEvent):void
+			{
+				var mediator:PopupColorSelectMediator = new PopupColorSelectMediator();
+				mediator.register(this);
+				
+			}
 			/*
 			 *Responders or something 
 			*/
@@ -56,12 +61,7 @@
 
 			}
 			
-			protected function componentCreationComplete(event:FlexEvent):void
-			{
-				var mediator:PopupColorSelectMediator = new PopupColorSelectMediator();
-				mediator.register(this);
-				
-			}
+
 			
 			protected function colorChanged(event:IndexChangeEvent):void
 			{

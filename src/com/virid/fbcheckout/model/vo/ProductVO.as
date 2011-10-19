@@ -7,13 +7,13 @@ package com.virid.fbcheckout.model.vo
 	public class ProductVO extends EventDispatcher
 	{
 		public var name     : String;
-		public var sku      : String;
+		//public var sku      : SizeVO;
 		public var styleid  : String;
-		public var colorName: String;
 		public var colorObj : ColorVO;
 		public var size     : String;
 		public var source   : String;
 		public var price    : String;
+		public var altViews : ArrayCollection = new ArrayCollection();
 		
 		//meta
 		public var rating:Number;

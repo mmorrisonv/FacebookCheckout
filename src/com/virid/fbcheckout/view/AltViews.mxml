@@ -5,20 +5,28 @@
 		 creationComplete="componentCreationComplete(event)">
 	<fx:Script>
 		<![CDATA[
+			import com.virid.fbcheckout.model.vo.AltViewVO;
+			
+			import controller.events.CustomEvent;
+			
 			import mx.events.FlexEvent;
 			
 			import spark.events.IndexChangeEvent;
 			
-			protected function entryLog_changeHandler(event:IndexChangeEvent):void
+			public static const UI_ALTVIEW_SELECTION_CHANGED:String = "AC";
+			
+			protected function altView_changeHandler(event:IndexChangeEvent):void
 			{
-				// TODO Auto-generated method stub
+				var e:CustomEvent;
+				var selItem:AltViewVO = event.target.selectedItems[0] as AltViewVO;
+				e = new CustomEvent(UI_ALTVIEW_SELECTION_CHANGED,selItem,false);
+				dispatchEvent(e);
 				
 			}
-			
 			protected function componentCreationComplete(event:FlexEvent):void
 			{
-				var altview:AltViewsMediator = new AltViewsMediator();
-				altview.register(this);
+				var mediator:AltViewsMediator = new AltViewsMediator();
+				mediator.register(this);
 				
 			}
 			
@@ -32,7 +40,7 @@
 	<s:List id="altViewList" width="100%" x="80" y="0" 
 			borderVisible="false" contentBackgroundAlpha="0"
 			itemRenderer="com.virid.fbcheckout.view.smallviews.AltViewItemRenderer"
-			change="entryLog_changeHandler(event)">
+			change="altView_changeHandler(event)">
 		<s:layout>
 			<s:HorizontalLayout gap="0" paddingBottom="0" paddingLeft="0" paddingRight="0"/>
 		</s:layout>

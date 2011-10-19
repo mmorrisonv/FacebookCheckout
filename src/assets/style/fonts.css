@@ -7,8 +7,17 @@
 	fontFamily:"LubalinDemi";
 }
 
+@font-face {
+	src:url("assets/fonts/HelveticaNeueBold.ttf");
+	fontFamily:"Helv";
+}
+
+
 .lubalin{
 	font-family:"LubalinDemi";
 }
 
 
+.Helv{
+	fontFamily:"Helv";
+}

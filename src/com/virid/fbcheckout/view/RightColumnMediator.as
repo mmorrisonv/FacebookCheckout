@@ -17,6 +17,7 @@ package com.virid.fbcheckout.view
 		{
 			this.ui = _ui;
 			this.model.addEventListener(Model.MainProductChanged,onProductChange);
+			this.model.addEventListener(Model.MainProductColorChanged,onProColorChanged);
 			onProductChange(null);
 		}
 		
@@ -24,6 +25,10 @@ package com.virid.fbcheckout.view
 		{
 			ui.prodName.text = model.MainProduct.name;
 			ui.selectedColor.text = model.MainProduct.colorObj.name;
+		}
+		protected function onProColorChanged(event:Event):void
+		{
+			ui.selectedColor.text = model.MainProduct.colorObj.name
 		}
 	}
 }

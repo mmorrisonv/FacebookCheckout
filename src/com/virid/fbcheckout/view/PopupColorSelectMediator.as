@@ -31,10 +31,7 @@ package com.virid.fbcheckout.view
 			if(event.data != null )
 			{
 				var newColor:ColorVO = event.data as ColorVO;
-				var newMP:ProductVO = this.model.MainProduct;
-				newMP.colorObj = newColor;
-			
-				this.model.MainProduct = newMP;
+				this.model.MainProductColor = newColor;
 			}
 			
 			this.ui.visible = false;

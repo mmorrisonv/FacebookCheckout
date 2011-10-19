@@ -4,10 +4,13 @@ package com.virid.fbcheckout.model.vo
 	
 	public class SizeVO extends EventDispatcher
 	{
-		public var name : String;
-		public var sku : String;
-		public var size: String;
-		public var image : String;
-		public var styleid : String;
+		public var name     : String;
+		public var sku      : String;
+		public var price	: Number;
+		public var size     : String;
+		public var size_code: String
+		public var index    : Number;
+		public var image    : String;
+		public var color    : ColorVO;
 	}
 }

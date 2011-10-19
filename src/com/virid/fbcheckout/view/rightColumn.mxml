@@ -67,27 +67,32 @@
 					<s:HorizontalLayout />
 				</s:layout>
 			</s:List>
-			
+
+			<s:Image source="assets/large-horiz-carrot.png" x="3" y="15" />
 			<s:Label id="prodName" y="20" x="20" maxWidth="120"
 					 text="---" 
 					 fontSize="12" color="0xffffff" styleName="lubalin"/>	
+			
+			
 			<s:Group  y="70" width="100%">
 				
 				<s:Group click="sizeSelectClick(event)" width="100%">
 					<smallviews:OpaqueFullWidthHeading text="Select a Size" 
 													   textColor="0x000000" backColor="0xffffff"											  
-													   width="100%" height="16" x="3"  />
-					<s:Label id="selectedSize" styleName="lubalin" text="Selected Size" 
-							 color="0xffffff" fontSize="16" y="23" x="20"/>						
+													   width="100%" height="14" x="3" marginLeftContent="23" />
+					<s:Label id="selectedSize" styleName="Helv" text="Selected Size" 
+							 color="0xffffff" fontSize="12" y="18" x="24"/>		
+					<s:Image source="assets/small-vertical-carrot.png" x="10" y="23" />
 				</s:Group>
 			
 			
 			  	<s:Group click="colorSelectClick(event)" width="100%" y="44">
 					<smallviews:OpaqueFullWidthHeading text="Select a Color" 
 													   textColor="0x000000" backColor="0xffffff"											  
-													   width="100%" height="16" x="3" />
-					<s:Label id="selectedColor" styleName="lubalin" text="Selected Color" 
-							 color="0xffffff" fontSize="12" y="24" x="20" />	
+													   width="100%" height="14" x="3" marginLeftContent="23"/>
+					<s:Label id="selectedColor" styleName="Helv" text="Selected Color" 
+							 color="0xffffff" fontSize="12" y="18" x="24" />
+					<s:Image source="assets/small-vertical-carrot.png" x="10" y="23" />
 				</s:Group>
 			
 			</s:Group>
@@ -107,11 +112,11 @@
 			</s:Group>			
 
 			<smallviews:OpaqueFullWidthHeading text="See More Like This" 
-											   textColor="0xffffff" backColor="0x000000"											  
-											   width="80%" height="16" horizontalCenter="-3" y="35" />
+											   textColor="0xffffff" backColor="0x000000" fontSize="11" marginLeftContent="8"  										  
+											   width="130" height="18" horizontalCenter="0" y="35" />
 			<smallviews:OpaqueFullWidthHeading text="Check Store Availability" 
-											   textColor="0xffffff" backColor="0x000000"											  
-											   width="80%" height="16" horizontalCenter="-3" y="58" />
+											   textColor="0xffffff" backColor="0x000000" fontSize="11" marginLeftContent="8"											  
+											   width="130" height="18" horizontalCenter="0" y="58" />
 
 		</s:Group>
 
