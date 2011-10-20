@@ -9,6 +9,12 @@
 			
 			import spark.events.IndexChangeEvent;
 			
+			/*
+			*Event Definition
+			*/
+			public static const CHECKOUT:String = "sC";
+			public static const PRODDETAIL:String = "pD";
+			
 			protected function ratingChanged(event:IndexChangeEvent):void
 			{
 				// TODO Auto-generated method stub
@@ -43,6 +49,14 @@
 				
 			}
 			
+			protected function onBuyItNowClick(event:MouseEvent):void
+			{
+				var e:Event = new Event(rightColumn.CHECKOUT,true,false);
+				dispatchEvent(e);
+			}
+			
+
+			
 		]]>
 	</fx:Script>
 	<fx:Declarations>
@@ -54,7 +68,8 @@
 			<s:BitmapFill source="@Embed('assets/rightPanel.jpg')" fillMode="clip"/>
 		</s:fill>
 	</s:Rect>
-
+	<s:Group width="150" height="298" 
+			 x="3" y="0"  useHandCursor="true" buttonMode="true" color="0x000000" contentBackgroundAlpha="1" contentBackgroundColor="0x000000"/>
 	
 	<s:VGroup width="100%" y="54" >
 		
@@ -89,9 +104,9 @@
 			  	<s:Group click="colorSelectClick(event)" width="100%" y="44">
 					<smallviews:OpaqueFullWidthHeading text="Select a Color" 
 													   textColor="0x000000" backColor="0xffffff"											  
-													   width="100%" height="14" x="3" marginLeftContent="23"/>
+													   width="100%"  height="14" x="3" marginLeftContent="23"/>
 					<s:Label id="selectedColor" styleName="Helv" text="Selected Color" 
-							 color="0xffffff" fontSize="12" y="18" x="24" />
+							 color="0xffffff" fontSize="12" y="18" x="24" maxWidth="130" height="23"/>
 					<s:Image source="assets/small-vertical-carrot.png" x="10" y="23" />
 				</s:Group>
 			
@@ -108,7 +123,7 @@
 					</s:fill>
 				</s:Rect>
 				<s:Label text="BUY IT NOW" color="0xffffff" styleName="lubalin" fontSize="19"
-						 verticalCenter="2" horizontalCenter="-3" />
+						 verticalCenter="2" horizontalCenter="-3" click="onBuyItNowClick(event)"/>
 			</s:Group>			
 
 			<smallviews:OpaqueFullWidthHeading text="See More Like This" 

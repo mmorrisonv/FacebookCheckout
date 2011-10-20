@@ -119,6 +119,7 @@ package com.virid.fbcheckout.model
 					nSKU.name = sizes[i];
 					nSKU.size = nSKU.name;
 					nSKU.sku = i + '_' + c.styleid;
+					nSKU.price = (i==0)?50.49:74.99;
 					c.SKUs.addItem(nSKU);
 				}
 				

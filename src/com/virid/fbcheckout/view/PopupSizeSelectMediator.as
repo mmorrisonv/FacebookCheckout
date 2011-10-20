@@ -31,7 +31,7 @@ package com.virid.fbcheckout.view
 		{
 			if(event.data != null )
 			{
-				this.model.MainProduct.colorObj.currentSKU = event.data as SizeVO;
+				this.model.MainProductSKU = event.data as SizeVO;
 				//this.model.MainProductColor.currentSKU = event.data as SizeVO;
 			}
 			

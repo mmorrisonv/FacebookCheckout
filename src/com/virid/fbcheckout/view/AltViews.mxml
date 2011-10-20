@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
 		 xmlns:s="library://ns.adobe.com/flex/spark" 
-		 xmlns:mx="library://ns.adobe.com/flex/mx" width="100%" height="100%"
+		 xmlns:mx="library://ns.adobe.com/flex/mx" width="247" height="100%"
 		 creationComplete="componentCreationComplete(event)">
 	<fx:Script>
 		<![CDATA[
@@ -30,6 +30,12 @@
 				
 			}
 			
+			protected function scrollRightHotspot(event:MouseEvent):void
+			{
+				//altViewList.ensureIndexIsVisible(altViewList.selectedIndex + 1);
+				
+			}
+			
 		]]>
 	</fx:Script>
 	<fx:Declarations>
@@ -37,12 +43,14 @@
 	</fx:Declarations>
 	
 	<s:Image  x="0" y="0" source="@Embed('assets/alt-viewsPanel-bkg.png')" />
-	<s:List id="altViewList" width="100%" x="80" y="0" 
+	<s:List id="altViewList" width="154" x="76" verticalCenter="0"
 			borderVisible="false" contentBackgroundAlpha="0"
-			itemRenderer="com.virid.fbcheckout.view.smallviews.AltViewItemRenderer"
-			change="altView_changeHandler(event)">
+			itemRenderer="com.virid.fbcheckout.view.smallviews.AltViewItemRenderer" horizontalScrollPolicy="off"
+			change="altView_changeHandler(event)" >
 		<s:layout>
-			<s:HorizontalLayout gap="0" paddingBottom="0" paddingLeft="0" paddingRight="0"/>
+			<s:HorizontalLayout columnWidth="42" gap="10" paddingBottom="0" paddingLeft="0" paddingRight="0"/>
 		</s:layout>
 	</s:List>
+	<s:Group rollOver="scrollRightHotspot(event)" width="20" height="100%" x="220" />
+	
 </s:Group>

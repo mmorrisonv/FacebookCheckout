@@ -4,6 +4,7 @@ package com.virid.fbcheckout.model
 	import com.virid.fbcheckout.model.vo.AltViewVO;
 	import com.virid.fbcheckout.model.vo.ColorVO;
 	import com.virid.fbcheckout.model.vo.ProductVO;
+	import com.virid.fbcheckout.model.vo.SizeVO;
 	
 	import flash.events.Event;
 	import flash.events.EventDispatcher;
@@ -34,8 +35,10 @@ package com.virid.fbcheckout.model
 		 *Event Definition
 		*/
 		public static const MainProductChanged:String = "MPC";
-		public static const MainProductColorChanged:String = "MPCC";
+		public static const MainProductColorSKUChanged:String = "MPCSC";
 		public static const MainProductImageChanged:String = "MPIC";
+		public static const StartCheckout:String = "SCOUT";
+		public static const StartProdDetail:String = "SPDETAIL";
 		/*
 		 * */
 		//public var AltViews:ArrayCollection = new ArrayCollection(); - default alt views stored on the MainProduct
@@ -44,10 +47,10 @@ package com.virid.fbcheckout.model
 		private var _MainProductImage:AltViewVO = new AltViewVO();
 		private var _MainProduct:ProductVO = new ProductVO();
 		private var _MainProductColor:ColorVO = new ColorVO();
+		private var _MainProductSKU:SizeVO = new SizeVO();
 		
 		/*
 		 * Setters and Getters for Main Elements*/
-
 		public function get MainProduct():ProductVO
 		{
 			return _MainProduct;
@@ -64,7 +67,14 @@ package com.virid.fbcheckout.model
 		{
 			_MainProductColor= value;
 			_MainProduct.colorObj = value;
-			var e:Event = new Event(MainProductColorChanged,true,false);
+			var e:Event = new Event(MainProductColorSKUChanged,true,false);
+			this.dispatchEvent(e);
+		}
+		public function set MainProductSKU(value:SizeVO):void
+		{
+			_MainProductSKU = value;
+			_MainProduct.colorObj.currentSKU = value;
+			var e:Event = new Event(MainProductColorSKUChanged,true,false);
 			this.dispatchEvent(e);
 		}
 		public function get MainProductImage():AltViewVO
@@ -77,6 +87,15 @@ package com.virid.fbcheckout.model
 			var e:Event = new Event(MainProductImageChanged,true,false);
 			this.dispatchEvent(e);
 		}
-		
+		public function set initiateCheckout(value:Object):void
+		{
+			var e:Event = new Event(StartCheckout,true,false);
+			this.dispatchEvent(e);
+		}
+		public function set initiateProdDetail(value:Object):void
+		{
+			var e:Event = new Event(StartProdDetail,true,false);
+			this.dispatchEvent(e);
+		}
 	}	
 }
