@@ -4,16 +4,18 @@ package com.virid.fbcheckout.view
 	
 	import flash.events.Event;
 	
+	import mx.controls.CheckBox;
+	import mx.effects.Sequence;
+	
 	import spark.effects.Animate;
 	import spark.effects.animation.MotionPath;
 	import spark.effects.animation.SimpleMotionPath;
 	import spark.effects.easing.Power;
-	import mx.effects.Sequence;
 
-	public class RightColumnMediator
+	public class CheckoutMediator
 	{
 		private var model:Model = Model.getInstance();
-		private var ui:rightColumn;
+		private var ui:Checkout;
 		
 		//tranition variables
 		private var bigease:Power = new Power();
@@ -21,54 +23,33 @@ package com.virid.fbcheckout.view
 		private var a1:Animate = new Animate();
 		private var m:SimpleMotionPath = new SimpleMotionPath();
 		
-		public function AltViewsMediator():void
+		public function CheckoutMediator():void
 		{
 			
 		}
 		
-		public function register(_ui:rightColumn):void
+		public function register(_ui:Checkout):void
 		{
 			this.ui = _ui;
-			this.ui.addEventListener(rightColumn.CHECKOUT,ui_OnCheckout);
-			this.ui.addEventListener(rightColumn.PRODDETAIL,ui_OnProdDetail);
 			
-			this.model.addEventListener(Model.MainProductChanged,onProductChange);
 			this.model.addEventListener(Model.MainProductColorSKUChanged,onProdColorSKUChanged);
 			//model listeners:ui
 			this.model.addEventListener(Model.StartCheckout,ui_gotoCheckoutMode);
 			this.model.addEventListener(Model.StartProdDetail,ui_gotoProdDetail);
 			
-			onProductChange(null);
+	
 		}
 		
-		protected function ui_OnProdDetail(event:Event):void
-		{
-			var obj:Object = new Object();
-			obj.start = "NOW";
-			this.model.initiateProdDetail = obj;
-		}
-		
-		protected function ui_OnCheckout(event:Event):void
-		{
-			var obj:Object = new Object();
-			obj.start = "NOW";
-			this.model.initiateCheckout = obj;
-		}
-		
-		protected function onProductChange(event:Event):void
-		{
-			ui.prodName.text = model.MainProduct.name;
-			ui.selectedColor.text = model.MainProduct.colorObj.name;
-			ui.selectedSize.text = model.MainProduct.colorObj.currentSKU.name;
-		}
 		protected function onProdColorSKUChanged(event:Event):void
 		{
-			ui.selectedColor.text = model.MainProduct.colorObj.name;
-			ui.selectedSize.text = model.MainProduct.colorObj.currentSKU.name;
+			// TODO Auto-generated method stub
+			
 		}
 		
 		protected function ui_gotoCheckoutMode(event:Event):void
 		{
+			this.ui.visible = true;
+			this.ui.includeInLayout = true;
 			a1 = new Animate();
 			a1.target = this.ui; a1.duration = 600; a1.easer = bigease;
 			m = new SimpleMotionPath();
@@ -92,8 +73,10 @@ package com.virid.fbcheckout.view
 			p.addChild(a1);
 			p.play( );
 			
+			this.ui.visible = false;
+			this.ui.includeInLayout = false;
+			
 		}
-		
 
 	}
 }

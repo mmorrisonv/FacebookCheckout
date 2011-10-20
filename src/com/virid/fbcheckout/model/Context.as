@@ -87,7 +87,7 @@ package com.virid.fbcheckout.model
 
 			color = new ColorVO();
 			//add item to main product
-			color.name = 'Black/Blue/Greem';
+			color.name = 'Black/Blue/Green';
 			color.imageTB = 'assets/data/colors/1_182022_SW.jpg';
 			color.imageFS = 'assets/data/colors/1_182022_FS.jpg';
 			color.hex = '6dc9f0';

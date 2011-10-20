@@ -57,6 +57,18 @@
 			
 
 			
+			protected function buyItNowRollover(event:MouseEvent):void
+			{
+				// TODO Auto-generated method stub
+				
+			}
+			
+			protected function buyItNowRollout(event:MouseEvent):void
+			{
+				// TODO Auto-generated method stub
+				
+			}
+			
 		]]>
 	</fx:Script>
 	<fx:Declarations>
@@ -68,8 +80,6 @@
 			<s:BitmapFill source="@Embed('assets/rightPanel.jpg')" fillMode="clip"/>
 		</s:fill>
 	</s:Rect>
-	<s:Group width="150" height="298" 
-			 x="3" y="0"  useHandCursor="true" buttonMode="true" color="0x000000" contentBackgroundAlpha="1" contentBackgroundColor="0x000000"/>
 	
 	<s:VGroup width="100%" y="54" >
 		
@@ -116,14 +126,16 @@
 		</s:Group>
 		
 		<s:Group width="100%">
-			<s:Group width="100%" height="29">
+			<s:Group id="buyItNowBtn" width="100%" height="29" 
+					 	rollOver="buyItNowRollover(event)" rollOut="buyItNowRollout(event)" click="onBuyItNowClick(event)"
+						useHandCursor="true" buttonMode="true">
 				<s:Rect width="100%" height="29">
 					<s:fill>
 						<s:SolidColor color="0xe07400" />
 					</s:fill>
 				</s:Rect>
 				<s:Label text="BUY IT NOW" color="0xffffff" styleName="lubalin" fontSize="19"
-						 verticalCenter="2" horizontalCenter="-3" click="onBuyItNowClick(event)"/>
+						 verticalCenter="2" horizontalCenter="-3" />
 			</s:Group>			
 
 			<smallviews:OpaqueFullWidthHeading text="See More Like This" 

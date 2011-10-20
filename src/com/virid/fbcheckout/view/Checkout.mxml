@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx" width="154" height="100%" xmlns:smallviews="com.virid.fbcheckout.view.smallviews.*"
+		 creationComplete="creationComplete(event)" xmlns:view="com.virid.fbcheckout.view.*">
+	<fx:Script>
+		<![CDATA[
+			import mx.events.FlexEvent;
+			
+			import spark.events.IndexChangeEvent;
+			
+			/*
+			*Event Definition
+			*/
+			
+			protected function ratingChanged(event:IndexChangeEvent):void
+			{
+				// TODO Auto-generated method stub
+				
+			}
+			
+			protected function creationComplete(event:FlexEvent):void
+			{
+				var myMediator:CheckoutMediator = new CheckoutMediator();
+				myMediator.register(this);
+				
+			}
+			
+
+
+			
+		]]>
+	</fx:Script>
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	
+	<s:Rect width="100%" height="100%">
+		<s:fill>
+			<s:SolidColor color="0xcccccc"/>
+		</s:fill>
+	</s:Rect>
+
+	
+	<s:VGroup width="100%" height="100%" paddingTop="2" paddingRight="2" paddingBottom="2" paddingLeft="2">
+		
+		<s:Label styleName="lubalin" text="yo" />
+		
+	</s:VGroup>
+
+</s:Group>

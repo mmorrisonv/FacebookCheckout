@@ -10,6 +10,9 @@ package com.virid.fbcheckout.view
 	import mx.effects.easing.Exponential;
 	import mx.states.Transition;
 	
+	import spark.effects.Animate;
+	import spark.effects.animation.MotionPath;
+	import spark.effects.animation.SimpleMotionPath;
 	import spark.effects.easing.EaseInOutBase;
 	import spark.effects.easing.EasingFraction;
 	import spark.effects.easing.Elastic;
@@ -19,9 +22,16 @@ package com.virid.fbcheckout.view
 	{
 		private var model:Model = Model.getInstance();
 		private var ui:ProductImage;
-		public function ProductImageMediator()
-		{
-			
+		
+		//tranition variables
+		private var bigease:Power = new Power();
+		private var v:Vector.<MotionPath> = new Vector.<MotionPath>();
+		private var a1:Animate = new Animate();
+		private var m:SimpleMotionPath = new SimpleMotionPath();
+		
+		
+		public function ProductImageMediator(){
+			bigease.exponent = 2;
 		}
 		
 		public function register(_ui:ProductImage):void
@@ -34,41 +44,7 @@ package com.virid.fbcheckout.view
 			this.model.addEventListener(Model.MainProductImageChanged,changeAltView);
 			changeProductImage(null);
 		}		
-		protected function ui_gotoCheckoutMode(event:Event):void
-		{
-			var bigease:Power = new Power();
-			bigease.exponent = 2;
-			
-			//move main prouduct image over to the left
-			var m:Move = new Move();
-			m.target = this.ui.productImage;
-			m.xTo = -500;
-			m.duration = 800;
-			//m.play();
-			var n:Move = new Move();
-			n.xBy = 10; 
-			//n.easingFunction = bigease;
-			n.target= this.ui.productImage;
-			n.duration = 800;
-			
-			var p:Sequence = new Sequence();
-			p.addChild(n);
-			p.addChild(m);
-			p.play( );
-			
-		}
 		
-		protected function ui_gotoProductDetailMode(event:Event):void
-		{
-
-			var m:Move = new Move();
-			//m.target = this.ui.productImage;
-			m.xTo = 0;
-			m.duration = 800;
-			//m.easer = ease;
-			m.play();
-
-		}
 		
 		protected function changeAltView(event:Event):void
 		{
@@ -80,5 +56,66 @@ package com.virid.fbcheckout.view
 			this.ui.productImage.source = this.model.MainProduct.colorObj.imageFS;
 			this.ui.productPriceDisplay.text = '$' + String(this.model.MainProduct.colorObj.currentSKU.price);
 		}
+		
+		
+		protected function ui_gotoCheckoutMode(event:Event):void
+		{
+			//move main prouduct image over to the left
+			a1 = new Animate();
+			a1.target = this.ui.productImage; a1.duration = 180; a1.easer = bigease;
+			m.property = 'x';m.valueBy= 10;
+			v.push(m);
+			a1.motionPaths = v;
+			var p:Sequence = new Sequence();
+			p.addChild(a1);
+			
+			a1 = new Animate();
+			a1.target = this.ui.productImage; a1.duration = 500; a1.easer = bigease;
+			m = new SimpleMotionPath();
+			m.property = 'x'; m.valueTo = -500;
+			v = new Vector.<MotionPath>();v.push(m);
+			a1.motionPaths = v;
+			p.addChild(a1);
+			p.play( );
+			
+			//move productPriceDisplay to right
+			a1 = new Animate();
+			a1.target = this.ui.productPriceDisplay; a1.duration = 300;
+			m = new SimpleMotionPath();
+			m.property = 'right'; m.valueTo = -1000;
+			v = new Vector.<MotionPath>();v.push(m);
+			a1.motionPaths = v;
+			var p2:Sequence = new Sequence();
+			p2.addChild(a1);
+			p2.play();
+			
+		}
+		
+		protected function ui_gotoProductDetailMode(event:Event):void
+		{
+			//move main proudctImage back
+			a1 = new Animate();
+			a1.target = this.ui.productImage; a1.duration = 500;
+			m = new SimpleMotionPath();
+			m.property = 'x'; m.valueTo = 0;
+			v = new Vector.<MotionPath>();v.push(m);
+			a1.motionPaths = v;
+			var seqMI:Sequence = new Sequence();
+			seqMI.addChild(a1);
+			seqMI.play( );
+			
+			//move productPriceDisplay back
+			a1 = new Animate();
+			a1.target = this.ui.productPriceDisplay; a1.duration = 300;
+			m = new SimpleMotionPath();
+			m.property = 'right'; m.valueTo = 3;
+			v = new Vector.<MotionPath>();v.push(m);
+			a1.motionPaths = v;
+			var p2:Sequence = new Sequence();
+			p2.addChild(a1);
+			p2.play();
+			
+		}
+
 	}
 }
