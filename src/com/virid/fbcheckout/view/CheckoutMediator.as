@@ -53,7 +53,7 @@ package com.virid.fbcheckout.view
 			a1 = new Animate();
 			a1.target = this.ui; a1.duration = 600; a1.easer = bigease;
 			m = new SimpleMotionPath();
-			m.property = 'y'; m.valueTo = 1000;
+			m.property = 'y'; m.valueTo = 101;
 			v = new Vector.<MotionPath>();v.push(m);
 			a1.motionPaths = v;
 			var p:Sequence = new Sequence();
@@ -66,15 +66,15 @@ package com.virid.fbcheckout.view
 			a1 = new Animate();
 			a1.target = this.ui; a1.duration = 700; a1.easer = bigease;
 			m = new SimpleMotionPath();
-			m.property = 'y'; m.valueTo = 0;
+			m.property = 'y'; m.valueTo = 1000;
 			v = new Vector.<MotionPath>();v.push(m);
 			a1.motionPaths = v;
 			var p:Sequence = new Sequence();
 			p.addChild(a1);
 			p.play( );
 			
-			this.ui.visible = false;
-			this.ui.includeInLayout = false;
+			/*this.ui.visible = false;
+			this.ui.includeInLayout = false;*/
 			
 		}
 

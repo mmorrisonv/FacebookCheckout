@@ -108,7 +108,7 @@ package com.virid.fbcheckout.view
 			a1 = new Animate();
 			a1.target = this.ui.productPriceDisplay; a1.duration = 300;
 			m = new SimpleMotionPath();
-			m.property = 'right'; m.valueTo = 3;
+			m.property = 'right'; m.valueTo = 12;
 			v = new Vector.<MotionPath>();v.push(m);
 			a1.motionPaths = v;
 			var p2:Sequence = new Sequence();
