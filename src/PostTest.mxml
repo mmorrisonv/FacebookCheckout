@@ -78,13 +78,13 @@
 		
 		<view:ProductImage id="mainProdImage" left="0" y="0" width="247" height="250"/>
 		
-		<view:AltViews bottom="0" left="0" height="51" />
+		<view:AltViews y="247" left="0" height="51" />
 		
 		<view:rightColumn right="0" width="153" height="100%"/>
 		<s:Image width="147" height="61"  right="3" y="0" source="@Embed('assets/logo.png')" click="onLogoClick(event)"
 				 useHandCursor="true" buttonMode="true"/>
 		
-		<view:Checkout visible="false" includeInLayout="false" y="101" width="100%" height="100%"/>
+		<view:Checkout visible="false" includeInLayout="false" y="1000" width="100%" height="100%"/>
 	</s:Group>
 	
 	

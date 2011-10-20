@@ -23,7 +23,7 @@ package com.virid.fbcheckout.view
 		private var bigease:Power = new Power();
 		private var v:Vector.<MotionPath> = new Vector.<MotionPath>();
 		private var m:SimpleMotionPath = new SimpleMotionPath();
-		private var a1:Animate = new Animate();
+		
 		
 		public function AltViewsMediator()
 		{
@@ -55,10 +55,10 @@ package com.virid.fbcheckout.view
 		}
 		protected function ui_gotoProdDetailMode(event:Event):void
 		{
-			a1 = new Animate();
+			var a1:Animate = new Animate();
 			a1.target = this.ui; a1.duration = 300;
 			m = new SimpleMotionPath();
-			m.property = 'bottom'; m.valueTo = 0;
+			m.property = 'y'; m.valueTo = 247;
 			v = new Vector.<MotionPath>();v.push(m);
 			a1.motionPaths = v;
 			var p2:Sequence = new Sequence();
@@ -72,8 +72,9 @@ package com.virid.fbcheckout.view
 
 			//move main prouduct image over to the left
 			//anticipate action
+			var a1:Animate = new Animate();
 			a1.target = this.ui; a1.duration = 240; a1.easer = bigease;
-			m.property = 'bottom';m.valueBy = 5;
+			m.property = 'y';m.valueBy = -5;
 			v.push(m);
 			a1.motionPaths = v;
 			var p:Sequence = new Sequence();
@@ -82,7 +83,7 @@ package com.virid.fbcheckout.view
 			a1 = new Animate();
 			a1.target = this.ui; a1.duration = 700; a1.easer = bigease;
 			m = new SimpleMotionPath();
-			m.property = 'bottom'; m.valueTo = -50;
+			m.property = 'y'; m.valueTo = 500;
 			v = new Vector.<MotionPath>();v.push(m);
 			a1.motionPaths = v;
 			p.addChild(a1);
