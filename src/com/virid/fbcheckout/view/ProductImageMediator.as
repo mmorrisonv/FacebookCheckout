@@ -5,10 +5,15 @@ package com.virid.fbcheckout.view
 	import flash.events.Event;
 	
 	import mx.effects.Move;
+	import mx.effects.Parallel;
+	import mx.effects.Sequence;
+	import mx.effects.easing.Exponential;
+	import mx.states.Transition;
 	
 	import spark.effects.easing.EaseInOutBase;
 	import spark.effects.easing.EasingFraction;
 	import spark.effects.easing.Elastic;
+	import spark.effects.easing.Power;
 
 	public class ProductImageMediator
 	{
@@ -31,29 +36,38 @@ package com.virid.fbcheckout.view
 		}		
 		protected function ui_gotoCheckoutMode(event:Event):void
 		{
-
+			var bigease:Power = new Power();
+			bigease.exponent = 2;
+			
 			//move main prouduct image over to the left
 			var m:Move = new Move();
 			m.target = this.ui.productImage;
 			m.xTo = -500;
 			m.duration = 800;
-			m.play();
+			//m.play();
+			var n:Move = new Move();
+			n.xBy = 10; 
+			//n.easingFunction = bigease;
+			n.target= this.ui.productImage;
+			n.duration = 800;
 			
+			var p:Sequence = new Sequence();
+			p.addChild(n);
+			p.addChild(m);
+			p.play( );
 			
 		}
 		
 		protected function ui_gotoProductDetailMode(event:Event):void
 		{
-			//var ease:Elastic = new Elastic();
-			
+
 			var m:Move = new Move();
-			m.target = this.ui.productImage;
+			//m.target = this.ui.productImage;
 			m.xTo = 0;
 			m.duration = 800;
 			//m.easer = ease;
 			m.play();
-			
-			
+
 		}
 		
 		protected function changeAltView(event:Event):void
