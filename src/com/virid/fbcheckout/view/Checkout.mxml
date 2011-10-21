@@ -41,11 +41,61 @@
 		</s:fill>
 	</s:Rect>
 
-	
-	<s:VGroup width="100%" height="100%" paddingTop="2" paddingRight="2" paddingBottom="2" paddingLeft="2">
-		
-		<s:Label styleName="lubalin" text="yo" />
-		
-	</s:VGroup>
+	<s:HGroup width="100%" paddingTop="3" paddingRight="3" paddingBottom="3" paddingLeft="3">
+		<s:VGroup width="50%" height="100%" paddingTop="3" paddingRight="3" paddingBottom="3" paddingLeft="3"
+				  gap="3">
+			
+			<s:Label styleName="lubalin" text="Shipping Address" fontSize="16" height="18"/>
+			<s:HGroup width="100%">
+				<s:TextInput prompt="First Name" width="100%"/>
+				<s:TextInput prompt="Last Name" width="100%"/>
+			</s:HGroup>
+			<s:TextInput prompt="Address 1" width="100%"/>
+			<s:TextInput prompt="Address " width="100%"/>
+			<s:HGroup width="100%">
+				<s:TextInput prompt="City" width="60%"/>
+				<s:TextInput prompt="ST" width="10%"/>
+				<s:TextInput prompt="Zip" width="30%"/>
+			</s:HGroup>		
+			<s:TextInput prompt="Email Address for receipt" width="100%"/>
+			<s:Label styleName="lubalin" text="Shipping Method" fontSize="16" />
+			<s:TextInput prompt="Enter Zip Code For Options " width="100%"/>
+		</s:VGroup>
+		<s:VGroup width="50%" height="100%" gap="3"
+				  paddingTop="3" paddingRight="3" paddingBottom="3" paddingLeft="3">
+			<s:HGroup>
+				<s:Label styleName="lubalin" text="Billing Info" fontSize="16" height="18"/>
+				<s:CheckBox styleName="lubalin" label="Same As Shipping" fontSize="8"/>
+			</s:HGroup>
+			<s:HGroup width="100%">
+				<s:TextInput prompt="First Name" width="100%"/>
+				<s:TextInput prompt="Last Name" width="100%"/>
+			</s:HGroup>
+			<s:TextInput prompt="Address 1" width="100%"/>
+			<s:TextInput prompt="Address " width="100%"/>
+			<s:HGroup width="100%">
+				<s:TextInput prompt="City" width="60%"/>
+				<s:TextInput prompt="ST" width="10%"/>
+				<s:TextInput prompt="Zip" width="30%"/>
+			</s:HGroup>	
+			<s:TextInput prompt="Phone Number" width="100%"/>
+			<s:Label styleName="lubalin" text="Card Details" fontSize="16" />
+			<s:HGroup width="100%">
+				<s:TextInput prompt="Card Number" width="50%"/>
+				<s:TextInput prompt="MM" width="15%" maxChars="2"/>
+				<s:TextInput prompt="YYYY" width="20%" maxChars="4"/>
+				<s:TextInput prompt="CVV" width="15%" maxChars="3"/>
+			</s:HGroup>	
+		</s:VGroup>
+	</s:HGroup>
+
+	<s:HGroup width="100%" height="40" y="160">
+		<s:Rect width="100%" height="100%">
+			<s:fill>
+				<s:SolidColor color="0xffffff" />
+			</s:fill>
+		</s:Rect>
+		<s:Label text="Final Price" />
+	</s:HGroup>
 
 </s:Group>

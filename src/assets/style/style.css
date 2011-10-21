@@ -6,3 +6,8 @@
 #scroller{
 	height:2;
 }
+
+s|TextInput{
+	borderVisible:false;
+	contentBackgroundColor:#f0f0f0;
+}
