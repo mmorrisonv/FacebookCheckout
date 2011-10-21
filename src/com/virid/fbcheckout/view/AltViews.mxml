@@ -41,7 +41,7 @@
 	<fx:Declarations>
 		<!-- Place non-visual elements (e.g., services, value objects) here -->
 	</fx:Declarations>
-	
+
 	<s:Image  x="0" y="0" source="@Embed('assets/alt-viewsPanel-bkg.png')" />
 	<s:List id="altViewList" width="154" x="76" verticalCenter="0"
 			borderVisible="false" contentBackgroundAlpha="0"
