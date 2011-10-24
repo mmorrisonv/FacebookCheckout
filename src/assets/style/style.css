@@ -13,4 +13,14 @@ s|TextInput{
 	fontSize:11px;
 	focusThickness:1px;
 	focusColor:#bbbbbb;
+	fontSize:9px;
+}
+
+.modalLabel{
+	fontFamily:"Helv";
+	fontSize:16px;
+	lineHeight:16px;
+	color:#666666;
+	left:40px;
+	dropShadowVisible:true;
 }

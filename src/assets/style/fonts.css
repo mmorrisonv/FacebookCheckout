@@ -9,9 +9,12 @@
 
 @font-face {
 	src:url("assets/fonts/HelveticaNeueBold.ttf");
+	fontFamily:"HelvBold";
+}
+@font-face {
+	src:url("assets/fonts/HelveticaLTStd Roman.otf");
 	fontFamily:"Helv";
 }
-
 
 .lubalin{
 	font-family:"LubalinDemi";
@@ -20,4 +23,7 @@
 
 .Helv{
 	fontFamily:"Helv";
+}
+.HelvBold{
+	fontFamily:"HelvBold";
 }

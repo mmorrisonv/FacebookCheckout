@@ -29,6 +29,6 @@
 			  x="0" top="0" verticalCenter="-10" width="247"/>
 	<s:Image source="@Embed('assets/prodareaback.png')"
 			 x="0" top="0" width="247" height="247" />
-	<s:Label id="productPriceDisplay" styleName="Helv" text="$--.--" 
+	<s:Label id="productPriceDisplay" styleName="lubalin" text="$--.-- USD" 
 			 color="0x353535" fontSize="16" bottom="12" right="12"/>
 </s:Group>

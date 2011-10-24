@@ -38,7 +38,7 @@ package com.virid.fbcheckout.view
 		{
 			this.ui = _ui;
 			this.model.addEventListener(Model.StartProdDetail,ui_gotoProductDetailMode);
-			this.model.addEventListener(Model.StartCheckout,ui_gotoCheckoutMode);
+			this.model.addEventListener(Model.DisplayCheckout,ui_gotoCheckoutMode);
 			
 			this.model.addEventListener(Model.MainProductColorSKUChanged,changeProductImage);
 			this.model.addEventListener(Model.MainProductImageChanged,changeAltView);
@@ -54,7 +54,7 @@ package com.virid.fbcheckout.view
 		protected function changeProductImage(event:Event):void
 		{
 			this.ui.productImage.source = this.model.MainProduct.colorObj.imageFS;
-			this.ui.productPriceDisplay.text = '$' + String(this.model.MainProduct.colorObj.currentSKU.price);
+			this.ui.productPriceDisplay.text = '$' + String(this.model.MainProduct.colorObj.currentSKU.price) + ' USD';
 		}
 		
 		

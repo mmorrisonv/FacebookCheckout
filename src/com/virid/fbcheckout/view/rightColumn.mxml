@@ -6,13 +6,12 @@
 	<fx:Script>
 		<![CDATA[
 			import mx.events.FlexEvent;
-			
 			import spark.events.IndexChangeEvent;
 			
 			/*
 			*Event Definition
 			*/
-			public static const CHECKOUT:String = "sC";
+			public static const BUYITNOWCLICKED:String = "sC";
 			public static const PRODDETAIL:String = "pD";
 			
 			protected function ratingChanged(event:IndexChangeEvent):void
@@ -51,7 +50,7 @@
 			
 			protected function onBuyItNowClick(event:MouseEvent):void
 			{
-				var e:Event = new Event(rightColumn.CHECKOUT,true,false);
+				var e:Event = new Event(rightColumn.BUYITNOWCLICKED,true,false);
 				dispatchEvent(e);
 			}
 			
@@ -105,7 +104,7 @@
 					<smallviews:OpaqueFullWidthHeading text="Select a Size" 
 													   textColor="0x000000" backColor="0xffffff"											  
 													   width="100%" height="14" x="3" marginLeftContent="23" />
-					<s:Label id="selectedSize" styleName="Helv" text="Selected Size" 
+					<s:Label id="selectedSize" styleName="HelvBold" text="Selected Size" 
 							 color="0xffffff" fontSize="12" y="18" x="24"/>		
 					<s:Image source="assets/small-vertical-carrot.png" x="10" y="23" />
 				</s:Group>
@@ -115,7 +114,7 @@
 					<smallviews:OpaqueFullWidthHeading text="Select a Color" 
 													   textColor="0x000000" backColor="0xffffff"											  
 													   width="100%"  height="14" x="3" marginLeftContent="23"/>
-					<s:Label id="selectedColor" styleName="Helv" text="Selected Color" 
+					<s:Label id="selectedColor" styleName="HelvBold" text="Selected Color" 
 							 color="0xffffff" fontSize="12" y="18" x="24" maxWidth="130" height="23"/>
 					<s:Image source="assets/small-vertical-carrot.png" x="10" y="23" />
 				</s:Group>

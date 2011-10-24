@@ -29,6 +29,12 @@
 
 
 			
+			protected function checkoutClicked(event:MouseEvent):void
+			{
+				// TODO Auto-generated method stub
+				
+			}
+			
 		]]>
 	</fx:Script>
 	<fx:Declarations>
@@ -45,7 +51,7 @@
 		<s:VGroup width="50%" height="100%" paddingTop="3" paddingRight="3" paddingBottom="3" paddingLeft="3"
 				  gap="3">
 			
-			<s:Label styleName="lubalin" text="Shipping Address" fontSize="11" height="11"/>
+			<s:Label styleName="lubalin" text="Shipping Address" fontSize="14" height="14"/>
 			<s:HGroup width="100%">
 				<s:TextInput prompt="First Name" width="100%"/>
 				<s:TextInput prompt="Last Name" width="100%"/>
@@ -58,14 +64,16 @@
 				<s:TextInput prompt="Zip" width="30%"/>
 			</s:HGroup>		
 			<s:TextInput prompt="Email Address for receipt" width="100%"/>
-			<s:Label styleName="lubalin" text="Shipping Method" fontSize="12" />
+			
+			
+			<s:Label styleName="lubalin" text="Shipping Method" fontSize="14" height="14" paddingTop="2" />
 			<s:TextInput prompt="Enter Zip Code For Options " width="100%"/>
 		</s:VGroup>
 		<s:VGroup width="50%" height="100%" gap="3"
 				  paddingTop="3" paddingRight="3" paddingBottom="3" paddingLeft="3">
-			<s:HGroup height="10">
-				<s:Label styleName="lubalin" text="Billing Info" fontSize="12" height="11"/>
-				<s:CheckBox styleName="lubalin" label="Same As Shipping" fontSize="8" />
+			<s:HGroup height="14">
+				<s:Label styleName="lubalin" text="Billing Info" fontSize="14" height="14"/>
+				<s:CheckBox styleName="lubalin" label="Same As Shipping" fontSize="10" color="0xffffff" height="12"/>
 			</s:HGroup>
 			<s:HGroup width="100%">
 				<s:TextInput prompt="First Name" width="100%"/>
@@ -79,7 +87,7 @@
 				<s:TextInput prompt="Zip" width="30%"/>
 			</s:HGroup>	
 			<s:TextInput prompt="Phone Number" width="100%"/>
-			<s:Label styleName="lubalin" text="Card Details" fontSize="12" />
+			<s:Label styleName="lubalin" text="Card Details" fontSize="14" height="14" paddingTop="2"/>
 			<s:HGroup width="100%">
 				<s:TextInput prompt="Card Number" width="50%"/>
 				<s:TextInput prompt="MM" width="15%" maxChars="2"/>
@@ -89,28 +97,30 @@
 		</s:VGroup>
 	</s:HGroup>
 
-	<s:Group width="100%" height="40" y="166">
+	<s:Group width="100%" height="40" y="165">
 		<s:Rect width="100%" height="100%">
 			<s:fill>
 				<s:SolidColor color="0xffffff" />
 			</s:fill>
 		</s:Rect>
 		<s:Image source="assets/checkout-bottom-wedge.png" width="243" height="10" bottom="0"/>
-		<s:HGroup right="0">
-			<s:Group width="56" height="20">
-				<s:Rect>
-					<s:stroke>
-						<s:SolidColorStroke color="0xcccccc" weight="1" />
-					</s:stroke>
-				</s:Rect>
-				<s:Label text="Final Price" />
+		<s:Group width="100%" height="36">
+			<s:Group height="36" left="10">
+				<s:Label text="Final Price:" fontSize="11" styleName="lubalin" verticalCenter="0"/>
+				<s:Label text="$79.64 USD" x="60" fontSize="18" styleName="lubalin" verticalCenter="0"/>
+			</s:Group>
+			<s:Group width="56" height="22" left="175" y="3">
+				<s:Rect width="100%" height="100%"><s:stroke><s:SolidColorStroke color="0xcccccc" weight="1" /></s:stroke></s:Rect>
+				<s:Label text="ITEMIZED&#13;VIEW" fontSize="9" color="0xcccccc" verticalCenter="1" horizontalCenter="0" textAlign="center" lineHeight="10"/>
 			</s:Group>
 			
-			<s:Group right="0" y="3">
-				<s:Image id="checkoutBtn" source="assets/buttons/checkout-complete.png" width="161" height="31" right="0"/>
+			<s:Group right="0" width="161" height="40" 
+					 click="checkoutClicked(event)">
+				<s:Image id="checkoutBtn" source="assets/buttons/checkout-complete.png" width="161" height="31" right="0" verticalCenter="-2"/>
+				<s:Label text="Complete Purchase" styleName="lubalin" color="0xffffff" fontSize="16" horizontalCenter="0" verticalCenter="-2"/>
 			</s:Group>
 			
-		</s:HGroup>
+		</s:Group>
 		
 	</s:Group>
 

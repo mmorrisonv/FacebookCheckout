@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx" width="153" height="120" 
+		 show="popupShown(event)" creationComplete="componentCreationComplete(event)">
+	<fx:Script>
+		<![CDATA[
+			import com.virid.fbcheckout.model.vo.ColorVO;
+			
+			import controller.events.CustomEvent;
+			
+			import mx.core.UIComponent;
+			import mx.events.FlexEvent;
+			
+			import spark.events.IndexChangeEvent;
+			
+			private var stageClickCount:Number = 0;
+			
+			/*
+			*Event Definition
+			*/
+			
+			public static const DISPLAY_CHECKOUT:String = "dC";
+			
+			protected function componentCreationComplete(event:FlexEvent):void
+			{
+				var mediator:ModalCheckoutSelectMediator = new ModalCheckoutSelectMediator();
+				mediator.register(this);
+				
+			}
+			/*
+			 *Responders or something 
+			*/
+			protected function popupShown(event:FlexEvent):void
+			{
+				
+				this.stageClickCount = 0;
+				this.stage.addEventListener(MouseEvent.CLICK,onStageClick);
+			
+			}
+			
+			protected function onStageClick(event:MouseEvent):void
+			{
+				stageClickCount++;
+				
+				//if we are clicking the actual component return
+				if(event.target == this || stageClickCount <= 1)
+					return;
+				//search for 'THIS' in parentDocument tree, ensuring we arent clicking on a child of this popup
+				var currTest:UIComponent = event.target as UIComponent;
+				while(currTest.parentDocument != null && currTest != parentApplication)
+				{
+					currTest = currTest.parentDocument as UIComponent;
+					if(currTest == this)
+						return
+				}
+				//close the popup if we reach this code
+				this.visible = false;
+				this.stage.removeEventListener(MouseEvent.CLICK,onStageClick);
+				
+
+			}
+			
+			
+			protected function useLogin_clickHandler(event:MouseEvent):void
+			{
+				var e:CustomEvent 
+				e = new CustomEvent(DISPLAY_CHECKOUT,null,false);
+				dispatchEvent( e );
+				
+			}
+			
+			protected function creditcard_clickHandler(event:MouseEvent):void
+			{
+				var e:CustomEvent 
+				e = new CustomEvent(DISPLAY_CHECKOUT,null,false);
+				dispatchEvent( e );
+			}
+			
+			protected function gotoJourneys_clickHandler(event:MouseEvent):void
+			{
+				var e:CustomEvent 
+				e = new CustomEvent(DISPLAY_CHECKOUT,null,false);
+				dispatchEvent( e );
+				
+			}
+			
+			protected function paypqal_clickHandler(event:MouseEvent):void
+			{
+				var e:CustomEvent 
+				e = new CustomEvent(DISPLAY_CHECKOUT,null,false);
+				dispatchEvent( e );
+			}
+			
+		]]>
+	</fx:Script>
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	<s:Rect width="100%" height="100%">
+		<s:fill>
+			<s:SolidColor color="0xffffff" />
+		</s:fill>
+	</s:Rect>
+	<s:Rect width="100%" height="60">
+		<s:fill>
+			<s:SolidColor color="0xcccddd" />
+		</s:fill>
+	</s:Rect>
+	<s:Group width="100%" height="100%">
+		<s:Label text="How would you like to &#13;Purchase This Product" 
+				 top="10" left="14"
+				 fontSize="22" styleName="lubalin" />
+		<s:Group top="60" width="100%" height="165" left="12">
+			
+				<s:Label styleName="modalLabel" y="15" click="useLogin_clickHandler(event)" buttonMode="true" width="100%">I have a Journey.com account and would &#13;like to login and use that here.</s:Label>
+				<s:Label styleName="modalLabel" y="60" click="creditcard_clickHandler(event)" buttonMode="true" width="100%">Just use my credit card</s:Label>
+				<s:Label styleName="modalLabel" y="90" click="gotoJourneys_clickHandler(event)" buttonMode="true" width="100%">I would like to add this to my cart on&#13;Journeys.com.</s:Label>
+				<s:Label styleName="modalLabel" y="140" click="paypqal_clickHandler(event)" buttonMode="true" width="100%">Use paypal.</s:Label>
+
+		</s:Group>
+
+
+	</s:Group>
+	
+</s:Group>

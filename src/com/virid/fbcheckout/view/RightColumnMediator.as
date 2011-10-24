@@ -29,13 +29,13 @@ package com.virid.fbcheckout.view
 		public function register(_ui:rightColumn):void
 		{
 			this.ui = _ui;
-			this.ui.addEventListener(rightColumn.CHECKOUT,ui_OnCheckout);
+			this.ui.addEventListener(rightColumn.BUYITNOWCLICKED,ui_OnBuyItNowClicked);
 			this.ui.addEventListener(rightColumn.PRODDETAIL,ui_OnProdDetail);
 			
 			this.model.addEventListener(Model.MainProductChanged,onProductChange);
 			this.model.addEventListener(Model.MainProductColorSKUChanged,onProdColorSKUChanged);
 			//model listeners:ui
-			this.model.addEventListener(Model.StartCheckout,ui_gotoCheckoutMode);
+			this.model.addEventListener(Model.DisplayCheckout,ui_gotoCheckoutMode);
 			this.model.addEventListener(Model.StartProdDetail,ui_gotoProdDetail);
 			
 			onProductChange(null);
@@ -48,7 +48,7 @@ package com.virid.fbcheckout.view
 			this.model.initiateProdDetail = obj;
 		}
 		
-		protected function ui_OnCheckout(event:Event):void
+		protected function ui_OnBuyItNowClicked(event:Event):void
 		{
 			var obj:Object = new Object();
 			obj.start = "NOW";
@@ -83,7 +83,7 @@ package com.virid.fbcheckout.view
 		protected function ui_gotoProdDetail(event:Event):void
 		{
 			a1 = new Animate();
-			a1.target = this.ui; a1.duration = 700; a1.easer = bigease;
+			a1.target = this.ui; a1.duration = 500; a1.easer = bigease;
 			m = new SimpleMotionPath();
 			m.property = 'y'; m.valueTo = 0;
 			v = new Vector.<MotionPath>();v.push(m);

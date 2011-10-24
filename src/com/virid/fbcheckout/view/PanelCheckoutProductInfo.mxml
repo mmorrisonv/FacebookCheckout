@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx" width="100%" height="100%"
+		 creationComplete="onCreationComplete(event)">
+	<fx:Script>
+		<![CDATA[
+			import mx.events.FlexEvent;
+			
+			import spark.effects.Move;
+			
+			public static const SHOWPRODDETAIL:String = "sPD";
+			
+			protected function onCreationComplete(event:FlexEvent):void
+			{
+				
+				var mediator:PanelCheckoutProductInfoMediator = new PanelCheckoutProductInfoMediator();
+				mediator.register(this);
+				
+			}
+			
+			protected function switchToProductView(event:MouseEvent):void
+			{
+				var e:Event = new Event(SHOWPRODDETAIL,true,false);
+				dispatchEvent(e);
+			}
+			
+		]]>
+	</fx:Script>
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+
+	<s:Rect width="100%" height="30">
+		<s:fill>
+			<s:SolidColor color="0xcccddd" />
+		</s:fill>
+	</s:Rect>
+	<s:Label styleName="lubalin" color="0x353535" fontSize="22" right="12" top="5"
+			 text="You are about to buy"/>
+	<s:Image id="productImage" source="@Embed('assets/data/prodimage.jpg')"
+			  x="5" y="36" maxWidth="60" maxHeight="60" smooth="true" smoothingQuality="high"/>
+	<s:Label id="productName" styleName="lubalin" text="Name with a long something or other" 
+			 color="0x353535" fontSize="14" y="36" x="75" width="180" lineHeight="12"/>
+	<s:Label id="productDetail" styleName="lubalin" text="Size:" 
+			 color="0x353535" fontSize="11" y="74" x="75" width="160"/>
+	<s:Label id="productColor" styleName="lubalin" text="Color:" 
+			 color="0x353535" fontSize="11" y="74" x="120" width="100" maxHeight="10"/>
+	<s:Label id="productSwitchToDetail" styleName="lubalin" text="Change Size/Color" 
+			 color="0x353535" fontSize="9" bottom="6" x="75" click="switchToProductView(event)" buttonMode="true"/>
+	
+	<s:Label id="productPriceDisplay" styleName="lubalin" text="$xx.xx USD" 
+			 color="0x353535" fontSize="16" bottom="12" x="248"/>
+</s:Group>
