@@ -9,6 +9,7 @@ package com.virid.fbcheckout.view
 	import spark.effects.Animate;
 	import spark.effects.animation.MotionPath;
 	import spark.effects.animation.SimpleMotionPath;
+	import spark.effects.easing.Elastic;
 	import spark.effects.easing.Power;
 
 	public class ModalCheckoutSelectMediator
@@ -38,11 +39,10 @@ package com.virid.fbcheckout.view
 		
 		protected function ui_HandleCheckout(event:Event):void
 		{
-			var e:Power = new Power();
-			e.easeInFraction = .5;
-			e.exponent = 3;
+			var e:Elastic = new Elastic();
+		
 			var a1:Animate = new Animate();
-			a1.target = this.ui; a1.duration = 250;a1.easer = e;
+			a1.target = this.ui; a1.duration = 1000;a1.easer = e;
 			m = new SimpleMotionPath();
 			m.property = 'horizontalCenter'; m.valueTo = 0;
 			v = new Vector.<MotionPath>();v.push(m);

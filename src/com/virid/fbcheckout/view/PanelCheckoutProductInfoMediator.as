@@ -2,13 +2,24 @@ package com.virid.fbcheckout.view
 {
 	import com.virid.fbcheckout.model.Model;
 	import com.virid.fbcheckout.model.vo.ColorVO;
+	
 	import controller.events.CustomEvent;
+	
 	import flash.events.Event;
+	
+	import mx.effects.Sequence;
+	
+	import spark.effects.Animate;
+	import spark.effects.animation.MotionPath;
+	import spark.effects.animation.SimpleMotionPath;
 
 	public class PanelCheckoutProductInfoMediator
 	{
 		private var model:Model = Model.getInstance();
 		private var ui:PanelCheckoutProductInfo;
+		
+		private var m:SimpleMotionPath = new SimpleMotionPath();
+		private var v:Vector.<MotionPath> = new Vector.<MotionPath>();
 		
 		public function register(_ui:PanelCheckoutProductInfo):void
 		{
@@ -42,12 +53,55 @@ package com.virid.fbcheckout.view
 		protected function ui_ShowCheckout(event:Event):void
 		{
 			this.ui.visible = true;
+			var a1:Animate = new Animate();
+			a1.target = this.ui.banner; a1.duration = 300;
+			m = new SimpleMotionPath();
+			m.property = 'y'; m.valueTo = 0;
+			v = new Vector.<MotionPath>();v.push(m);
+			a1.motionPaths = v;
+			var p2:Sequence = new Sequence();
+			p2.addChild(a1);
+			p2.play();
 			
+
+			
+			this.ui.visible = true;
+			var a1:Animate = new Animate();
+			a1.target = this.ui.details; a1.duration = 300;
+			m = new SimpleMotionPath();
+			m.property = 'x'; m.valueTo = 0;
+			v = new Vector.<MotionPath>();v.push(m);
+			a1.motionPaths = v;
+			var p2:Sequence = new Sequence();
+			p2.addChild(a1);
+			p2.play();
 		}
 		
 		protected function ui_ShowProDetail(event:Event):void
 		{
-			this.ui.visible = false;
+			this.ui.visible = true;
+			var a1:Animate = new Animate();
+			a1.target = this.ui.banner; a1.duration = 300;
+			m = new SimpleMotionPath();
+			m.property = 'y'; m.valueTo = -50;
+			v = new Vector.<MotionPath>();v.push(m);
+			a1.motionPaths = v;
+			var p2:Sequence = new Sequence();
+			p2.addChild(a1);
+			p2.play();
+			
+			
+			
+			this.ui.visible = true;
+			var a1:Animate = new Animate();
+			a1.target = this.ui.details; a1.duration = 300;
+			m = new SimpleMotionPath();
+			m.property = 'x'; m.valueTo = -500;
+			v = new Vector.<MotionPath>();v.push(m);
+			a1.motionPaths = v;
+			var p2:Sequence = new Sequence();
+			p2.addChild(a1);
+			p2.play();
 		}
 		
 		protected function colorChanged(event:CustomEvent):void
