@@ -22,6 +22,7 @@ package com.virid.fbcheckout.view
 		private var v:Vector.<MotionPath> = new Vector.<MotionPath>();
 		private var a1:Animate = new Animate();
 		private var m:SimpleMotionPath = new SimpleMotionPath();
+		var p2:Sequence = new Sequence();
 		
 		public function ModalCheckoutSelectMediator():void
 		{
@@ -42,12 +43,12 @@ package com.virid.fbcheckout.view
 			var e:Elastic = new Elastic();
 		
 			var a1:Animate = new Animate();
-			a1.target = this.ui; a1.duration = 1000;a1.easer = e;
+			a1.target = this.ui; a1.duration = 800;a1.easer = e;
 			m = new SimpleMotionPath();
 			m.property = 'horizontalCenter'; m.valueTo = 0;
 			v = new Vector.<MotionPath>();v.push(m);
 			a1.motionPaths = v;
-			var p2:Sequence = new Sequence();
+			p2 = new Sequence();
 			p2.addChild(a1);
 			p2.play();
 			//this.ui.visible = true;
@@ -55,6 +56,8 @@ package com.virid.fbcheckout.view
 		
 		protected function ui_OnCheckout(event:Event):void
 		{
+			if(p2)
+				p2.stop();
 			var a1:Animate = new Animate();
 			a1.target = this.ui; a1.duration = 300;
 			m = new SimpleMotionPath();

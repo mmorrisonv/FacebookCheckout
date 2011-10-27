@@ -25,27 +25,95 @@
 			{
 				var myMediator:CheckoutMediator = new CheckoutMediator();
 				myMediator.register(this);
+				if(this.sameAsShipping.selected)
+					deactivateAllBillingFields();
+				else
+					enableAllBillingFields();
 				
 			}
 			
-
-
 			
 			protected function checkoutClicked(event:MouseEvent):void
 			{
 				// TODO Auto-generated method stub
 				
 			}
+
+
 			
 			protected function sfname_changeHandler(event:TextOperationEvent):void
 			{
-				
+				if(this.sameAsShipping.selected)
+					this.bfname.text = this.sfname.text;
 			}
 			
 			protected function checkbox1_changeHandler(event:Event):void
 			{
 				var e:Event = new Event(BILLING_SAME_AS);
 				dispatchEvent(e);
+				if( this.sameAsShipping.selected )
+					deactivateAllBillingFields();
+				else
+					enableAllBillingFields();
+			}
+			
+			private function deactivateAllBillingFields():void
+			{
+				// TODO Auto Generated method stub
+				this.baddress1.enabled = this.baddress2.enabled = this.bfname.enabled = this.blname.enabled = this.bstate.enabled = this.bcity.enabled = this.bzip.enabled = this.bcity.enabled = false;
+				this.bfname.text = this.sfname.text;
+				this.blname.text = this.slname.text;
+				this.baddress1.text = this.saddress1.text;
+				this.baddress2.text = this.saddress2.text;
+				this.bstate.text = this.sstate.text;
+				this.bzip.text = this.szip.text;
+				this.bcity.text = this.scity.text;
+			}
+			private function enableAllBillingFields():void
+			{
+				// TODO Auto Generated method stub
+				this.baddress1.enabled = this.baddress2.enabled = this.bfname.enabled = this.blname.enabled = this.bstate.enabled = this.bcity.enabled = this.bzip.enabled = this.bcity.enabled = true;
+
+			}
+			
+			protected function slname_changeHandler(event:TextOperationEvent):void
+			{
+				if(this.sameAsShipping.selected)
+					this.blname.text = this.slname.text;
+				
+			}
+			
+			protected function saddress1_changeHandler(event:TextOperationEvent):void
+			{
+				if(this.sameAsShipping.selected)
+					this.baddress1.text = this.saddress1.text;
+			}
+			
+			protected function saddress2_changeHandler(event:TextOperationEvent):void
+			{
+				if(this.sameAsShipping.selected)
+					this.baddress2.text = this.saddress2.text;
+			}
+			
+			protected function sstate_changeHandler(event:TextOperationEvent):void
+			{
+				if(this.sameAsShipping.selected)
+					this.bstate.text = this.sstate.text;
+				
+			}
+			
+			protected function szip_changeHandler(event:TextOperationEvent):void
+			{
+				if(this.sameAsShipping.selected)
+					this.bzip.text = this.szip.text;
+				
+			}
+			
+			protected function scity_changeHandler(event:TextOperationEvent):void
+			{
+				if(this.sameAsShipping.selected)
+					this.bcity.text = this.scity.text;
+				
 			}
 			
 		]]>
@@ -67,26 +135,30 @@
 			<s:Label styleName="lubalin" text="Shipping Address" fontSize="14" height="14"/>
 			<s:HGroup width="100%">
 				<s:TextInput id="sfname" prompt="First Name" width="100%" change="sfname_changeHandler(event)"/>
-				<s:TextInput id="slname" prompt="Last Name" width="100%"/>
+				<s:TextInput id="slname" prompt="Last Name" width="100%" change="slname_changeHandler(event)"/>
 			</s:HGroup>
-			<s:TextInput id="saddress1" prompt="Address 1" width="100%"/>
-			<s:TextInput id="saddress2" prompt="Address 2" width="100%"/>
+			<s:TextInput id="saddress1" prompt="Address 1" width="100%" change="saddress1_changeHandler(event)"/>
+			<s:TextInput id="saddress2" prompt="Address 2" width="100%" change="saddress2_changeHandler(event)"/>
 			<s:HGroup width="100%">
-				<s:TextInput id="scity" prompt="City" width="60%" />
-				<s:TextInput id="sstate" prompt="ST" width="18%" maxChars="2"/>
-				<s:TextInput id="szip" prompt="Zip" width="22%" maxChars="5"/>
+				<s:TextInput id="scity" prompt="City" width="60%" change="scity_changeHandler(event)"/>
+				<s:TextInput id="sstate" prompt="ST" width="18%" maxChars="2" change="sstate_changeHandler(event)"/>
+				<s:TextInput id="szip" prompt="Zip" width="22%" maxChars="5" change="szip_changeHandler(event)"/>
 			</s:HGroup>		
 			<s:TextInput prompt="Email Address for receipt" width="100%"/>
 			
 			
 			<s:Label styleName="lubalin" text="Shipping Method" fontSize="14" height="14" paddingTop="2" />
-			<s:DropDownList id="soptions" width="100%"/>
+			<s:DropDownList id="soptions" width="100%" contentBackgroundColor="0xaaaaaa" borderAlpha="0" borderVisible="false" skinClass="com.virid.fbcheckout.view.smallviews.skins.DropDownSkin" cornerRadius="0" verticalCenter="-1" >
+				<s:ArrayCollection>
+					<fx:String>Enter Zip Code for Options</fx:String>
+				</s:ArrayCollection>
+			</s:DropDownList>
 		</s:VGroup>
 		<s:VGroup width="50%" height="100%" gap="3"
 				  paddingTop="3" paddingRight="3" paddingBottom="3" paddingLeft="3">
 			<s:Group height="14">
 				<s:Label styleName="lubalin" text="Billing Info" fontSize="14" height="14"/>
-				<s:CheckBox styleName="lubalin" label="Same As Shipping" fontSize="10" color="0xffffff" selected="true" x="90" y="-3" alignmentBaseline="ideographicCenter" change="checkbox1_changeHandler(event)"/>
+				<s:CheckBox id="sameAsShipping" styleName="lubalin" label="Same As Shipping" fontSize="10" color="0xffffff" selected="true" x="90" y="-3" alignmentBaseline="ideographicCenter" change="checkbox1_changeHandler(event)"/>
 			</s:Group>
 			<s:HGroup width="100%">
 				<s:TextInput id="bfname" prompt="First Name" width="100%"/>
