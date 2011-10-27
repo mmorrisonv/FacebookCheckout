@@ -33,6 +33,7 @@ package com.virid.fbcheckout.view
 		public function register(_ui:Checkout):void
 		{
 			this.ui = _ui;
+			this.ui.addEventListener(Checkout.BILLING_SAME_AS,billing_checkout);
 			
 			this.model.addEventListener(Model.MainProductColorSKUChanged,onProdColorSKUChanged);
 			//model listeners:ui
@@ -40,6 +41,12 @@ package com.virid.fbcheckout.view
 			this.model.addEventListener(Model.StartProdDetail,ui_gotoProdDetail);
 			mapUIFieldsToModel();
 	
+		}
+		
+		protected function billing_checkout(event:Event):void
+		{
+			// TODO Auto-generated method stub
+			
 		}
 		
 		private function mapUIFieldsToModel():void

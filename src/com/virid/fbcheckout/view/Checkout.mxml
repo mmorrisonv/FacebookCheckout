@@ -8,10 +8,12 @@
 			import mx.events.FlexEvent;
 			
 			import spark.events.IndexChangeEvent;
+			import spark.events.TextOperationEvent;
 			
 			/*
 			*Event Definition
 			*/
+			static var BILLING_SAME_AS:String="BSA";
 			
 			protected function ratingChanged(event:IndexChangeEvent):void
 			{
@@ -35,6 +37,17 @@
 				
 			}
 			
+			protected function sfname_changeHandler(event:TextOperationEvent):void
+			{
+				
+			}
+			
+			protected function checkbox1_changeHandler(event:Event):void
+			{
+				var e:Event = new Event(BILLING_SAME_AS);
+				dispatchEvent(e);
+			}
+			
 		]]>
 	</fx:Script>
 	<fx:Declarations>
@@ -53,7 +66,7 @@
 			
 			<s:Label styleName="lubalin" text="Shipping Address" fontSize="14" height="14"/>
 			<s:HGroup width="100%">
-				<s:TextInput id="sfname" prompt="First Name" width="100%"/>
+				<s:TextInput id="sfname" prompt="First Name" width="100%" change="sfname_changeHandler(event)"/>
 				<s:TextInput id="slname" prompt="Last Name" width="100%"/>
 			</s:HGroup>
 			<s:TextInput id="saddress1" prompt="Address 1" width="100%"/>
@@ -73,7 +86,7 @@
 				  paddingTop="3" paddingRight="3" paddingBottom="3" paddingLeft="3">
 			<s:Group height="14">
 				<s:Label styleName="lubalin" text="Billing Info" fontSize="14" height="14"/>
-				<s:CheckBox styleName="lubalin" label="Same As Shipping" fontSize="10" color="0xffffff" selected="true" x="90" y="-3" alignmentBaseline="ideographicCenter"/>
+				<s:CheckBox styleName="lubalin" label="Same As Shipping" fontSize="10" color="0xffffff" selected="true" x="90" y="-3" alignmentBaseline="ideographicCenter" change="checkbox1_changeHandler(event)"/>
 			</s:Group>
 			<s:HGroup width="100%">
 				<s:TextInput id="bfname" prompt="First Name" width="100%"/>
