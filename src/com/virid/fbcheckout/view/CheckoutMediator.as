@@ -17,6 +17,8 @@ package com.virid.fbcheckout.view
 		private var model:Model = Model.getInstance();
 		private var ui:Checkout;
 		
+		private var uiTOaddressPropertyMap:Array;
+		
 		//tranition variables
 		private var bigease:Power = new Power();
 		private var v:Vector.<MotionPath> = new Vector.<MotionPath>();
@@ -36,8 +38,13 @@ package com.virid.fbcheckout.view
 			//model listeners:ui
 			this.model.addEventListener(Model.DisplayCheckout,ui_gotoCheckoutMode);
 			this.model.addEventListener(Model.StartProdDetail,ui_gotoProdDetail);
-			
+			mapUIFieldsToModel();
 	
+		}
+		
+		private function mapUIFieldsToModel():void
+		{
+			this.ui.sfname;
 		}
 		
 		protected function onProdColorSKUChanged(event:Event):void

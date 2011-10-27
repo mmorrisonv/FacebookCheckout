@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx" width="100%" height="36"
+		 rollOver="onRollOverHandler(event)" rollOut="onRollOutHandler(event)">
+	<fx:Script>
+		<![CDATA[
+			import mx.events.FlexEvent;
+			
+			private var _label:String = new String();
+			private var _index:String = new String();
+
+			public function set index(value:String):void
+			{
+				_index = value;
+				this.num.text = _index;
+			}
+
+			public function set label(value:String):void
+			{
+				_label = value;
+				this.text.text = _label;
+			}
+
+			
+			protected function onRollOverHandler(event:MouseEvent):void
+			{
+				this.rollover.visible = true;
+				
+			}
+			
+			protected function onRollOutHandler(event:MouseEvent):void
+			{
+				this.rollover.visible = false;
+				
+			}
+			
+		]]>
+	</fx:Script>
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	<s:Rect id="rollover" x="34" width="296" height="100%" verticalCenter="0"
+			radiusX="3" radiusY="3" visible="false">
+		<s:fill>
+			<s:SolidColor color="0xfaded3" />
+		</s:fill>
+	</s:Rect>
+	<s:Image left="0" source="assets/selectDivet.png" verticalCenter="-2"/>
+	<s:Label left="10" id="num" styleName="lubalin" color="0xffffff" width="30" fontSize="20" verticalCenter="0"/>
+	<s:Label id="text" styleName="modalLabel" width="100%" verticalCenter="0"/>
+	
+</s:Group>

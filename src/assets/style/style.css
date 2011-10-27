@@ -18,7 +18,8 @@ s|TextInput{
 
 .modalLabel{
 	fontFamily:"Helv";
-	fontSize:16px;
+	fontSize:15px;
+	letterSpacing:-20;
 	lineHeight:16px;
 	color:#666666;
 	left:40px;

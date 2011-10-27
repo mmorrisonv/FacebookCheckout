@@ -2,7 +2,7 @@
 <s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
 		 xmlns:s="library://ns.adobe.com/flex/spark" 
 		 xmlns:mx="library://ns.adobe.com/flex/mx" width="153" height="120" 
-		 show="popupShown(event)" creationComplete="componentCreationComplete(event)">
+		 show="popupShown(event)" creationComplete="componentCreationComplete(event)" xmlns:smallviews="com.virid.fbcheckout.view.smallviews.*">
 	<fx:Script>
 		<![CDATA[
 			import com.virid.fbcheckout.model.vo.ColorVO;
@@ -85,7 +85,7 @@
 				
 			}
 			
-			protected function paypqal_clickHandler(event:MouseEvent):void
+			protected function paypal_clickHandler(event:MouseEvent):void
 			{
 				var e:CustomEvent 
 				e = new CustomEvent(DISPLAY_CHECKOUT,null,false);
@@ -108,16 +108,20 @@
 		</s:fill>
 	</s:Rect>
 	<s:Group width="100%" height="100%">
-		<s:Label text="How would you like to &#13;Purchase This Product" 
-				 top="10" left="14"
+		<s:Label text="How would you like to &#13;purchase this product?" 
+				 left="14" height="60" verticalAlign="middle" top="1"
 				 fontSize="22" lineHeight="20" styleName="lubalin" />
 		<s:Group top="60" width="100%" height="165" left="12">
-			
-				<s:Label styleName="modalLabel" y="15" click="useLogin_clickHandler(event)" buttonMode="true" width="100%">I have a Journey.com account and would &#13;like to login and use that here.</s:Label>
-				<s:Label styleName="modalLabel" y="60" click="creditcard_clickHandler(event)" buttonMode="true" width="100%">Just use my credit card</s:Label>
-				<s:Label styleName="modalLabel" y="90" click="gotoJourneys_clickHandler(event)" buttonMode="true" width="100%">I would like to add this to my cart on&#13;Journeys.com.</s:Label>
-				<s:Label styleName="modalLabel" y="140" click="paypqal_clickHandler(event)" buttonMode="true" width="100%">Use paypal.</s:Label>
-
+			<s:VGroup top="15" width="100%" gap="3">
+				<smallviews:modalCheckoutSelectOption buttonMode="true" width="100%" index="1"
+													  click="useLogin_clickHandler(event)" label="I have a Journey.com account and would &#13;like to login and use that here." />
+				<smallviews:modalCheckoutSelectOption buttonMode="true" width="100%" index="2"
+													  click="creditcard_clickHandler(event)" label="Just use my credit card" />
+				<smallviews:modalCheckoutSelectOption  buttonMode="true" width="100%" index="3"
+													   click="gotoJourneys_clickHandler(event)" label="I would like to add this to my cart on&#13;Journeys.com."/>
+				<smallviews:modalCheckoutSelectOption  buttonMode="true" width="100%" index="4"
+													   click="paypal_clickHandler(event)" label="Use paypal." />
+			</s:VGroup>
 		</s:Group>
 
 

@@ -1,9 +1,11 @@
 package com.virid.fbcheckout.model
 {
 	import com.virid.fbcheckout.model.Model;
+	import com.virid.fbcheckout.model.vo.AddressVO;
 	import com.virid.fbcheckout.model.vo.AltViewVO;
 	import com.virid.fbcheckout.model.vo.ColorVO;
 	import com.virid.fbcheckout.model.vo.ProductVO;
+	import com.virid.fbcheckout.model.vo.ShippingOptionVO;
 	import com.virid.fbcheckout.model.vo.SizeVO;
 	
 	import flash.events.Event;
@@ -49,6 +51,14 @@ package com.virid.fbcheckout.model
 		private var _MainProduct:ProductVO = new ProductVO();
 		private var _MainProductColor:ColorVO = new ColorVO();
 		private var _MainProductSKU:SizeVO = new SizeVO();
+		
+		
+		/*
+		 * Checkout Based info*/
+		public var _ShippingOptions:ShippingOptionVO = new ShippingOptionVO();
+		public var _shippingAddress:AddressVO = new AddressVO();
+		public var _blillingAddress:AddressVO = new AddressVO();
+		public var Addresses:ArrayCollection = new ArrayCollection();
 		
 		/*
 		 * Setters and Getters for Main Elements*/
