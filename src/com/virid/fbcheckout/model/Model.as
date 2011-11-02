@@ -12,6 +12,7 @@ package com.virid.fbcheckout.model
 	import flash.events.EventDispatcher;
 	
 	import mx.collections.ArrayCollection;
+	import mx.rpc.http.HTTPService;
 
 	[Event(name="MainProductChanged", type="flash.events.Event")]
 	[Event(name="MainProductColorChanged", type="flash.events.Event")]
@@ -45,6 +46,11 @@ package com.virid.fbcheckout.model
 		/*
 		 * */
 		//public var AltViews:ArrayCollection = new ArrayCollection(); - default alt views stored on the MainProduct
+		
+		public var urlRoot:String = "http://www.journeys.com/api/";
+		public var httpService:HTTPService = new HTTPService();
+		public var productID:String = '201046';
+		
 		public var Colors:ArrayCollection = new ArrayCollection();
 		//public var SKUs:ArrayCollection = new ArrayCollection();
 		private var _MainProductImage:AltViewVO = new AltViewVO();

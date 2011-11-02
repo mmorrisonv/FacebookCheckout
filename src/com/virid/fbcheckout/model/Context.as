@@ -1,5 +1,6 @@
 package com.virid.fbcheckout.model
 {
+	import com.adobe.serialization.json.JSON;
 	import com.virid.fbcheckout.model.vo.AltViewVO;
 	import com.virid.fbcheckout.model.vo.ColorVO;
 	import com.virid.fbcheckout.model.vo.ProductVO;
@@ -8,16 +9,20 @@ package com.virid.fbcheckout.model
 	import flash.sampler.NewObjectSample;
 	
 	import mx.collections.ArrayCollection;
+	import mx.controls.Alert;
+	import mx.rpc.events.FaultEvent;
+	import mx.rpc.events.ResultEvent;
 
 	public class Context
 	{
 		private var model:Model = Model.getInstance();
 		public function Context()
 		{
-			buildTestColors();
-			buildSKUs();
+
+			buildProductColors();
+			/*buildSKUs();
 			buildMainProduct();
-			buildTestAltViews();
+			buildTestAltViews();*/
 		}
 		
 
@@ -51,10 +56,16 @@ package com.virid.fbcheckout.model
 			}
 		}
 		
-		private function buildTestColors():void
+		private function buildProductColors():void
 		{
 			//build some test color data
 			
+			model.httpService.resultFormat="text";
+			model.httpService.url = model.urlRoot + "getproduct.aspx?id=" + model.productID;
+			model.httpService.addEventListener("result", buildColorHTTPResult); 
+			model.httpService.addEventListener("fault", buildColorHTTPFault);
+			model.httpService.send();
+			/*
 			var color:ColorVO = new ColorVO();
 			//add item to main product
 			color.name = 'Grey/Black/Purple';
@@ -92,7 +103,21 @@ package com.virid.fbcheckout.model
 			color.imageFS = 'assets/data/colors/1_182022_FS.jpg';
 			color.hex = '6dc9f0';
 			color.styleid = '471192';
-			model.Colors.addItem(color);
+			model.Colors.addItem(color);*/
+		}
+		
+		protected function buildColorHTTPFault(event:FaultEvent):void
+		{
+			var faultString:String = event.fault.faultString;
+			Alert.show(faultString);
+		}
+		
+		protected function buildColorHTTPResult(event:ResultEvent):void
+		{
+			var result:Object = event.result;	
+			result = JSON.decode( result.toString() );
+			
+			trace(result);
 		}
 		
 		private function build471219AltViews(color:ColorVO):void
