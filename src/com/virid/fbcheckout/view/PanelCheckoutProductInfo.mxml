@@ -43,7 +43,7 @@
 	<s:Group id="details" x="-400" >
 		<s:Image id="productImage" source="@Embed('assets/data/prodimage.jpg')"
 				  x="5" y="36" maxWidth="60" maxHeight="60" smooth="true" smoothingQuality="high"/>
-		<s:Label id="productName" styleName="lubalin" text="Name with a long something or other" 
+		<s:Label id="productName" styleName="lubalin" text="Product Name" 
 				 color="0x353535" fontSize="14" y="36" x="75" width="180" lineHeight="12"/>
 		<s:Label id="productDetail" styleName="lubalin" text="Size:" 
 				 color="0x353535" fontSize="11" y="74" x="75" width="160"/>

@@ -57,9 +57,11 @@ package com.virid.fbcheckout.view
 		
 		protected function onProductChange(event:Event):void
 		{
-			ui.prodName.text = model.MainProduct.name;
-			ui.selectedColor.text = model.MainProduct.colorObj.name;
-			ui.selectedSize.text = model.MainProduct.colorObj.currentSKU.name;
+			if(this.model.MainProduct.colorObj != null){
+				ui.prodName.text = model.MainProduct.name;
+				ui.selectedColor.text = model.MainProduct.colorObj.name;
+				ui.selectedSize.text = model.MainProduct.colorObj.currentSKU.name;
+			}
 		}
 		protected function onProdColorSKUChanged(event:Event):void
 		{

@@ -21,7 +21,8 @@ package com.virid.fbcheckout.view
 		public function register(_ui:PopupSizeSelect):void
 		{
 			this.ui = _ui;
-			this.ui.sizeSelect.dataProvider = this.model.MainProduct.colorObj.SKUs;
+			if(this.model.MainProduct != null && this.model.MainProduct.colorObj != null)
+				this.ui.sizeSelect.dataProvider = this.model.MainProduct.colorObj.SKUs;
 			
 			ui.addEventListener(PopupSizeSelect.UI_SIZE_CHANGED,ui_sizeChanged);
 			

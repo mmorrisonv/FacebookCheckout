@@ -192,7 +192,7 @@
 		<s:Group width="100%" height="36">
 			<s:Group height="36" left="10">
 				<s:Label text="Final Price:" fontSize="11" styleName="lubalin" verticalCenter="0"/>
-				<s:Label text="$79.64 USD" x="60" fontSize="18" styleName="lubalin" verticalCenter="0"/>
+				<s:Label text="$--.-- USD" x="60" fontSize="18" styleName="lubalin" verticalCenter="0"/>
 			</s:Group>
 			<s:Group width="56" height="22" left="175" y="3">
 				<s:Rect width="100%" height="100%"><s:stroke><s:SolidColorStroke color="0xcccccc" weight="1" /></s:stroke></s:Rect>

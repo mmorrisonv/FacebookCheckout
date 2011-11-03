@@ -53,8 +53,10 @@ package com.virid.fbcheckout.view
 		
 		protected function changeProductImage(event:Event):void
 		{
-			this.ui.productImage.source = this.model.MainProduct.colorObj.imageFS;
-			this.ui.productPriceDisplay.text = '$' + String(this.model.MainProduct.colorObj.currentSKU.price) + ' USD';
+			if(this.model.MainProduct.colorObj != null){
+				this.ui.productImage.source = this.model.MainProduct.colorObj.imageFS;
+				this.ui.productPriceDisplay.text = '$' + String(this.model.MainProduct.colorObj.currentSKU.price) + ' USD';
+			}
 		}
 		
 		

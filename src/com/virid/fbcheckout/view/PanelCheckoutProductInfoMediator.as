@@ -35,11 +35,14 @@ package com.virid.fbcheckout.view
 		
 		protected function onProductChange(event:Event):void
 		{
-			this.ui.productImage.source = this.model.MainProduct.colorObj.imageFS;	
-			this.ui.productName.text = model.MainProduct.name;
-			this.ui.productDetail.text = "Size: " + model.MainProduct.colorObj.currentSKU.name;
-			this.ui.productColor.text = "Color: " + model.MainProduct.colorObj.name;
-			this.ui.productPriceDisplay.text = "$" + String(this.model.MainProduct.colorObj.currentSKU.price) + " USD";
+			if(this.model.MainProduct.colorObj != null)
+			{
+				this.ui.productImage.source = this.model.MainProduct.colorObj.imageFS;	
+				this.ui.productName.text = model.MainProduct.name;
+				this.ui.productDetail.text = "Size: " + model.MainProduct.colorObj.currentSKU.name;
+				this.ui.productColor.text = "Color: " + model.MainProduct.colorObj.name;
+				this.ui.productPriceDisplay.text = "$" + String(this.model.MainProduct.colorObj.currentSKU.price) + " USD";
+			}
 		}
 		
 		protected function initateProDetail(event:Event):void

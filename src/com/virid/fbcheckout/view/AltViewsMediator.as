@@ -47,7 +47,7 @@ package com.virid.fbcheckout.view
 		* Model Listeners*/
 		protected function changeAltViewList(event:Event):void
 		{
-			if( this.model.MainProduct.colorObj.AltViews != null && this.model.MainProduct.colorObj.AltViews.length > 0 )
+			if( this.model.MainProduct.colorObj != null && this.model.MainProduct.colorObj.AltViews != null && this.model.MainProduct.colorObj.AltViews.length > 0 )
 				this.ui.altViewList.dataProvider = this.model.MainProduct.colorObj.AltViews;
 			else
 				this.ui.altViewList.dataProvider = this.model.MainProduct.altViews;
