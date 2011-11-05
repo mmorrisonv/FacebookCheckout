@@ -5,7 +5,7 @@
 		 show="popupShown(event)" creationComplete="componentCreationComplete(event)" xmlns:smallviews="com.virid.fbcheckout.view.smallviews.*">
 	<fx:Script>
 		<![CDATA[
-			import com.virid.fbcheckout.model.vo.ColorVO;
+			import com.virid.fbcheckout.model.vo.SKUVO;
 			
 			import controller.events.CustomEvent;
 			

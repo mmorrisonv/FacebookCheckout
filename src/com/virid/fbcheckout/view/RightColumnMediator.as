@@ -57,16 +57,16 @@ package com.virid.fbcheckout.view
 		
 		protected function onProductChange(event:Event):void
 		{
-			if(this.model.MainProduct.colorObj != null){
-				ui.prodName.text = model.MainProduct.name;
-				ui.selectedColor.text = model.MainProduct.colorObj.name;
-				ui.selectedSize.text = model.MainProduct.colorObj.currentSKU.name;
+			if(this.model.SelectedProduct.colorObj != null){
+				ui.prodName.text = model.SelectedProduct.name;
+				ui.selectedColor.text = model.SelectedProduct.colorObj.name;
+				ui.selectedSize.text = model.SelectedProduct.colorObj.currentSKU.name;
 			}
 		}
 		protected function onProdColorSKUChanged(event:Event):void
 		{
-			ui.selectedColor.text = model.MainProduct.colorObj.name;
-			ui.selectedSize.text = model.MainProduct.colorObj.currentSKU.name;
+			ui.selectedColor.text = model.SelectedProduct.colorObj.name;
+			ui.selectedSize.text = model.SelectedProduct.colorObj.currentSKU.name;
 		}
 		
 		protected function ui_gotoCheckoutMode(event:Event):void

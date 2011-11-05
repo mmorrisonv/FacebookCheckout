@@ -1,10 +1,13 @@
 package com.virid.fbcheckout.model
-{
+{	
+
 	import com.adobe.serialization.json.JSON;
 	import com.virid.fbcheckout.model.vo.AltViewVO;
-	import com.virid.fbcheckout.model.vo.ColorVO;
 	import com.virid.fbcheckout.model.vo.ProductVO;
+	import com.virid.fbcheckout.model.vo.SKUVO;
 	import com.virid.fbcheckout.model.vo.SizeVO;
+	
+	import controller.commands.extractColorOptions;
 	
 	import flash.sampler.NewObjectSample;
 	
@@ -26,20 +29,20 @@ package com.virid.fbcheckout.model
 		}
 		
 
-		private function buildMainProduct():void
-		{
+		private function buildMainProduct(rawArray:Object):void
+		{//function gets called when data is returned on buildProductColors
 			var Product:ProductVO = new ProductVO();
 			
 			
-			var tcolor: ColorVO = this.model.Colors[1];
-			Product.name = "Womens Osiris NYC 83 Slim Skate Shoe - White/Zebra";
+			var tcolor: SKUVO = this.model.AllSKUs[1];
+			Product.name = rawArray.NAME;
 			Product.colorObj = tcolor;
 			//Product.sku  = null;
-			Product.source = "assets/images/data/prodimage.jpg";
+			Product.source = Product.colorObj.imageFS;//todo: should not need to set this, anything that needs this should be able to retrieve from Color.imageFS
 			
 			
 			
-			model.MainProduct = Product;
+			model.SelectedProduct = Product;
 			
 			
 		}
@@ -52,19 +55,17 @@ package com.virid.fbcheckout.model
 				var testView:AltViewVO = new AltViewVO();
 				testView.source = "assets/data/alt-view"+i+".jpg";
 				testView.thumb = testView.source;
-				model.MainProduct.altViews.addItem(testView);
+				model.SelectedProduct.altViews.addItem(testView);
 			}
 		}
 		
 		private function buildProductColors():void
 		{
 			//build some test color data
-			
-			model.httpService.resultFormat="text";
-			model.httpService.url = model.urlRoot + "getproduct.aspx?id=" + model.productID;
-			model.httpService.addEventListener("result", buildColorHTTPResult); 
-			model.httpService.addEventListener("fault", buildColorHTTPFault);
-			model.httpService.send();
+	
+			var url:String = model.urlRoot + "getproduct.aspx?id=" + model.productID;
+			var colorExtractor:extractColorOptions = new extractColorOptions(url,onColorOptionsReceived,buildMainProduct);
+
 			/*
 			var color:ColorVO = new ColorVO();
 			//add item to main product
@@ -106,6 +107,12 @@ package com.virid.fbcheckout.model
 			model.Colors.addItem(color);*/
 		}
 		
+		private function onColorOptionsReceived(colors:ArrayCollection):void
+		{
+			// TODO Auto Generated method stub
+			this.model.AllSKUs = colors;
+			
+		}
 		protected function buildColorHTTPFault(event:FaultEvent):void
 		{
 			var faultString:String = event.fault.faultString;
@@ -120,7 +127,7 @@ package com.virid.fbcheckout.model
 			trace(result);
 		}
 		
-		private function build471219AltViews(color:ColorVO):void
+		private function build471219AltViews(color:SKUVO):void
 		{
 			var thumbs:Array = new Array('assets/data/alt-views/1_201046_SW.JPG','assets/data/alt-views/1_201046_SW_BACK.JPG','assets/data/alt-views/1_201046_SW_FRONT.JPG','assets/data/alt-views/1_201046_SW_SIDE.JPG','assets/data/alt-views/1_201046_SW_TOP.JPG');
 			var fullsize:Array = new Array('assets/data/alt-views/1_201046_FS.JPG','assets/data/alt-views/1_201046_FS_BACK.JPG','assets/data/alt-views/1_201046_FS_FRONT.JPG','assets/data/alt-views/1_201046_FS_SIDE.JPG','assets/data/alt-views/1_201046_FS_TOP.JPG');
@@ -136,19 +143,19 @@ package com.virid.fbcheckout.model
 		private function buildSKUs():void
 		{
 			var sizes:Array = new Array('XS','S','M','L','XL');
-			for each(var c:ColorVO in model.Colors)
+			for each(var c:SKUVO in model.AllSKUs)
 			{
 				for( var i:Number = 0; i < 5; i++){
 					var nSKU:SizeVO = new SizeVO();
 					nSKU.index = i;
 					nSKU.name = sizes[i];
 					nSKU.size = nSKU.name;
-					nSKU.sku = i + '_' + c.styleid;
+					nSKU.style_id = i + '_' + c.styleid;
 					nSKU.price = (i==0)?50.49:74.99;
-					c.SKUs.addItem(nSKU);
+					c.Sizes.addItem(nSKU);
 				}
 				
-				c.currentSKU = c.SKUs[0];
+				c.currentSKU = c.Sizes[0];
 			}
 		}
 		

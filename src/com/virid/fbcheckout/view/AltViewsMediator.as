@@ -34,7 +34,7 @@ package com.virid.fbcheckout.view
 		{
 			this.ui = _ui;
 			//ui listeners
-			this.ui.altViewList.dataProvider = this.model.MainProduct.altViews;
+			this.ui.altViewList.dataProvider = this.model.SelectedProduct.altViews;
 			this.ui.addEventListener(AltViews.UI_ALTVIEW_SELECTION_CHANGED,changeProductImage);
 			//model listeners
 			this.model.addEventListener(Model.DisplayCheckout,ui_gotoCheckoutMode);
@@ -47,10 +47,10 @@ package com.virid.fbcheckout.view
 		* Model Listeners*/
 		protected function changeAltViewList(event:Event):void
 		{
-			if( this.model.MainProduct.colorObj != null && this.model.MainProduct.colorObj.AltViews != null && this.model.MainProduct.colorObj.AltViews.length > 0 )
-				this.ui.altViewList.dataProvider = this.model.MainProduct.colorObj.AltViews;
+			if( this.model.SelectedProduct.colorObj != null && this.model.SelectedProduct.colorObj.AltViews != null && this.model.SelectedProduct.colorObj.AltViews.length > 0 )
+				this.ui.altViewList.dataProvider = this.model.SelectedProduct.colorObj.AltViews;
 			else
-				this.ui.altViewList.dataProvider = this.model.MainProduct.altViews;
+				this.ui.altViewList.dataProvider = this.model.SelectedProduct.altViews;
 			
 		}
 		protected function ui_gotoProdDetailMode(event:Event):void

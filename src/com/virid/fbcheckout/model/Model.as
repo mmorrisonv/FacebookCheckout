@@ -3,7 +3,7 @@ package com.virid.fbcheckout.model
 	import com.virid.fbcheckout.model.Model;
 	import com.virid.fbcheckout.model.vo.AddressVO;
 	import com.virid.fbcheckout.model.vo.AltViewVO;
-	import com.virid.fbcheckout.model.vo.ColorVO;
+	import com.virid.fbcheckout.model.vo.SKUVO;
 	import com.virid.fbcheckout.model.vo.ProductVO;
 	import com.virid.fbcheckout.model.vo.ShippingOptionVO;
 	import com.virid.fbcheckout.model.vo.SizeVO;
@@ -51,11 +51,11 @@ package com.virid.fbcheckout.model
 		public var httpService:HTTPService = new HTTPService();
 		public var productID:String = '201046';
 		
-		public var Colors:ArrayCollection = new ArrayCollection();
+		public var AllSKUs:ArrayCollection = new ArrayCollection();
 		//public var SKUs:ArrayCollection = new ArrayCollection();
 		private var _MainProductImage:AltViewVO = new AltViewVO();
 		private var _MainProduct:ProductVO = new ProductVO();
-		private var _MainProductColor:ColorVO = new ColorVO();
+		private var _MainProductColor:SKUVO = new SKUVO();
 		private var _MainProductSKU:SizeVO = new SizeVO();
 		
 		
@@ -68,19 +68,19 @@ package com.virid.fbcheckout.model
 		
 		/*
 		 * Setters and Getters for Main Elements*/
-		public function get MainProduct():ProductVO
+		public function get SelectedProduct():ProductVO
 		{
 			return _MainProduct;
 		}
 
-		public function set MainProduct(value:ProductVO):void
+		public function set SelectedProduct(value:ProductVO):void
 		{
 			_MainProduct = value;
 			_MainProductColor = _MainProduct.colorObj;
 			var e:Event = new Event(MainProductChanged,true,false);
 			this.dispatchEvent(e);
 		}
-		public function set MainProductColor(value:ColorVO):void
+		public function set MainProductColor(value:SKUVO):void
 		{
 			_MainProductColor= value;
 			_MainProduct.colorObj = value;

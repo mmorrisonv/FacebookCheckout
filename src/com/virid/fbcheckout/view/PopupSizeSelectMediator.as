@@ -1,7 +1,7 @@
 package com.virid.fbcheckout.view
 {
 	import com.virid.fbcheckout.model.Model;
-	import com.virid.fbcheckout.model.vo.ColorVO;
+	import com.virid.fbcheckout.model.vo.SKUVO;
 	import com.virid.fbcheckout.model.vo.ProductVO;
 	import com.virid.fbcheckout.model.vo.SizeVO;
 	
@@ -21,8 +21,8 @@ package com.virid.fbcheckout.view
 		public function register(_ui:PopupSizeSelect):void
 		{
 			this.ui = _ui;
-			if(this.model.MainProduct != null && this.model.MainProduct.colorObj != null)
-				this.ui.sizeSelect.dataProvider = this.model.MainProduct.colorObj.SKUs;
+			if(this.model.SelectedProduct != null && this.model.SelectedProduct.colorObj != null)
+				this.ui.sizeSelect.dataProvider = this.model.SelectedProduct.colorObj.Sizes;
 			
 			ui.addEventListener(PopupSizeSelect.UI_SIZE_CHANGED,ui_sizeChanged);
 			

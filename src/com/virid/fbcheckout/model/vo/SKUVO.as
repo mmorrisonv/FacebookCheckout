@@ -4,7 +4,7 @@ package com.virid.fbcheckout.model.vo
 	
 	import mx.collections.ArrayCollection;
 	
-	public class ColorVO extends EventDispatcher
+	public class SKUVO extends EventDispatcher
 	{
 		public var name 		: String;
 		public var colorcode	: String;
@@ -13,13 +13,14 @@ package com.virid.fbcheckout.model.vo
 		public var currentSKU 	: SizeVO;
 		
 		//linked data
-		public var SKUs 		: ArrayCollection = new ArrayCollection();
+		public var Sizes 		: ArrayCollection = new ArrayCollection();
 		public var AltViews		:ArrayCollection = new ArrayCollection();
 		
 		//meta
 		public var imageFS 		: String;
 		public var imageTB 		: String = "";
-		
+		public var imagePVW		: String = "";
 		public var defaultColor	:Boolean = false;
+		
 	}
 }

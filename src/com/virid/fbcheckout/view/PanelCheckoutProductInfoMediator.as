@@ -1,7 +1,7 @@
 package com.virid.fbcheckout.view
 {
 	import com.virid.fbcheckout.model.Model;
-	import com.virid.fbcheckout.model.vo.ColorVO;
+	import com.virid.fbcheckout.model.vo.SKUVO;
 	
 	import controller.events.CustomEvent;
 	
@@ -35,13 +35,13 @@ package com.virid.fbcheckout.view
 		
 		protected function onProductChange(event:Event):void
 		{
-			if(this.model.MainProduct.colorObj != null)
+			if(this.model.SelectedProduct.colorObj != null)
 			{
-				this.ui.productImage.source = this.model.MainProduct.colorObj.imageFS;	
-				this.ui.productName.text = model.MainProduct.name;
-				this.ui.productDetail.text = "Size: " + model.MainProduct.colorObj.currentSKU.name;
-				this.ui.productColor.text = "Color: " + model.MainProduct.colorObj.name;
-				this.ui.productPriceDisplay.text = "$" + String(this.model.MainProduct.colorObj.currentSKU.price) + " USD";
+				this.ui.productImage.source = this.model.SelectedProduct.colorObj.imageFS;	
+				this.ui.productName.text = model.SelectedProduct.name;
+				this.ui.productDetail.text = "Size: " + model.SelectedProduct.colorObj.currentSKU.name;
+				this.ui.productColor.text = "Color: " + model.SelectedProduct.colorObj.name;
+				this.ui.productPriceDisplay.text = "$" + String(this.model.SelectedProduct.colorObj.currentSKU.price) + " USD";
 			}
 		}
 		
@@ -111,7 +111,7 @@ package com.virid.fbcheckout.view
 		{
 			if(event.data != null )
 			{
-				var newColor:ColorVO = event.data as ColorVO;
+				var newColor:SKUVO = event.data as SKUVO;
 				this.model.MainProductColor = newColor;
 			}
 			
