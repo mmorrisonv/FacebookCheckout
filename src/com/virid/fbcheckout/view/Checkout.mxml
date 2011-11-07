@@ -120,6 +120,10 @@
 	</fx:Script>
 	<fx:Declarations>
 		<!-- Place non-visual elements (e.g., services, value objects) here -->
+		<s:Power id="bigThing"/>
+		<s:Animate id="animateToProdDetail" target="{this}" duration="700" easer="{bigThing}">
+			<s:SimpleMotionPath  property="y" valueTo="1000"/>
+		</s:Animate>
 	</fx:Declarations>
 	
 	<s:Rect width="100%" height="100%">

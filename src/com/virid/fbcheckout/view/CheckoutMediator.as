@@ -77,18 +77,7 @@ package com.virid.fbcheckout.view
 		
 		protected function ui_gotoProdDetail(event:Event):void
 		{
-			a1 = new Animate();
-			a1.target = this.ui; a1.duration = 700; a1.easer = bigease;
-			m = new SimpleMotionPath();
-			m.property = 'y'; m.valueTo = 1000;
-			v = new Vector.<MotionPath>();v.push(m);
-			a1.motionPaths = v;
-			var p:Sequence = new Sequence();
-			p.addChild(a1);
-			p.play( );
-			
-			/*this.ui.visible = false;
-			this.ui.includeInLayout = false;*/
+			this.ui.animateToProdDetail.play();
 			
 		}
 

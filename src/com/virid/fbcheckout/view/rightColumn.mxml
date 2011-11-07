@@ -145,9 +145,10 @@
 											   width="130" height="18" horizontalCenter="0" y="58" />
 
 		</s:Group>
-
-		<view:PopupColorSelect id="colorSelect" visible="false" includeInLayout="false" y="90"/>
+		
 		<view:PopupSizeSelect id="sizeSelect" visible="false" includeInLayout="false" y="60"/>
+		<view:PopupColorSelect id="colorSelect" visible="false" includeInLayout="false" y="90"/>
+		
 		
 	</s:VGroup>
 

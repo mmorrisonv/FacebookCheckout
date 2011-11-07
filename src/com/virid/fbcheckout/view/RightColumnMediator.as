@@ -53,6 +53,7 @@ package com.virid.fbcheckout.view
 			var obj:Object = new Object();
 			obj.start = "NOW";
 			this.model.initiateCheckout = obj;
+			this.model.PurchaseCurrent();
 		}
 		
 		protected function onProductChange(event:Event):void

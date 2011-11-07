@@ -66,45 +66,6 @@ package com.virid.fbcheckout.model
 			var url:String = model.urlRoot + "getproduct.aspx?id=" + model.productID;
 			var colorExtractor:extractColorOptions = new extractColorOptions(url,onColorOptionsReceived,buildMainProduct);
 
-			/*
-			var color:ColorVO = new ColorVO();
-			//add item to main product
-			color.name = 'Grey/Black/Purple';
-			color.imageTB = 'assets/data/colors/1_198001_SW.jpg';
-			color.imageFS = 'assets/data/colors/1_198001_FS.jpg';
-			color.hex = '53874a';
-			color.styleid = '471219';
-			build471219AltViews(color);
-			model.Colors.addItem(color);
-			
-			
-			//add item to main product
-			color = new ColorVO();
-			color.name = 'White/Neon Pink/Black';
-			color.imageTB = 'assets/data/colors/1_167758_SW.jpg';
-			color.imageFS = 'assets/data/colors/1_167758_FS.jpg';
-			color.hex = 'd4326b';
-			color.styleid = '471180';
-			model.Colors.addItem(color);
-			
-			color = new ColorVO();
-			//add item to main product
-			color.name = 'White/Zebra';
-			color.imageTB = 'assets/data/colors/1_167748_SW.jpg';
-			color.imageFS = 'assets/data/colors/1_167748_FS.jpg';
-			color.hex = 'c6323e';
-			color.styleid = '471177';
-			color.defaultColor = true;
-			model.Colors.addItem(color);
-
-			color = new ColorVO();
-			//add item to main product
-			color.name = 'Black/Blue/Green';
-			color.imageTB = 'assets/data/colors/1_182022_SW.jpg';
-			color.imageFS = 'assets/data/colors/1_182022_FS.jpg';
-			color.hex = '6dc9f0';
-			color.styleid = '471192';
-			model.Colors.addItem(color);*/
 		}
 		
 		private function onColorOptionsReceived(colors:ArrayCollection):void

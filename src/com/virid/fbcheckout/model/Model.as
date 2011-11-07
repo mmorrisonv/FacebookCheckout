@@ -68,6 +68,7 @@ package com.virid.fbcheckout.model
 		
 		/*
 		 * Setters and Getters for Main Elements*/
+		
 		public function get SelectedProduct():ProductVO
 		{
 			return _MainProduct;
@@ -118,6 +119,11 @@ package com.virid.fbcheckout.model
 		{
 			var e:Event = new Event(StartProdDetail,true,false);
 			this.dispatchEvent(e);
+		}
+		
+		public function PurchaseCurrent():void
+		{
+			;
 		}
 	}	
 }
