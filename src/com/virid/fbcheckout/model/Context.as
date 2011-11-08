@@ -24,8 +24,8 @@ package com.virid.fbcheckout.model
 
 			buildProductColors();
 			/*buildSKUs();
-			buildMainProduct();
-			buildTestAltViews();*/
+			buildMainProduct();*/
+			//build471219AltViews();
 		}
 		
 

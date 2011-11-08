@@ -49,8 +49,16 @@ package com.virid.fbcheckout.view
 		{
 			if( this.model.SelectedProduct.colorObj != null && this.model.SelectedProduct.colorObj.AltViews != null && this.model.SelectedProduct.colorObj.AltViews.length > 0 )
 				this.ui.altViewList.dataProvider = this.model.SelectedProduct.colorObj.AltViews;
-			else
+			else if(  this.model.SelectedProduct.altViews != null && this.model.SelectedProduct.altViews != null && this.model.SelectedProduct.altViews.length > 0 )
 				this.ui.altViewList.dataProvider = this.model.SelectedProduct.altViews;
+			else
+				this.ui_gotoSlimView();
+			
+		}
+		
+		private function ui_gotoSlimView():void
+		{
+			this.ui.showMini.play();
 			
 		}
 		protected function ui_gotoProdDetailMode(event:Event):void

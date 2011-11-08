@@ -40,6 +40,10 @@
 	</fx:Script>
 	<fx:Declarations>
 		<!-- Place non-visual elements (e.g., services, value objects) here -->
+		<s:Power id="bigGame" />
+		<s:Animate target="{this}" id ="showMini" duration="1000" >
+			<s:SimpleMotionPath property="y" valueTo="270"/>
+		</s:Animate>
 	</fx:Declarations>
 
 	<s:Image  x="0" y="0" source="@Embed('assets/alt-viewsPanel-bkg.png')" />
