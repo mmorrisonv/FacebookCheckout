@@ -61,7 +61,8 @@ package com.virid.fbcheckout.view
 			if(this.model.SelectedProduct.colorObj != null){
 				ui.prodName.text = model.SelectedProduct.name;
 				ui.selectedColor.text = model.SelectedProduct.colorObj.name;
-				ui.selectedSize.text = model.SelectedProduct.colorObj.currentSKU.name;
+				/*if(model.SelectedProduct.colorObj.currentSKU != null)
+				ui.selectedSize.text = model.SelectedProduct.colorObj.currentSKU.name;*/
 			}
 		}
 		protected function onProdColorSKUChanged(event:Event):void
