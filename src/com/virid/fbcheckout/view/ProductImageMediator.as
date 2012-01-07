@@ -55,7 +55,7 @@ package com.virid.fbcheckout.view
 		{
 			if(this.model.SelectedProduct.colorObj != null){
 				this.ui.productImage.source = this.model.SelectedProduct.colorObj.imageFS;
-				//this.ui.productPriceDisplay.text = '$' + String(this.model.SelectedProduct.colorObj.currentSKU.price) + ' USD';
+				this.ui.productPriceDisplay.text = '$' + String(this.model.SelectedProduct.colorObj.currentSKU.price) + ' USD';
 			}
 		}
 		

@@ -25,6 +25,7 @@ package com.virid.fbcheckout.view
 				this.ui.sizeSelect.dataProvider = this.model.SelectedProduct.colorObj.Sizes;
 			
 			ui.addEventListener(PopupSizeSelect.UI_SIZE_CHANGED,ui_sizeChanged);
+			this.model.addEventListener(Model.MainProductColorSKUChanged,changeProductImage);
 			
 		}
 		
@@ -39,6 +40,14 @@ package com.virid.fbcheckout.view
 			this.ui.visible = false;
 			
 		}		
+		
+		
+		protected function changeProductImage(event:Event):void
+		{
+			if(this.model.SelectedProduct.colorObj != null){
+				//this.ui.sizeSelect.selectedIndex = this.model.SelectedProduct.colorObj.currentSKU.name;
+			}
+		}
 
 		
 	}
