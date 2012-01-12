@@ -5,6 +5,7 @@ package controller.commands
 	import com.virid.fbcheckout.model.vo.SizeVO;
 	
 	import mx.collections.ArrayCollection;
+	import mx.controls.Alert;
 	import mx.rpc.events.FaultEvent;
 	import mx.rpc.events.ResultEvent;
 	import mx.rpc.http.HTTPService;
@@ -36,8 +37,8 @@ package controller.commands
 		
 		protected function onHTTPFault(event:FaultEvent):void
 		{
-			// TODO Auto-generated method stub
-			
+			Alert.show('HTTP FAULT' + event.message.toString() );
+			trace( event.message.toString() );
 		}
 		
 		protected function onHTTPResult(event:ResultEvent):void
@@ -47,7 +48,11 @@ package controller.commands
 			var rawData:String = String(event.result);
 			rawArray = JSON.decode(rawData);
 			
-			parseSKUs(rawArray);
+			
+			createAllSKUs(rawArray);
+			
+			createAllSizes(rawArray);			
+			
 			
 			if(_colorCallback != null)
 				_colorCallback(returnableListofSKUVOs);
@@ -57,22 +62,13 @@ package controller.commands
 			
 			
 		}
-		
-		private function parseSKUs(rawArray:Object):void
-		{
-			
-			
-			createAllSKUs(rawArray);
-			
-			createAllSizes(rawArray);
-			
 
-			
-			
-		}
-		
 		private function createAllSizes(rawArray:Object):void
 		{
+			//for each size within each SKU
+			/*create a size with size info
+			 *then add to returnableListofSKUVOs object
+			*/
 			var iter:Number = -1;
 			for each( var jsonSize:Object in rawArray.SKUS)
 			{
@@ -99,14 +95,14 @@ package controller.commands
 				var test:uint 		= 0; 
 				test =  uniqueColors.indexOf(jsonSize.COLOR_CODE) ;					
 				
-				
+				//traverse over all SKUs and add newSize. 
 				for each( var matchedSKU:SKUVO in this.returnableListofSKUVOs )
 				{				
 					if(matchedSKU.colorcode == newSize.color_code)
 					{
 						if(newSize.isdefault)
-							matchedSKU.currentSKU = newSize;
-						
+							matchedSKU.currentSize = newSize;
+						//add it to our list of SKUs, and correlate these sizes to a SKU/Color
 						newSize.parent_sku = matchedSKU;
 						matchedSKU.Sizes.addItem(newSize);
 						
@@ -117,6 +113,7 @@ package controller.commands
 		
 		private function createAllSKUs(rawArray : Object):void
 		{
+			//traverse through all SKU's and add them to an array of SKUVO's if colorCode is unique
 			for each( var jsonsku:Object in rawArray.SKUS){
 				if(uniqueColors.indexOf(jsonsku.COLOR_CODE) == -1)
 				{

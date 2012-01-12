@@ -40,9 +40,9 @@ package com.virid.fbcheckout.view
 			this.model.addEventListener(Model.StartProdDetail,ui_gotoProductDetailMode);
 			this.model.addEventListener(Model.DisplayCheckout,ui_gotoCheckoutMode);
 			
-			this.model.addEventListener(Model.MainProductColorSKUChanged,changeProductImage);
+			this.model.addEventListener(Model.MainProductColorSKUChanged,onProductColororSKUchanged);
 			this.model.addEventListener(Model.MainProductImageChanged,changeAltView);
-			changeProductImage(null);
+			onProductColororSKUchanged(null);
 		}		
 		
 		
@@ -51,11 +51,15 @@ package com.virid.fbcheckout.view
 			this.ui.productImage.source = this.model.MainProductImage.source;
 		}
 		
-		protected function changeProductImage(event:Event):void
+		protected function onProductColororSKUchanged(event:Event):void
 		{
+			
 			if(this.model.SelectedProduct.colorObj != null){
 				this.ui.productImage.source = this.model.SelectedProduct.colorObj.imageFS;
-				this.ui.productPriceDisplay.text = '$' + String(this.model.SelectedProduct.colorObj.currentSKU.price) + ' USD';
+				this.ui.productPriceDisplay.text = '$' + String(this.model.SelectedProduct.colorObj.currentSize.price) + ' USD';
+			}
+			else{
+				trace('product not setup correctly');
 			}
 		}
 		

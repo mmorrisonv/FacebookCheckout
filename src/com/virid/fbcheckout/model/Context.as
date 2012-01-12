@@ -28,25 +28,31 @@ package com.virid.fbcheckout.model
 			//build471219AltViews();
 		}
 		
-
+		private function buildProductColors():void
+		{
+			//use ajax to get SKU / image / price information for the current productID
+			
+			var url:String = model.urlRoot + "getproduct.aspx?id=" + model.productID;
+			var colorExtractor:extractColorOptions = new extractColorOptions(url,onColorOptionsParsed,buildMainProduct);
+			
+		}
 		private function buildMainProduct(rawArray:Object):void
-		{//function gets called when data is returned on buildProductColors
+		{//function gets called when data is returned on buildProductColors by extractColorOptions object
 			var Product:ProductVO = new ProductVO();
 			
-			
-			var tcolor: SKUVO = this.model.AllSKUs[1];
+			var tcolor: SKUVO = this.model.AllSKUs[0];
 			Product.name = rawArray.NAME;
 			Product.colorObj = tcolor;
-			//Product.sku  = null;
-			Product.source = Product.colorObj.imageFS;//todo: should not need to set this, anything that needs this should be able to retrieve from Color.imageFS
-			
-			
 			
 			model.SelectedProduct = Product;
 			
+		}
+		private function onColorOptionsParsed(colors:ArrayCollection):void
+		{
+			// TODO Auto Generated method stub
+			this.model.AllSKUs = colors;
 			
 		}
-		
 		private function buildTestAltViews():void{
 			
 			//build some test data
@@ -59,21 +65,9 @@ package com.virid.fbcheckout.model
 			}
 		}
 		
-		private function buildProductColors():void
-		{
-			//build some test color data
-	
-			var url:String = model.urlRoot + "getproduct.aspx?id=" + model.productID;
-			var colorExtractor:extractColorOptions = new extractColorOptions(url,onColorOptionsReceived,buildMainProduct);
 
-		}
 		
-		private function onColorOptionsReceived(colors:ArrayCollection):void
-		{
-			// TODO Auto Generated method stub
-			this.model.AllSKUs = colors;
-			
-		}
+
 		protected function buildColorHTTPFault(event:FaultEvent):void
 		{
 			var faultString:String = event.fault.faultString;
@@ -116,7 +110,7 @@ package com.virid.fbcheckout.model
 					c.Sizes.addItem(nSKU);
 				}
 				
-				c.currentSKU = c.Sizes[0];
+				c.currentSize = c.Sizes[0];
 			}
 		}
 		

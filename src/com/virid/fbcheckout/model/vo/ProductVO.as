@@ -11,7 +11,7 @@ package com.virid.fbcheckout.model.vo
 		//public var styleid  : String;
 		public var colorObj : SKUVO;
 		//public var size     : String;
-		public var source   : String;
+		//public var source   : String;
 		//public var price    : String;
 		public var altViews : ArrayCollection = new ArrayCollection();
 		

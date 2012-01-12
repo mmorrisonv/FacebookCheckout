@@ -39,9 +39,9 @@ package com.virid.fbcheckout.view
 			{
 				this.ui.productImage.source = this.model.SelectedProduct.colorObj.imageFS;	
 				this.ui.productName.text = model.SelectedProduct.name;
-				this.ui.productDetail.text = "Size: " + model.SelectedProduct.colorObj.currentSKU.name;
+				this.ui.productDetail.text = "Size: " + model.SelectedProduct.colorObj.currentSize.name;
 				this.ui.productColor.text = "Color: " + model.SelectedProduct.colorObj.name;
-				this.ui.productPriceDisplay.text = "$" + String(this.model.SelectedProduct.colorObj.currentSKU.price) + " USD";
+				this.ui.productPriceDisplay.text = "$" + String(this.model.SelectedProduct.colorObj.currentSize.price) + " USD";
 			}
 		}
 		

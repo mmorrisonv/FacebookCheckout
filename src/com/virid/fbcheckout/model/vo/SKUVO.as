@@ -10,7 +10,7 @@ package com.virid.fbcheckout.model.vo
 		public var colorcode	: String;
 		public var styleid 		: String;
 		public var hex 			: String;
-		public var currentSKU 	: SizeVO;
+		public var currentSize 	: SizeVO;
 		
 		//linked data
 		public var Sizes 		: ArrayCollection = new ArrayCollection();

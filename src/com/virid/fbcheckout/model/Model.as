@@ -49,9 +49,9 @@ package com.virid.fbcheckout.model
 		
 		public var urlRoot:String = "http://www.journeys.com/api/";
 		public var httpService:HTTPService = new HTTPService();
-		public var productID:String = '201046';
+		public var productID:String = '201046';		//main root product id
 		
-		public var AllSKUs:ArrayCollection = new ArrayCollection();
+		public var AllSKUs:ArrayCollection = new ArrayCollection(); // basically all colors available - size/oids within
 		//public var SKUs:ArrayCollection = new ArrayCollection();
 		private var _MainProductImage:AltViewVO = new AltViewVO();
 		private var _MainProduct:ProductVO = new ProductVO();
@@ -91,10 +91,13 @@ package com.virid.fbcheckout.model
 		public function set MainProductSKU(value:SizeVO):void
 		{
 			_MainProductSKU = value;
-			_MainProduct.colorObj.currentSKU = value;
+			_MainProduct.colorObj.currentSize = value;
 			var e:Event = new Event(MainProductColorSKUChanged,true,false);
 			this.dispatchEvent(e);
 		}
+		
+		
+		
 		public function get MainProductImage():AltViewVO
 		{
 			return _MainProductImage;	
@@ -105,6 +108,8 @@ package com.virid.fbcheckout.model
 			var e:Event = new Event(MainProductImageChanged,true,false);
 			this.dispatchEvent(e);
 		}
+		
+		
 		public function set initiateCheckout(value:Object):void
 		{
 			var e:Event = new Event(CheckoutModal,true,false);
