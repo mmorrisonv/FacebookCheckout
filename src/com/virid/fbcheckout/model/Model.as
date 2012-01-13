@@ -3,7 +3,7 @@ package com.virid.fbcheckout.model
 	import com.virid.fbcheckout.model.Model;
 	import com.virid.fbcheckout.model.vo.AddressVO;
 	import com.virid.fbcheckout.model.vo.AltViewVO;
-	import com.virid.fbcheckout.model.vo.SKUVO;
+	import com.virid.fbcheckout.model.vo.ColorVO;
 	import com.virid.fbcheckout.model.vo.ProductVO;
 	import com.virid.fbcheckout.model.vo.ShippingOptionVO;
 	import com.virid.fbcheckout.model.vo.SizeVO;
@@ -55,7 +55,7 @@ package com.virid.fbcheckout.model
 		//public var SKUs:ArrayCollection = new ArrayCollection();
 		private var _MainProductImage:AltViewVO = new AltViewVO();
 		private var _MainProduct:ProductVO = new ProductVO();
-		private var _MainProductColor:SKUVO = new SKUVO();
+		private var _MainProductColor:ColorVO = new ColorVO();
 		private var _MainProductSKU:SizeVO = new SizeVO();
 		
 		
@@ -81,10 +81,17 @@ package com.virid.fbcheckout.model
 			var e:Event = new Event(MainProductChanged,true,false);
 			this.dispatchEvent(e);
 		}
-		public function set MainProductColor(value:SKUVO):void
+		public function set MainProductColor(value:ColorVO):void
 		{
 			_MainProductColor= value;
 			_MainProduct.colorObj = value;
+			for each(var size:SizeVO in _MainProduct.colorObj.Sizes)
+			{
+				if(size.isdefault)
+				this.MainProductSKU = size;
+				//_MainProduct.colorObj.currentSize
+			}
+			this.SelectedProduct = _MainProduct;
 			var e:Event = new Event(MainProductColorSKUChanged,true,false);
 			this.dispatchEvent(e);
 		}
@@ -92,6 +99,9 @@ package com.virid.fbcheckout.model
 		{
 			_MainProductSKU = value;
 			_MainProduct.colorObj.currentSize = value;
+			
+			this.SelectedProduct = _MainProduct;
+			
 			var e:Event = new Event(MainProductColorSKUChanged,true,false);
 			this.dispatchEvent(e);
 		}

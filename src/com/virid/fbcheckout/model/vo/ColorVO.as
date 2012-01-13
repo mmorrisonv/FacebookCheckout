@@ -4,7 +4,7 @@ package com.virid.fbcheckout.model.vo
 	
 	import mx.collections.ArrayCollection;
 	
-	public class SKUVO extends EventDispatcher
+	public class ColorVO extends EventDispatcher
 	{
 		public var name 		: String;
 		public var colorcode	: String;

@@ -1,7 +1,7 @@
 package controller.commands
 {
 	import com.adobe.serialization.json.JSON;
-	import com.virid.fbcheckout.model.vo.SKUVO;
+	import com.virid.fbcheckout.model.vo.ColorVO;
 	import com.virid.fbcheckout.model.vo.SizeVO;
 	
 	import mx.collections.ArrayCollection;
@@ -96,7 +96,7 @@ package controller.commands
 				test =  uniqueColors.indexOf(jsonSize.COLOR_CODE) ;					
 				
 				//traverse over all SKUs and add newSize. 
-				for each( var matchedSKU:SKUVO in this.returnableListofSKUVOs )
+				for each( var matchedSKU:ColorVO in this.returnableListofSKUVOs )
 				{				
 					if(matchedSKU.colorcode == newSize.color_code)
 					{
@@ -119,7 +119,7 @@ package controller.commands
 				{
 					//newSize is a member of a new unique color
 					uniqueColors.push(jsonsku.COLOR_CODE);
-					var newSKU:SKUVO = new SKUVO();
+					var newSKU:ColorVO = new ColorVO();
 					newSKU.colorcode = jsonsku.COLOR_CODE;
 					newSKU.name = jsonsku.COLOR_CODE;
 					newSKU.imageFS = jsonsku.FULL_IMAGE;

@@ -18,7 +18,7 @@ package com.virid.fbcheckout.model.vo
 		public var inStock		: Boolean;
 		public var index    	: Number;
 		public var image    	: String;
-		public var parent_sku    	: SKUVO;
+		public var parent_sku    	: ColorVO;
 		public var isdefault	: Boolean;
 	}
 }

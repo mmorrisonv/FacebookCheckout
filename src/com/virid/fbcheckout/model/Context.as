@@ -4,7 +4,7 @@ package com.virid.fbcheckout.model
 	import com.adobe.serialization.json.JSON;
 	import com.virid.fbcheckout.model.vo.AltViewVO;
 	import com.virid.fbcheckout.model.vo.ProductVO;
-	import com.virid.fbcheckout.model.vo.SKUVO;
+	import com.virid.fbcheckout.model.vo.ColorVO;
 	import com.virid.fbcheckout.model.vo.SizeVO;
 	
 	import controller.commands.extractColorOptions;
@@ -40,7 +40,7 @@ package com.virid.fbcheckout.model
 		{//function gets called when data is returned on buildProductColors by extractColorOptions object
 			var Product:ProductVO = new ProductVO();
 			
-			var tcolor: SKUVO = this.model.AllSKUs[0];
+			var tcolor: ColorVO = this.model.AllSKUs[0];
 			Product.name = rawArray.NAME;
 			Product.colorObj = tcolor;
 			
@@ -82,7 +82,7 @@ package com.virid.fbcheckout.model
 			trace(result);
 		}
 		
-		private function build471219AltViews(color:SKUVO):void
+		private function build471219AltViews(color:ColorVO):void
 		{
 			var thumbs:Array = new Array('assets/data/alt-views/1_201046_SW.JPG','assets/data/alt-views/1_201046_SW_BACK.JPG','assets/data/alt-views/1_201046_SW_FRONT.JPG','assets/data/alt-views/1_201046_SW_SIDE.JPG','assets/data/alt-views/1_201046_SW_TOP.JPG');
 			var fullsize:Array = new Array('assets/data/alt-views/1_201046_FS.JPG','assets/data/alt-views/1_201046_FS_BACK.JPG','assets/data/alt-views/1_201046_FS_FRONT.JPG','assets/data/alt-views/1_201046_FS_SIDE.JPG','assets/data/alt-views/1_201046_FS_TOP.JPG');
@@ -98,7 +98,7 @@ package com.virid.fbcheckout.model
 		private function buildSKUs():void
 		{
 			var sizes:Array = new Array('XS','S','M','L','XL');
-			for each(var c:SKUVO in model.AllSKUs)
+			for each(var c:ColorVO in model.AllSKUs)
 			{
 				for( var i:Number = 0; i < 5; i++){
 					var nSKU:SizeVO = new SizeVO();

@@ -1,7 +1,7 @@
 package com.virid.fbcheckout.view
 {
 	import com.virid.fbcheckout.model.Model;
-	import com.virid.fbcheckout.model.vo.SKUVO;
+	import com.virid.fbcheckout.model.vo.ColorVO;
 	import com.virid.fbcheckout.model.vo.ProductVO;
 	import com.virid.fbcheckout.model.vo.SizeVO;
 	
@@ -25,7 +25,7 @@ package com.virid.fbcheckout.view
 				this.ui.sizeSelect.dataProvider = this.model.SelectedProduct.colorObj.Sizes;
 			
 			ui.addEventListener(PopupSizeSelect.UI_SIZE_CHANGED,ui_sizeChanged);
-			this.model.addEventListener(Model.MainProductColorSKUChanged,changeProductImage);
+			this.model.addEventListener(Model.MainProductColorSKUChanged,onProductSizeChanged);
 			
 		}
 		
@@ -42,10 +42,10 @@ package com.virid.fbcheckout.view
 		}		
 		
 		
-		protected function changeProductImage(event:Event):void
+		protected function onProductSizeChanged(event:Event):void
 		{
 			if(this.model.SelectedProduct.colorObj != null){
-				//this.ui.sizeSelect.selectedIndex = this.model.SelectedProduct.colorObj.currentSKU.name;
+				this.ui.sizeSelect.selectedIndex = int( this.model.SelectedProduct.colorObj.currentSize.index );
 			}
 		}
 
