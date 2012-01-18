@@ -45,7 +45,7 @@ package com.virid.fbcheckout.view
 		protected function onProductSizeChanged(event:Event):void
 		{
 			if(this.model.SelectedProduct.colorObj != null){
-				this.ui.sizeSelect.selectedIndex = int( this.model.SelectedProduct.colorObj.currentSize.index );
+				//this.ui.sizeSelect.selectedIndex = 0// this.model.SelectedProduct.colorObj.currentSize.index as int;
 			}
 		}
 

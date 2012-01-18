@@ -88,8 +88,8 @@ package com.virid.fbcheckout.model
 			for each(var size:SizeVO in _MainProduct.colorObj.Sizes)
 			{
 				if(size.isdefault)
-				this.MainProductSKU = size;
-				//_MainProduct.colorObj.currentSize
+					this.MainProductSKU = size;
+					//_MainProduct.colorObj.currentSize
 			}
 			this.SelectedProduct = _MainProduct;
 			var e:Event = new Event(MainProductColorSKUChanged,true,false);
