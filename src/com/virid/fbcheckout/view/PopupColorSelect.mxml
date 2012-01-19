@@ -5,7 +5,7 @@
 		 show="popupShown(event)" creationComplete="componentCreationComplete(event)">
 	<fx:Script>
 		<![CDATA[
-			import com.virid.fbcheckout.model.vo.SKUVO;
+			import com.virid.fbcheckout.model.vo.ColorVO;
 			
 			import controller.events.CustomEvent;
 			
@@ -67,7 +67,7 @@
 			{
 				var e:CustomEvent 
 				if(event.newIndex >= 0){
-					var selItem:SKUVO = event.target.selectedItems[0] as SKUVO;
+					var selItem:ColorVO = event.target.selectedItems[0] as ColorVO;
 					e = new CustomEvent(COLOR_CHANGED,selItem,false);
 				}
 				else{

@@ -1,7 +1,7 @@
 package com.virid.fbcheckout.view
 {
 	import com.virid.fbcheckout.model.Model;
-	import com.virid.fbcheckout.model.vo.SKUVO;
+	import com.virid.fbcheckout.model.vo.ColorVO;
 	
 	import controller.events.CustomEvent;
 	
@@ -30,7 +30,7 @@ package com.virid.fbcheckout.view
 		{
 			if(event.data != null )
 			{
-				var newColor:SKUVO = event.data as SKUVO;
+				var newColor:ColorVO = event.data as ColorVO;
 				this.model.MainProductColor = newColor;
 			}
 			
