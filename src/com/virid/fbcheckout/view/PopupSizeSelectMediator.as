@@ -25,7 +25,7 @@ package com.virid.fbcheckout.view
 				this.ui.sizeSelect.dataProvider = this.model.SelectedProduct.colorObj.Sizes;
 			
 			ui.addEventListener(PopupSizeSelect.UI_SIZE_CHANGED,ui_sizeChanged);
-			this.model.addEventListener(Model.MainProductColorSKUChanged,changeProductImage);
+			this.model.addEventListener(Model.MainProductColorChanged,changeProductImage);
 			
 		}
 		
@@ -34,7 +34,7 @@ package com.virid.fbcheckout.view
 			if(event.data != null )
 			{
 				this.model.MainProductSKU = event.data as SizeVO;
-				//this.model.MainProductColor.currentSKU = event.data as SizeVO;
+				//this.model.MainProductColor.currentSize = event.data as SizeVO;
 			}
 			
 			this.ui.visible = false;
@@ -44,8 +44,9 @@ package com.virid.fbcheckout.view
 		
 		protected function changeProductImage(event:Event):void
 		{
+			this.ui.sizeSelect.dataProvider = this.model.SelectedProduct.colorObj.Sizes;
 			if(this.model.SelectedProduct.colorObj != null){
-				//this.ui.sizeSelect.selectedIndex = this.model.SelectedProduct.colorObj.currentSKU.name;
+				this.ui.sizeSelect.selectedIndex = 0;//this.model.SelectedProduct.colorObj.currentSKU.name;
 			}
 		}
 

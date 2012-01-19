@@ -39,7 +39,7 @@ package com.virid.fbcheckout.view
 			//model listeners
 			this.model.addEventListener(Model.DisplayCheckout,ui_gotoCheckoutMode);
 			this.model.addEventListener(Model.StartProdDetail,ui_gotoProdDetailMode);
-			this.model.addEventListener(Model.MainProductColorSKUChanged,changeAltViewList);
+			this.model.addEventListener(Model.MainProductColorChanged,changeAltViewList);
 			
 			changeAltViewList(null);
 		}

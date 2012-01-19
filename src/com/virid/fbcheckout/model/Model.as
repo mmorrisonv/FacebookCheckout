@@ -38,7 +38,8 @@ package com.virid.fbcheckout.model
 		 *Event Definition
 		*/
 		public static const MainProductChanged:String = "MPC";
-		public static const MainProductColorSKUChanged:String = "MPCSC";
+		public static const MainProductSKUChanged:String = "MPSC";
+		public static const MainProductColorChanged:String = "MPCC";
 		public static const MainProductImageChanged:String = "MPIC";
 		public static const CheckoutModal:String = "CM";
 		public static const DisplayCheckout:String = "SCOUT";
@@ -85,14 +86,14 @@ package com.virid.fbcheckout.model
 		{
 			_MainProductColor= value;
 			_MainProduct.colorObj = value;
-			var e:Event = new Event(MainProductColorSKUChanged,true,false);
+			var e:Event = new Event(MainProductColorChanged,true,false);
 			this.dispatchEvent(e);
 		}
 		public function set MainProductSKU(value:SizeVO):void
 		{
 			_MainProductSKU = value;
 			_MainProduct.colorObj.currentSize = value;
-			var e:Event = new Event(MainProductColorSKUChanged,true,false);
+			var e:Event = new Event(MainProductSKUChanged,true,false);
 			this.dispatchEvent(e);
 		}
 		

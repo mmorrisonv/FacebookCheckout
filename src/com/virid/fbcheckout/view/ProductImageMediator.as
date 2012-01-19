@@ -40,7 +40,8 @@ package com.virid.fbcheckout.view
 			this.model.addEventListener(Model.StartProdDetail,ui_gotoProductDetailMode);
 			this.model.addEventListener(Model.DisplayCheckout,ui_gotoCheckoutMode);
 			
-			this.model.addEventListener(Model.MainProductColorSKUChanged,onProductColororSKUchanged);
+			this.model.addEventListener(Model.MainProductColorChanged,onProductColororSKUchanged);
+			this.model.addEventListener(Model.MainProductSKUChanged,onProductColororSKUchanged);
 			this.model.addEventListener(Model.MainProductImageChanged,changeAltView);
 			onProductColororSKUchanged(null);
 		}		

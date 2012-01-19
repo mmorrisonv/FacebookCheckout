@@ -35,7 +35,7 @@ package com.virid.fbcheckout.view
 			this.ui = _ui;
 			this.ui.addEventListener(Checkout.BILLING_SAME_AS,billing_checkout);
 			
-			this.model.addEventListener(Model.MainProductColorSKUChanged,onProdColorSKUChanged);
+			//this.model.addEventListener(Model.MainProductSKUChanged,onProdColorSKUChanged);//unused
 			//model listeners:ui
 			this.model.addEventListener(Model.DisplayCheckout,ui_gotoCheckoutMode);
 			this.model.addEventListener(Model.StartProdDetail,ui_gotoProdDetail);

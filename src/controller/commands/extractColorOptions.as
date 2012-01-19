@@ -103,7 +103,7 @@ package controller.commands
 						if(newSize.isdefault)
 							matchedSKU.currentSize = newSize;
 						//add it to our list of SKUs, and correlate these sizes to a SKU/Color
-						newSize.parent_sku = matchedSKU;
+						//newSize.parent_sku = matchedSKU;
 						matchedSKU.Sizes.addItem(newSize);
 						
 					}
