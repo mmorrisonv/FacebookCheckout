@@ -5,7 +5,14 @@
 		 creationComplete="creationComplete(event)" xmlns:view="com.virid.fbcheckout.view.*">
 	<fx:Script>
 		<![CDATA[
+			import com.adobe.serialization.json.JSON;
+			
+			import controller.commands.checkoutArbiter;
+			
 			import mx.events.FlexEvent;
+			import mx.rpc.events.FaultEvent;
+			import mx.rpc.events.ResultEvent;
+			import mx.rpc.http.HTTPService;
 			
 			import spark.events.IndexChangeEvent;
 			import spark.events.TextOperationEvent;
@@ -14,7 +21,9 @@
 			*Event Definition
 			*/
 			static var BILLING_SAME_AS:String="BSA";
+			static var CHECKOUT_PURCHASE:String = "FINAL_PURCHASE"
 			
+
 			protected function ratingChanged(event:IndexChangeEvent):void
 			{
 				// TODO Auto-generated method stub
@@ -30,12 +39,40 @@
 				else
 					enableAllBillingFields();
 				
+				//setup demo info
+				bfname.text = "Toby";
+				sfname.text = "Toby";
+				blname.text = "Johnson"; 
+				slname.text = "Johnson";
+				baddress1.text = "555 Alexander Bell Dr.";
+				saddress1.text = "555 Alexander Bell Dr.";
+				baddress2.text = ""
+				saddress2.text = "";
+				bstate.text  = "VA";
+				sstate.text = "VA";
+				bzip.text = "44444"
+				szip.text = "44444";
+				bcity.text = "reston";
+				scity.text = "reston";
+				
+				email.text = "mail@virid.com";
+				phonenum.text = "5555555555";
+
+				this.bcardnum.text ="4111-1111-1111-1111";
+				this.bcardcvv.text = "123";
+				bcardmonth.text = "4";
+				bcardyear.text = "2012";
+				
 			}
 			
 			
 			protected function checkoutClicked(event:MouseEvent):void
 			{
-				// TODO Auto-generated method stub
+				//build an address from form inputs
+			
+				//show the status modal
+				var e:Event = new Event(CHECKOUT_PURCHASE);
+				dispatchEvent(e);
 				
 			}
 
@@ -116,6 +153,8 @@
 				
 			}
 			
+
+			
 		]]>
 	</fx:Script>
 	<fx:Declarations>
@@ -148,7 +187,7 @@
 				<s:TextInput id="sstate" prompt="ST" width="18%" maxChars="2" change="sstate_changeHandler(event)"/>
 				<s:TextInput id="szip" prompt="Zip" width="22%" maxChars="5" change="szip_changeHandler(event)"/>
 			</s:HGroup>		
-			<s:TextInput prompt="Email Address for receipt" width="100%"/>
+			<s:TextInput id="email" prompt="Email Address for receipt" width="100%"/>
 			
 			
 			<s:Label styleName="lubalin" text="Shipping Method" fontSize="14" height="14" paddingTop="2" />
@@ -175,7 +214,7 @@
 				<s:TextInput id="bstate" prompt="ST" width="18%" maxChars="2"/>
 				<s:TextInput id="bzip" prompt="Zip" width="22%" maxChars="5"/>
 			</s:HGroup>	
-			<s:TextInput prompt="Phone Number" width="100%"/>
+			<s:TextInput id="phonenum" prompt="Phone Number" width="100%"/>
 			<s:Label styleName="lubalin" text="Card Details" fontSize="14" height="14" paddingTop="2"/>
 			<s:HGroup width="100%">
 				<s:TextInput id="bcardnum" prompt="Card Number" width="50%"/>
@@ -196,7 +235,7 @@
 		<s:Group width="100%" height="36">
 			<s:Group height="36" left="10">
 				<s:Label text="Final Price:" fontSize="11" styleName="lubalin" verticalCenter="0"/>
-				<s:Label text="$--.-- USD" x="60" fontSize="18" styleName="lubalin" verticalCenter="0"/>
+				<s:Label id="cartPrice" text="$--.-- USD" x="60" fontSize="18" styleName="lubalin" verticalCenter="0"/>
 			</s:Group>
 			<s:Group width="56" height="22" left="175" y="3">
 				<s:Rect width="100%" height="100%"><s:stroke><s:SolidColorStroke color="0xcccccc" weight="1" /></s:stroke></s:Rect>
@@ -204,7 +243,7 @@
 			</s:Group>
 			
 			<s:Group right="0" width="161" height="40" 
-					 click="checkoutClicked(event)">
+					 click="checkoutClicked(event)" buttonMode="true" useHandCursor="true">
 				<s:Image id="checkoutBtn" source="assets/buttons/checkout-complete.png" width="161" height="31" right="0" verticalCenter="-2"/>
 				<s:Label text="Complete Purchase" styleName="lubalin" color="0xffffff" fontSize="16" horizontalCenter="0" verticalCenter="-2"/>
 			</s:Group>

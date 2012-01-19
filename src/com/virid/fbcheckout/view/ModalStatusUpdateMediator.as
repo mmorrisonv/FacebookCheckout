@@ -12,10 +12,10 @@ package com.virid.fbcheckout.view
 	import spark.effects.easing.Elastic;
 	import spark.effects.easing.Power;
 
-	public class ModalCheckoutSelectMediator
+	public class ModalStatusUpdateMediator
 	{
 		private var model:Model = Model.getInstance();
-		private var ui:ModalCheckoutSelect;
+		private var ui:ModalStatusUpdate;
 		
 		//tranition variables
 		private var bigease:Power = new Power();
@@ -24,41 +24,24 @@ package com.virid.fbcheckout.view
 		private var m:SimpleMotionPath = new SimpleMotionPath();
 		private var p2:Sequence = new Sequence();
 		
-		public function ModalCheckoutSelectMediator():void
+		
+		public function ModalStatusUpdateMediator()
 		{
-			
 		}
 		
-		public function register(_ui:ModalCheckoutSelect):void
+		public function register(_ui:ModalStatusUpdate):void
 		{
 			this.ui = _ui;
-			this.ui.addEventListener(ModalCheckoutSelect.DISPLAY_CHECKOUT,ui_OnCheckout);
+			this.ui.addEventListener(ModalStatusUpdate.REMOVE_UI_FROMSTAGE,ui_OnRemoveUI);
 			
 			//model listeners:ui
-			this.model.addEventListener(Model.CheckoutModal,ui_HandleCheckout);
+			this.model.addEventListener(Model.StatusUpdate,showStatusUpdate);
 		}
 		
 		
 		
 		
-		
-		protected function ui_HandleCheckout(event:Event):void
-		{
-			var e:Elastic = new Elastic();
-		
-			var a1:Animate = new Animate();
-			a1.target = this.ui; a1.duration = 800;a1.easer = e;
-			m = new SimpleMotionPath();
-			m.property = 'horizontalCenter'; m.valueTo = 0;
-			v = new Vector.<MotionPath>();v.push(m);
-			a1.motionPaths = v;
-			p2 = new Sequence();
-			p2.addChild(a1);
-			p2.play();
-			//this.ui.visible = true;
-		}
-		
-		protected function ui_OnCheckout(event:Event):void
+		protected function ui_OnRemoveUI(event:Event):void
 		{
 			if(p2)
 				p2.stop();
@@ -76,9 +59,23 @@ package com.virid.fbcheckout.view
 			obj.start = "NOW";
 			this.model.displayCheckout = obj;
 		}
-
-
 		
-
+		protected function showStatusUpdate(event:Event):void
+		{
+			var e:Elastic = new Elastic();
+			
+			var a1:Animate = new Animate();
+			a1.target = this.ui; a1.duration = 800;a1.easer = e;
+			m = new SimpleMotionPath();
+			m.property = 'horizontalCenter'; m.valueTo = 0;
+			v = new Vector.<MotionPath>();v.push(m);
+			a1.motionPaths = v;
+			p2 = new Sequence();
+			p2.addChild(a1);
+			p2.play();
+			//this.ui.visible = true;
+			
+		}
+		
 	}
 }

@@ -31,6 +31,7 @@ package com.virid.fbcheckout.view
 			if(event.data != null )
 			{
 				var newColor:ColorVO = event.data as ColorVO;
+				newColor.currentSize = null; // reset currentSize so we dont have conflicts
 				this.model.MainProductColor = newColor;
 			}
 			

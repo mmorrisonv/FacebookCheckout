@@ -33,26 +33,24 @@ package com.virid.fbcheckout.model
 			//use ajax to get SKU / image / price information for the current productID
 			
 			var url:String = model.urlRoot + "getproduct.aspx?id=" + model.productID;
-			var colorExtractor:extractColorOptions = new extractColorOptions(url,onColorOptionsParsed,buildMainProduct);
+			var colorExtractor:extractColorOptions = new extractColorOptions(url,buildMainProduct);
 			
 		}
 		private function buildMainProduct(rawArray:Object):void
 		{//function gets called when data is returned on buildProductColors by extractColorOptions object
+			
 			var Product:ProductVO = new ProductVO();
 			
-			var tcolor: ColorVO = this.model.AllSKUs[0];
+			var tcolor: ColorVO = this.model.AllSKUs[7];
+			var tsize: SizeVO = tcolor.Sizes[0];
+			tcolor.currentSize = tsize;
 			Product.name = rawArray.NAME;
 			Product.colorObj = tcolor;
 			
 			model.SelectedProduct = Product;
 			
 		}
-		private function onColorOptionsParsed(colors:ArrayCollection):void
-		{
-			// TODO Auto Generated method stub
-			this.model.AllSKUs = colors;
-			
-		}
+
 		private function buildTestAltViews():void{
 			
 			//build some test data

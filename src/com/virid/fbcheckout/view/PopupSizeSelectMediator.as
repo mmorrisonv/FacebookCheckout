@@ -22,7 +22,11 @@ package com.virid.fbcheckout.view
 		{
 			this.ui = _ui;
 			if(this.model.SelectedProduct != null && this.model.SelectedProduct.colorObj != null)
+			{
 				this.ui.sizeSelect.dataProvider = this.model.SelectedProduct.colorObj.Sizes;
+				//this.ui.sizeSelect.selectedIndex = 0;
+				//this.model.MainProductSKU = this.model.SelectedProduct.colorObj.Sizes[0];
+			}
 			
 			ui.addEventListener(PopupSizeSelect.UI_SIZE_CHANGED,ui_sizeChanged);
 			this.model.addEventListener(Model.MainProductColorChanged,onProductColorChanged);
@@ -48,7 +52,7 @@ package com.virid.fbcheckout.view
 			
 			if(this.model.SelectedProduct.colorObj != null){
 				this.ui.sizeSelect.dataProvider = this.model.SelectedProduct.colorObj.Sizes;
-				this.ui.sizeSelect.selectedIndex = 0;//this.model.SelectedProduct.colorObj.currentSKU.name;
+				//this.ui.sizeSelect.selectedIndex = 0;//this.model.SelectedProduct.colorObj.currentSKU.name;
 			}
 		}
 

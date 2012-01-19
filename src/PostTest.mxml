@@ -49,7 +49,7 @@
 			
 			protected function creationComplete(event:FlexEvent):void
 			{
-				this.model.addEventListener(Model.DisplayCheckout,gotoCheckout);
+				this.model.addEventListener(Model.DisplayCheckoutPanel,gotoCheckout);
 				
 			}
 			
@@ -90,6 +90,7 @@
 	
 	
 	<view:ModalCheckoutSelect verticalCenter="0" horizontalCenter="500" width="90%" height="80%" visible="true"/>
+	<view:ModalStatusUpdate verticalCenter="0" horizontalCenter="500" width="80%" height="80%" visible="true"/>
 	
 	
 </s:Application>

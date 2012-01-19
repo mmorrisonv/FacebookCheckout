@@ -33,14 +33,16 @@ package com.virid.fbcheckout.view
 			this.ui.addEventListener(rightColumn.PRODDETAIL,ui_OnProdDetail);
 			
 			this.model.addEventListener(Model.MainProductChanged,onProductChange);
-			this.model.addEventListener(Model.MainProductSKUChanged,onProdColorSKUChanged);
-			this.model.addEventListener(Model.MainProductColorChanged,onProdColorSKUChanged);
+			this.model.addEventListener(Model.MainProductSKUChanged,onProdSKUChanged);
+			this.model.addEventListener(Model.MainProductColorChanged,onProdColorChanged);
 			//model listeners:ui
-			this.model.addEventListener(Model.DisplayCheckout,ui_gotoCheckoutMode);
+			this.model.addEventListener(Model.DisplayCheckoutPanel,ui_gotoCheckoutMode);
 			this.model.addEventListener(Model.StartProdDetail,ui_gotoProdDetail);
 			
 			onProductChange(null);
 		}
+		
+
 		
 		protected function ui_OnProdDetail(event:Event):void
 		{
@@ -53,8 +55,7 @@ package com.virid.fbcheckout.view
 		{
 			var obj:Object = new Object();
 			obj.start = "NOW";
-			this.model.initiateCheckout = obj;
-			this.model.PurchaseCurrent();
+			this.model.initiateCheckoutPanel = obj;
 		}
 		
 		protected function onProductChange(event:Event):void
@@ -62,16 +63,32 @@ package com.virid.fbcheckout.view
 			if(this.model.SelectedProduct.colorObj != null){
 				ui.prodName.text = model.SelectedProduct.name;
 				ui.selectedColor.text = model.SelectedProduct.colorObj.name;
-			if(model.SelectedProduct.colorObj.currentSize != null)
-				ui.selectedSize.text = model.SelectedProduct.colorObj.currentSize.name;
+				if(model.SelectedProduct.colorObj.currentSize != null)
+				{
+					ui.selectedSize.text = model.SelectedProduct.colorObj.currentSize.name;
+					ui.buyItNowBtnBackground.color = 0xe07400;
+					ui.buyItNowBtn.enabled = true;
+				}
+				else
+				{
+					ui.selectedSize.text = "Select a Size";
+					ui.buyItNowBtnBackground.color = 0xeeeeee;
+					ui.buyItNowBtn.enabled = false;
+				}
 			}
 		}
-		protected function onProdColorSKUChanged(event:Event):void
+		protected function onProdColorChanged(event:Event):void
 		{
 			ui.selectedColor.text = model.SelectedProduct.colorObj.name;
-			ui.selectedSize.text = model.SelectedProduct.colorObj.currentSize.name;
+			ui.buyItNowBtnBackground.color = 0xeeeeee;
+			ui.buyItNowBtn.enabled = false;
 		}
-		
+		protected function onProdSKUChanged(event:Event):void
+		{
+			ui.selectedSize.text = model.SelectedProduct.colorObj.currentSize.name;
+			ui.buyItNowBtnBackground.color = 0xe07400;
+			ui.buyItNowBtn.enabled = true;
+		}
 		protected function ui_gotoCheckoutMode(event:Event):void
 		{
 			a1 = new Animate();

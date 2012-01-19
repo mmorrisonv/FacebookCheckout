@@ -3,6 +3,7 @@ package com.virid.fbcheckout.model
 	import com.virid.fbcheckout.model.Model;
 	import com.virid.fbcheckout.model.vo.AddressVO;
 	import com.virid.fbcheckout.model.vo.AltViewVO;
+	import com.virid.fbcheckout.model.vo.CCardVO;
 	import com.virid.fbcheckout.model.vo.ColorVO;
 	import com.virid.fbcheckout.model.vo.ProductVO;
 	import com.virid.fbcheckout.model.vo.ShippingOptionVO;
@@ -41,8 +42,9 @@ package com.virid.fbcheckout.model
 		public static const MainProductSKUChanged:String = "MPSC";
 		public static const MainProductColorChanged:String = "MPCC";
 		public static const MainProductImageChanged:String = "MPIC";
+		public static const StatusUpdate:String = "SU";
 		public static const CheckoutModal:String = "CM";
-		public static const DisplayCheckout:String = "SCOUT";
+		public static const DisplayCheckoutPanel:String = "SCOUT";
 		public static const StartProdDetail:String = "SPDETAIL";
 		/*
 		 * */
@@ -65,7 +67,8 @@ package com.virid.fbcheckout.model
 		public var _ShippingOptions:ShippingOptionVO = new ShippingOptionVO();
 		public var _shippingAddress:AddressVO = new AddressVO();
 		public var _blillingAddress:AddressVO = new AddressVO();
-		public var Addresses:ArrayCollection = new ArrayCollection();
+		public var _ccard:CCardVO = new CCardVO();
+		//public var Addresses:ArrayCollection = new ArrayCollection();
 		
 		/*
 		 * Setters and Getters for Main Elements*/
@@ -89,13 +92,13 @@ package com.virid.fbcheckout.model
 
 			var e:Event = new Event(MainProductColorChanged,true,false);
 
-			for each(var size:SizeVO in _MainProduct.colorObj.Sizes)
+			/*for each(var size:SizeVO in _MainProduct.colorObj.Sizes)
 			{
 				if(size.isdefault){
 					this.MainProductSKU = size;
 					_MainProduct.colorObj.currentSize = size;
 				}
-			}
+			}*/
 			this.SelectedProduct = _MainProduct;
 
 			this.dispatchEvent(e);
@@ -105,11 +108,9 @@ package com.virid.fbcheckout.model
 			_MainProductSKU = value;
 			_MainProduct.colorObj.currentSize = value;
 			
-			var e:Event = new Event(MainProductSKUChanged,true,false);
-			
 			this.SelectedProduct = _MainProduct;
 			
-
+			var e:Event = new Event(MainProductSKUChanged,true,false);
 			this.dispatchEvent(e);
 		}
 		
@@ -126,26 +127,34 @@ package com.virid.fbcheckout.model
 			this.dispatchEvent(e);
 		}
 		
-		
-		public function set initiateCheckout(value:Object):void
+		/*
+		*---------------------------------------------------
+		*Panel and Modal Transitions
+		*/
+		//show status modal
+		public function set showStatus(value:Object):void
+		{
+			var e:Event = new Event(StatusUpdate,true,false);
+			this.dispatchEvent(e);
+		}		
+		//show chekcout options modal
+		public function set initiateCheckoutPanel(value:Object):void
 		{
 			var e:Event = new Event(CheckoutModal,true,false);
 			this.dispatchEvent(e);
 		}
+		//show checkout panel
 		public function set displayCheckout(value:Object):void
 		{
-			var e:Event = new Event(DisplayCheckout,true,false);
+			var e:Event = new Event(DisplayCheckoutPanel,true,false);
 			this.dispatchEvent(e);
 		}
+		//show the main product detail panel
 		public function set initiateProdDetail(value:Object):void
 		{
 			var e:Event = new Event(StartProdDetail,true,false);
 			this.dispatchEvent(e);
 		}
 		
-		public function PurchaseCurrent():void
-		{
-			;
-		}
 	}	
 }

@@ -26,7 +26,7 @@ package com.virid.fbcheckout.view
 			this.ui = _ui;
 			
 			this.model.addEventListener(Model.StartProdDetail,ui_ShowProDetail);
-			this.model.addEventListener(Model.DisplayCheckout,ui_ShowCheckout);
+			this.model.addEventListener(Model.DisplayCheckoutPanel,ui_ShowCheckout);
 			
 			ui.addEventListener(PanelCheckoutProductInfo.SHOWPRODDETAIL,initateProDetail );
 			this.model.addEventListener(Model.MainProductChanged,onProductChange);
@@ -39,9 +39,12 @@ package com.virid.fbcheckout.view
 			{
 				this.ui.productImage.source = this.model.SelectedProduct.colorObj.imageFS;	
 				this.ui.productName.text = model.SelectedProduct.name;
-				this.ui.productDetail.text = "Size: " + model.SelectedProduct.colorObj.currentSize.name;
+				if(this.model.SelectedProduct.colorObj.currentSize != null){
+					this.ui.productDetail.text = "Size: " + model.SelectedProduct.colorObj.currentSize.name;
+					this.ui.productPriceDisplay.text = "$" + String(this.model.SelectedProduct.colorObj.currentSize.price) + " USD";
+				}
 				this.ui.productColor.text = "Color: " + model.SelectedProduct.colorObj.name;
-				this.ui.productPriceDisplay.text = "$" + String(this.model.SelectedProduct.colorObj.currentSize.price) + " USD";
+				
 			}
 		}
 		

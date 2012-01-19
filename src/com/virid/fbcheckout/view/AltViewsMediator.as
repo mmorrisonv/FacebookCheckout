@@ -37,7 +37,7 @@ package com.virid.fbcheckout.view
 			this.ui.altViewList.dataProvider = this.model.SelectedProduct.altViews;
 			this.ui.addEventListener(AltViews.UI_ALTVIEW_SELECTION_CHANGED,changeProductImage);
 			//model listeners
-			this.model.addEventListener(Model.DisplayCheckout,ui_gotoCheckoutMode);
+			this.model.addEventListener(Model.DisplayCheckoutPanel,ui_gotoCheckoutMode);
 			this.model.addEventListener(Model.StartProdDetail,ui_gotoProdDetailMode);
 			this.model.addEventListener(Model.MainProductColorChanged,changeAltViewList);
 			

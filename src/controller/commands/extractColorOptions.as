@@ -13,13 +13,17 @@ package controller.commands
 	import mx.rpc.events.FaultEvent;
 	import mx.rpc.events.ResultEvent;
 	import mx.rpc.http.HTTPService;
+	import com.virid.fbcheckout.model.Model;
 
 	public class extractColorOptions
 	{
+		
+		private var model:Model = Model.getInstance();
 		//--------------
 		//class related
 		private var httpService:HTTPService = new HTTPService();
-		private var _colorCallback:Function;
+	
+		
 		private var _productLoaderCallback:Function;
 		
 		//--------------
@@ -28,9 +32,8 @@ package controller.commands
 		private var uniqueSizes:Array = new Array();
 		private var uniqueColors:Array = new Array();
 		
-		public function extractColorOptions(url:String, colorCallback:Function, productLoader:Function):void
+		public function extractColorOptions(url:String,productLoader:Function):void
 		{			
-			this._colorCallback = colorCallback;
 			this._productLoaderCallback = productLoader;
 			this.httpService.resultFormat="text";
 			this.httpService.url = url;
@@ -83,8 +86,7 @@ package controller.commands
 			createAllSizes(rawArray);			
 			
 			
-			if(_colorCallback != null)
-				_colorCallback(returnableListofSKUVOs);
+			this.model.AllSKUs = returnableListofSKUVOs;
 			
 			if(_productLoaderCallback != null)
 				_productLoaderCallback(rawArray);
@@ -124,16 +126,17 @@ package controller.commands
 				var test:uint 		= 0; 
 				test =  uniqueColors.indexOf(jsonSize.COLOR_CODE) ;					
 				
-				//traverse over all SKUs and add newSize. 
-				for each( var matchedSKU:ColorVO in this.returnableListofSKUVOs )
+				//traverse over all SKUs and add newSize. relating all sizes to some Color
+				for each( var matchedSKU_Color:ColorVO in this.returnableListofSKUVOs )
 				{				
-					if(matchedSKU.colorcode == newSize.color_code)
+					if(matchedSKU_Color.colorcode == newSize.color_code)
 					{
-						if(newSize.isdefault)
-							matchedSKU.currentSize = newSize;
+						/*if(newSize.isdefault)
+							matchedSKU_Color.currentSize = newSize;*/
 						//add it to our list of SKUs, and correlate these sizes to a SKU/Color
-						//newSize.parent_sku = matchedSKU;
-						matchedSKU.Sizes.addItem(newSize);
+						matchedSKU_Color.priceOfSKUs = newSize.price; //make sure we can guess a price
+						matchedSKU_Color.Sizes.addItem(newSize);
+						
 						
 					}
 				}

@@ -1,11 +1,17 @@
 package com.virid.fbcheckout.view
 {
+	import com.adobe.serialization.json.JSON;
 	import com.virid.fbcheckout.model.Model;
+	
+	import controller.commands.checkoutArbiter;
 	
 	import flash.events.Event;
 	
 	import mx.controls.CheckBox;
 	import mx.effects.Sequence;
+	import mx.rpc.events.FaultEvent;
+	import mx.rpc.events.ResultEvent;
+	import mx.rpc.http.HTTPService;
 	
 	import spark.effects.Animate;
 	import spark.effects.animation.MotionPath;
@@ -18,6 +24,8 @@ package com.virid.fbcheckout.view
 		private var ui:Checkout;
 		
 		private var uiTOaddressPropertyMap:Array;
+		
+		private var cartHTTPService:HTTPService = new HTTPService();
 		
 		//tranition variables
 		private var bigease:Power = new Power();
@@ -34,13 +42,56 @@ package com.virid.fbcheckout.view
 		{
 			this.ui = _ui;
 			this.ui.addEventListener(Checkout.BILLING_SAME_AS,billing_checkout);
+			this.ui.addEventListener(Checkout.CHECKOUT_PURCHASE,onPurchase);
 			
-			//this.model.addEventListener(Model.MainProductSKUChanged,onProdColorSKUChanged);//unused
+			this.model.addEventListener(Model.MainProductSKUChanged,onProdColorSKUChanged);
+			onProdColorSKUChanged(null);//just in case event has already been thrown
 			//model listeners:ui
-			this.model.addEventListener(Model.DisplayCheckout,ui_gotoCheckoutMode);
+			this.model.addEventListener(Model.DisplayCheckoutPanel,ui_gotoCheckoutMode);
 			this.model.addEventListener(Model.StartProdDetail,ui_gotoProdDetail);
 			mapUIFieldsToModel();
 	
+		}
+		
+		protected function onPurchase(event:Event):void
+		{
+			updateCartTotals();
+			
+
+			this.model._blillingAddress.firstname = this.ui.bfname.text;
+			this.model._shippingAddress.firstname = this.ui.sfname.text;
+			this.model._blillingAddress.lastname = this.ui.blname.text 
+			this.model._shippingAddress.lastname = this.ui.slname.text;
+			this.model._blillingAddress.address1 = this.ui.baddress1.text 
+			this.model._shippingAddress.address1 = this.ui.saddress1.text;
+			this.model._blillingAddress.address2 = this.ui.baddress2.text 
+			this.model._shippingAddress.address2 = this.ui.saddress2.text;
+			this.model._blillingAddress.state = this.ui.bstate.text 
+			this.model._shippingAddress.state = this.ui.sstate.text;
+			this.model._blillingAddress.zip = this.ui.bzip.text 
+			this.model._shippingAddress.zip= this.ui.szip.text;
+			this.model._blillingAddress.city = this.ui.bcity.text 
+			this.model._shippingAddress.city = this.ui.scity.text;
+			
+			this.model._blillingAddress.email = this.model._shippingAddress.email = this.ui.email.text;
+			this.model._blillingAddress.phone = this.model._shippingAddress.phone = this.ui.phonenum.text;
+			
+			this.model._shippingAddress.Method = "STD"
+			
+			//record ccard info
+			this.model._ccard.number = this.ui.bcardnum.text;
+			this.model._ccard.ccv = this.ui.bcardcvv.text;
+			this.model._ccard.month = this.ui.bcardmonth.text;
+			this.model._ccard.year = this.ui.bcardyear.text;
+			this.model._ccard.exp = this.model._ccard.month + "/" + this.model._ccard.year;
+			
+			//send addresses and card info to class that will handle checkout
+			var checkoutProcess:checkoutArbiter = new checkoutArbiter(this.model.SelectedProduct.colorObj.currentSize.OID);
+			
+			//call up the notice modal
+			/*var obj:Object = new Object();
+			obj.start = "NOW";
+			this.model.showStatus = obj;*/
 		}
 		
 		protected function billing_checkout(event:Event):void
@@ -56,12 +107,37 @@ package com.virid.fbcheckout.view
 		
 		protected function onProdColorSKUChanged(event:Event):void
 		{
+			//if(this.model.SelectedProduct.colorObj.currentSize != null)
+			//this.ui.productPrice.text = '$' + String(this.model.SelectedProduct.colorObj.currentSize.price) + ' USD';
+			
+		}
+		protected function updateCartTotals():void
+		{
+			//set shipping address
+			this.cartHTTPService.resultFormat="text";
+			this.cartHTTPService.addEventListener("fault", onCartJSONFault);
+			this.cartHTTPService.url = "http://www.journeys.com/api/cart.aspx";
+			this.cartHTTPService.addEventListener("result", onCartJSONResualt); 
+			this.cartHTTPService.send();
+		}
+		
+		protected function onCartJSONFault(event:FaultEvent):void
+		{
 			// TODO Auto-generated method stub
 			
 		}
 		
+		protected function onCartJSONResualt(event:ResultEvent):void
+		{
+			var obj:Object = JSON.decode(String(event.result));
+			
+			this.ui.cartPrice.text = "$" + obj.total + "USD";
+		}
+		
+		
 		protected function ui_gotoCheckoutMode(event:Event):void
 		{
+			updateCartTotals();
 			this.ui.visible = true;
 			this.ui.includeInLayout = true;
 			a1 = new Animate();
