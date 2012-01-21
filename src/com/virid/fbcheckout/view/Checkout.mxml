@@ -191,9 +191,11 @@
 			
 			
 			<s:Label styleName="lubalin" text="Shipping Method" fontSize="14" height="14" paddingTop="2" />
-			<s:DropDownList id="soptions" width="100%" contentBackgroundColor="0xaaaaaa" borderAlpha="0" borderVisible="false" skinClass="com.virid.fbcheckout.view.smallviews.skins.DropDownSkin" cornerRadius="0" verticalCenter="-1" >
+			<s:DropDownList id="soptions" width="100%" contentBackgroundColor="0xaaaaaa" selectedIndex="1" borderAlpha="0" borderVisible="false" skinClass="com.virid.fbcheckout.view.smallviews.skins.DropDownSkin" cornerRadius="0" verticalCenter="-1" >
 				<s:ArrayCollection>
-					<fx:String>Enter Zip Code for Options</fx:String>
+					<fx:String>$4.95 UPS Ground Shipping</fx:String>
+					<fx:String>$9.00 2-3 Day Air</fx:String>
+					<fx:String>$18.00 Next Day Air</fx:String>
 				</s:ArrayCollection>
 			</s:DropDownList>
 		</s:VGroup>
@@ -210,7 +212,7 @@
 			<s:TextInput id="baddress1" prompt="Address 1" width="100%"/>
 			<s:TextInput id="baddress2" prompt="Address 2" width="100%"/>
 			<s:HGroup width="100%">
-				<s:TextInput id="bcity" prompt="City" width="60%"/>
+				<s:TextInput id="bcity" prompt="City" width="60%" toolTip="test"/>
 				<s:TextInput id="bstate" prompt="ST" width="18%" maxChars="2"/>
 				<s:TextInput id="bzip" prompt="Zip" width="22%" maxChars="5"/>
 			</s:HGroup>	

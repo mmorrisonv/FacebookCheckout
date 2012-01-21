@@ -50,9 +50,11 @@ package com.virid.fbcheckout.model
 		 * */
 		//public var AltViews:ArrayCollection = new ArrayCollection(); - default alt views stored on the MainProduct
 		
-		public var urlRoot:String = "http://www.journeys.com/api/";
+		public var urlRootSecure:String = "https://www.journeys.com/";
+		public var urlRoot:String = "http://www.journeys.com/";
 		public var httpService:HTTPService = new HTTPService();
 		public var productID:String = '201046';		//main root product id
+		private var lastError:String;
 		
 		public var AllSKUs:ArrayCollection = new ArrayCollection(); // basically all colors available - size/oids within
 		//public var SKUs:ArrayCollection = new ArrayCollection();
@@ -72,6 +74,7 @@ package com.virid.fbcheckout.model
 		
 		/*
 		 * Setters and Getters for Main Elements*/
+
 		
 		public function get SelectedProduct():ProductVO
 		{
@@ -131,6 +134,13 @@ package com.virid.fbcheckout.model
 		*---------------------------------------------------
 		*Panel and Modal Transitions
 		*/
+		//show status modal
+		public function set showError(value:String):void
+		{
+			this.lastError = value;
+			var e:Event = new Event(StatusUpdate,true,false);
+			this.dispatchEvent(e);
+		}	
 		//show status modal
 		public function set showStatus(value:Object):void
 		{

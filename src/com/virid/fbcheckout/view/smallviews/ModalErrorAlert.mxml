@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx" width="300" height="100">
+	<fx:Script>
+		<![CDATA[
+			import mx.events.FlexEvent;
+			
+			/*
+			*Event Definition
+			*/
+			static var REMOVE_UI_FROMSTAGE:String="X";
+			
+			protected function creationCompleteHandler(event:FlexEvent):void
+			{
+				var mediator:ModalErrorAlertMediator = new ModalErrorAlertMediator();
+				mediator.register(this);
+			}
+			
+			protected function return_clickHandler(event:MouseEvent):void
+			{
+				//remove the status modal
+				var e:Event = new Event(REMOVE_UI_FROMSTAGE);
+				dispatchEvent(e);
+			}
+			
+		]]>
+	</fx:Script>
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	
+	<s:Rect width="100%" height="100%">
+		<s:fill>
+			<s:SolidColor color="0xffffff" />
+		</s:fill>	
+		<s:filters>
+			<s:DropShadowFilter distance="10" angle="45" quality="3" alpha=".8" blurX="32" blurY="32" />
+		</s:filters>
+	</s:Rect>
+	<s:Rect width="100%" height="30">
+		<s:fill>
+			<s:SolidColor color="0xcccccc" />
+		</s:fill>
+	</s:Rect>
+	
+	<s:Group width="100%" height="100%">
+		<s:Label text="close" 
+				 right="4" height="20" verticalAlign="middle" top="1"
+				 fontSize="12" lineHeight="20" 
+				 useHandCursor="true" buttonMode="true" click="return_clickHandler(event)"/>
+		
+		<s:Label id="statusTitle" text="Information" 
+				 left="14" height="30" verticalAlign="middle" top="1"
+				 fontSize="22" lineHeight="20" styleName="lubalin" />
+	</s:Group>
+	
+</s:Group>

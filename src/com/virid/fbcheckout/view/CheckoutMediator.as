@@ -55,7 +55,7 @@ package com.virid.fbcheckout.view
 		
 		protected function onPurchase(event:Event):void
 		{
-			updateCartTotals();
+			//updateCartTotals();
 			
 
 			this.model._blillingAddress.firstname = this.ui.bfname.text;
@@ -76,8 +76,23 @@ package com.virid.fbcheckout.view
 			this.model._blillingAddress.email = this.model._shippingAddress.email = this.ui.email.text;
 			this.model._blillingAddress.phone = this.model._shippingAddress.phone = this.ui.phonenum.text;
 			
-			this.model._shippingAddress.Method = "STD"
+			var shpOpt:Number = new Number();
+			shpOpt = this.ui.soptions.selectedIndex;
 			
+			//this.model._shippingAddress.Method = "STD"
+			switch(shpOpt)
+			{
+				case 0:
+					this.model._shippingAddress.Method = "STD";
+					break;
+				case 1:
+					this.model._shippingAddress.Method = "2DAY";
+					break;
+				case 2:
+					this.model._shippingAddress.Method = "1DAY";
+					break;
+					
+			}
 			//record ccard info
 			this.model._ccard.number = this.ui.bcardnum.text;
 			this.model._ccard.ccv = this.ui.bcardcvv.text;
@@ -86,7 +101,7 @@ package com.virid.fbcheckout.view
 			this.model._ccard.exp = this.model._ccard.month + "/" + this.model._ccard.year;
 			
 			//send addresses and card info to class that will handle checkout
-			var checkoutProcess:checkoutArbiter = new checkoutArbiter(this.model.SelectedProduct.colorObj.currentSize.OID);
+			var checkoutProcess:checkoutArbiter = new checkoutArbiter();
 			
 			//call up the notice modal
 			/*var obj:Object = new Object();
@@ -116,9 +131,13 @@ package com.virid.fbcheckout.view
 			//set shipping address
 			this.cartHTTPService.resultFormat="text";
 			this.cartHTTPService.addEventListener("fault", onCartJSONFault);
-			this.cartHTTPService.url = "http://www.journeys.com/api/cart.aspx";
+			var paramsCart:Object = {};
+			paramsCart['action'] = "update";
+			paramsCart['qty'] = 1;
+			paramsCart['id'] = this.model.SelectedProduct.colorObj.currentSize.OID;
+			this.cartHTTPService.url = this.model.urlRoot + "api/cart.aspx";
 			this.cartHTTPService.addEventListener("result", onCartJSONResualt); 
-			this.cartHTTPService.send();
+			this.cartHTTPService.send(paramsCart);
 		}
 		
 		protected function onCartJSONFault(event:FaultEvent):void

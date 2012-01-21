@@ -58,10 +58,13 @@ package com.virid.fbcheckout.view
 			if(this.model.SelectedProduct.colorObj != null)
 				this.ui.productImage.source = this.model.SelectedProduct.colorObj.imageFS;
 			//if we have a currentSize - use that price . else use a guestimate of the price based on color
-			if(this.model.SelectedProduct.colorObj.currentSize != null)
+			if(this.model.SelectedProduct.colorObj != null && this.model.SelectedProduct.colorObj.currentSize != null)
+			{
 				this.ui.productPriceDisplay.text = '$' + String(this.model.SelectedProduct.colorObj.currentSize.price) + ' USD';
-			else
 				this.ui.productPriceDisplay.text = '$' + String(this.model.SelectedProduct.colorObj.priceOfSKUs) + ' USD';
+			}
+			else
+				;
 			
 
 		}

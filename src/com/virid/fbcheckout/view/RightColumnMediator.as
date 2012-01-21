@@ -4,11 +4,13 @@ package com.virid.fbcheckout.view
 	
 	import flash.events.Event;
 	
+	import mx.effects.Sequence;
+	import mx.rpc.http.HTTPService;
+	
 	import spark.effects.Animate;
 	import spark.effects.animation.MotionPath;
 	import spark.effects.animation.SimpleMotionPath;
 	import spark.effects.easing.Power;
-	import mx.effects.Sequence;
 
 	public class RightColumnMediator
 	{
@@ -53,6 +55,19 @@ package com.virid.fbcheckout.view
 		
 		protected function ui_OnBuyItNowClicked(event:Event):void
 		{
+			var cartAddService:HTTPService = new HTTPService();
+			//add current sku to cart
+			//add current sku to cart
+			cartAddService.resultFormat="text";
+			//this.cartAddService.addEventListener("fault", onAddedToCart_Fault);
+			cartAddService.url = model.urlRoot + "api/cart.aspx";//?action=update&id="+sku+"&qty=1";
+			var paramsCart:Object = {};
+			paramsCart['action'] = "update";
+			paramsCart['qty'] = 1;
+			paramsCart['id'] = this.model.SelectedProduct.colorObj.currentSize.OID;
+			//this.cartAddService.addEventListener("result", onAddedToCart); 
+			cartAddService.send(paramsCart);
+			
 			var obj:Object = new Object();
 			obj.start = "NOW";
 			this.model.initiateCheckoutPanel = obj;

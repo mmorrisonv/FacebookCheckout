@@ -1,21 +1,21 @@
-package com.virid.fbcheckout.view
+package com.virid.fbcheckout.view.smallviews
 {
 	import com.virid.fbcheckout.model.Model;
 	
 	import flash.events.Event;
 	
 	import mx.effects.Sequence;
+	import mx.effects.easing.Elastic;
 	
 	import spark.effects.Animate;
 	import spark.effects.animation.MotionPath;
 	import spark.effects.animation.SimpleMotionPath;
-	import spark.effects.easing.Elastic;
 	import spark.effects.easing.Power;
 
-	public class ModalStatusUpdateMediator
+	public class ModalErrorAlertMediator
 	{
 		private var model:Model = Model.getInstance();
-		private var ui:ModalStatusUpdate;
+		private var ui:ModalErrorAlert;
 		
 		//tranition variables
 		private var bigease:Power = new Power();
@@ -25,16 +25,14 @@ package com.virid.fbcheckout.view
 		private var p2:Sequence = new Sequence();
 		
 		
-		public function register(_ui:ModalStatusUpdate):void
+		public function register(_ui:ModalErrorAlert):void
 		{
 			this.ui = _ui;
-			this.ui.addEventListener(ModalStatusUpdate.REMOVE_UI_FROMSTAGE,ui_OnRemoveUI);
+			this.ui.addEventListener(ModalErrorAlert.REMOVE_UI_FROMSTAGE,ui_OnRemoveUI);
 			
 			//model listeners:ui
 			this.model.addEventListener(Model.StatusUpdate,showStatusUpdate);
 		}
-		
-		
 		
 		
 		protected function ui_OnRemoveUI(event:Event):void
@@ -56,7 +54,7 @@ package com.virid.fbcheckout.view
 			this.model.displayCheckout = obj;
 		}
 		
-		protected function showStatusUpdate(event:Event):void
+		protected function showErrorModal(event:Event):void
 		{
 			var e:Elastic = new Elastic();
 			
@@ -72,6 +70,7 @@ package com.virid.fbcheckout.view
 			//this.ui.visible = true;
 			
 		}
+		
 		
 	}
 }

@@ -32,7 +32,7 @@ package com.virid.fbcheckout.model
 		{
 			//use ajax to get SKU / image / price information for the current productID
 			
-			var url:String = model.urlRoot + "getproduct.aspx?id=" + model.productID;
+			var url:String = model.urlRootSecure + "api/getproduct.aspx?id=" + model.productID;
 			var colorExtractor:extractColorOptions = new extractColorOptions(url,buildMainProduct);
 			
 		}
