@@ -33,7 +33,8 @@
 				if(this.size == null)
 					return;
 				this.sizeDisplay.text = this.size.name;
-				if( this.size.qty <= 0)
+				if( !this.size.inStock)
+					
 				{
 					this.backColor.color = colorbg_disabled;
 					this.colorbg_hovered = colorbg_disabled;

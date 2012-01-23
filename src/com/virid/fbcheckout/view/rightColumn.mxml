@@ -5,13 +5,17 @@
 		 creationComplete="creationComplete(event)" xmlns:view="com.virid.fbcheckout.view.*">
 	<fx:Script>
 		<![CDATA[
+			import mx.core.mx_internal;
 			import mx.events.FlexEvent;
+			
 			import spark.events.IndexChangeEvent;
 			
 			/*
 			*Event Definition
 			*/
 			public static const BUYITNOWCLICKED:String = "sC";
+			public static const AVAILCHECKCLICKED:String = "saC";
+			public static const SEEMORECLICKED:String = "smC";
 			public static const PRODDETAIL:String = "pD";
 			
 			protected function ratingChanged(event:IndexChangeEvent):void
@@ -68,6 +72,20 @@
 				
 			}
 			
+			protected function onMoreLikeThisClicked(event:MouseEvent):void
+			{
+				var e:Event = new Event(rightColumn.SEEMORECLICKED,true,false);
+				dispatchEvent(e);
+				
+			}
+			
+			protected function onStoreAvailabilityClicked(event:MouseEvent):void
+			{
+				var e:Event = new Event(rightColumn.PRODDETAIL,true,false);
+				dispatchEvent(e);
+				
+			}
+			
 		]]>
 	</fx:Script>
 	<fx:Declarations>
@@ -100,7 +118,16 @@
 			
 			<s:Group  y="70" width="100%">
 				
-				<s:Group click="sizeSelectClick(event)" width="100%">
+				<s:Group click="colorSelectClick(event)" width="100%" >
+					<smallviews:OpaqueFullWidthHeading text="Select a Color" 
+													   textColor="0x000000" backColor="0xffffff"											  
+													   width="100%"  height="14" x="3" marginLeftContent="23"/>
+					<s:Label id="selectedColor" styleName="HelvBold" text="Selected Color" 
+							 color="0xffffff" fontSize="11" y="18" x="24" maxWidth="130" height="23" lineHeight="10"/>
+					<s:Image source="assets/small-vertical-carrot.png" x="10" y="23" />
+				</s:Group>
+				
+				<s:Group click="sizeSelectClick(event)" width="100%" y="44">
 					<smallviews:OpaqueFullWidthHeading text="Select a Size" 
 													   textColor="0x000000" backColor="0xffffff"											  
 													   width="100%" height="14" x="3" marginLeftContent="23" />
@@ -110,14 +137,7 @@
 				</s:Group>
 			
 			
-			  	<s:Group click="colorSelectClick(event)" width="100%" y="44">
-					<smallviews:OpaqueFullWidthHeading text="Select a Color" 
-													   textColor="0x000000" backColor="0xffffff"											  
-													   width="100%"  height="14" x="3" marginLeftContent="23"/>
-					<s:Label id="selectedColor" styleName="HelvBold" text="Selected Color" 
-							 color="0xffffff" fontSize="11" y="18" x="24" maxWidth="130" height="23" lineHeight="10"/>
-					<s:Image source="assets/small-vertical-carrot.png" x="10" y="23" />
-				</s:Group>
+
 			
 			</s:Group>
 
@@ -139,9 +159,9 @@
 
 			<smallviews:OpaqueFullWidthHeading text="See More Like This" 
 											   textColor="0xffffff" backColor="0x000000" fontSize="11" marginLeftContent="8"  										  
-											   width="130" height="18" horizontalCenter="0" y="35" />
+											   width="130" height="18" horizontalCenter="0" y="35" click="onMoreLikeThisClicked(event)" />
 			<smallviews:OpaqueFullWidthHeading text="Check Store Availability" 
-											   textColor="0xffffff" backColor="0x000000" fontSize="11" marginLeftContent="8"											  
+											   textColor="0xffffff" backColor="0x000000" fontSize="11" click="onStoreAvailabilityClicked(event)" marginLeftContent="8"											  
 											   width="130" height="18" horizontalCenter="0" y="58" />
 
 		</s:Group>

@@ -6,9 +6,13 @@ package com.virid.fbcheckout.view
 	import controller.events.CustomEvent;
 	
 	import flash.events.Event;
+	import flash.events.TimerEvent;
 	import flash.sampler.NewObjectSample;
+	import flash.utils.Timer;
 	
 	import mx.effects.Sequence;
+	
+	import org.osmf.events.TimeEvent;
 	
 	import spark.effects.Animate;
 	import spark.effects.animation.MotionPath;
@@ -39,13 +43,22 @@ package com.virid.fbcheckout.view
 			//model listeners
 			this.model.addEventListener(Model.DisplayCheckoutPanel,ui_gotoCheckoutMode);
 			this.model.addEventListener(Model.StartProdDetail,ui_gotoProdDetailMode);
-			this.model.addEventListener(Model.MainProductColorChanged,changeAltViewList);
+			this.model.addEventListener(Model.MainProductColorChanged,setupAltViewList);
 			
-			changeAltViewList(null);
+			if(this.model.productSetup)
+				setupAltViewList(null);
+			else{
+				var reloadTimer:Timer = new Timer(300,1);
+				reloadTimer.addEventListener(TimerEvent.TIMER_COMPLETE,function (evt:TimerEvent):void{
+					setupAltViewList(null);
+				});
+				reloadTimer.start();
+			}
+			
 		}
 		/*
 		* Model Listeners*/
-		protected function changeAltViewList(event:Event):void
+		protected function setupAltViewList(event:Event):void
 		{
 			if( this.model.SelectedProduct.colorObj != null && this.model.SelectedProduct.colorObj.AltViews != null && this.model.SelectedProduct.colorObj.AltViews.length > 0 )
 				this.ui.altViewList.dataProvider = this.model.SelectedProduct.colorObj.AltViews;
@@ -63,7 +76,7 @@ package com.virid.fbcheckout.view
 		}
 		protected function ui_gotoProdDetailMode(event:Event):void
 		{
-			var a1:Animate = new Animate();
+			/*var a1:Animate = new Animate();
 			a1.target = this.ui; a1.duration = 300;
 			m = new SimpleMotionPath();
 			m.property = 'y'; m.valueTo = 247;
@@ -71,8 +84,8 @@ package com.virid.fbcheckout.view
 			a1.motionPaths = v;
 			var p2:Sequence = new Sequence();
 			p2.addChild(a1);
-			p2.play();
-			
+			p2.play();*/
+			this.ui.showMini.play();
 		}
 		
 		protected function ui_gotoCheckoutMode(event:Event):void

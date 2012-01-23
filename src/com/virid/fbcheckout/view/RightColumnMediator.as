@@ -3,6 +3,8 @@ package com.virid.fbcheckout.view
 	import com.virid.fbcheckout.model.Model;
 	
 	import flash.events.Event;
+	import flash.net.URLRequest;
+	import flash.net.navigateToURL;
 	
 	import mx.effects.Sequence;
 	import mx.rpc.http.HTTPService;
@@ -33,6 +35,8 @@ package com.virid.fbcheckout.view
 			this.ui = _ui;
 			this.ui.addEventListener(rightColumn.BUYITNOWCLICKED,ui_OnBuyItNowClicked);
 			this.ui.addEventListener(rightColumn.PRODDETAIL,ui_OnProdDetail);
+			this.ui.addEventListener(rightColumn.AVAILCHECKCLICKED,ui_OnCheckAVailClicked);
+			this.ui.addEventListener(rightColumn.SEEMORECLICKED,ui_OnSeeMoreClicked);
 			
 			this.model.addEventListener(Model.MainProductChanged,onProductChange);
 			this.model.addEventListener(Model.MainProductSKUChanged,onProdSKUChanged);
@@ -44,6 +48,20 @@ package com.virid.fbcheckout.view
 			onProductChange(null);
 		}
 		
+		protected function ui_OnCheckAVailClicked(event:Event):void
+		{
+			var urlR:URLRequest = new URLRequest(this.model.urlRoot + '/product.aspx?id=' + this.model.productID);
+			navigateToURL(urlR, '_self');
+			
+			
+		}
+		
+		protected function ui_OnSeeMoreClicked(event:Event):void
+		{
+			var urlR:URLRequest = new URLRequest(this.model.urlRoot + '/product.aspx?id=' + this.model.productID);
+			navigateToURL(urlR, '_self');
+			
+		}		
 
 		
 		protected function ui_OnProdDetail(event:Event):void

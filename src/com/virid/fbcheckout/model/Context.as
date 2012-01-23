@@ -41,13 +41,15 @@ package com.virid.fbcheckout.model
 			
 			var Product:ProductVO = new ProductVO();
 			
-			var tcolor: ColorVO = this.model.AllSKUs[7];
+			var tcolor: ColorVO = this.model.AllSKUs[0];
 			var tsize: SizeVO = tcolor.Sizes[0];
 			tcolor.currentSize = tsize;
 			Product.name = rawArray.NAME;
 			Product.colorObj = tcolor;
 			
 			model.SelectedProduct = Product;
+			model.MainProductSKU = tsize;
+			model.productSetup = true;
 			
 		}
 

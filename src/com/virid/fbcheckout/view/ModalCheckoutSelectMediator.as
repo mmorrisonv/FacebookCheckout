@@ -3,6 +3,8 @@ package com.virid.fbcheckout.view
 	import com.virid.fbcheckout.model.Model;
 	
 	import flash.events.Event;
+	import flash.net.URLRequest;
+	import flash.net.navigateToURL;
 	
 	import mx.effects.Sequence;
 	
@@ -33,11 +35,17 @@ package com.virid.fbcheckout.view
 		{
 			this.ui = _ui;
 			this.ui.addEventListener(ModalCheckoutSelect.DISPLAY_CHECKOUT,ui_OnCheckout);
+			this.ui.addEventListener(ModalCheckoutSelect.GOTO_JOURNEYSCHECKOUT,gotoJourneys);
 			
 			//model listeners:ui
 			this.model.addEventListener(Model.CheckoutModal,ui_HandleCheckout);
 		}
 		
+		protected function gotoJourneys(event:Event):void
+		{
+			var urlR:URLRequest = new URLRequest(this.model.urlRoot + '/basket.aspx');
+			navigateToURL(urlR, '_blank');
+		}		
 		
 		
 		

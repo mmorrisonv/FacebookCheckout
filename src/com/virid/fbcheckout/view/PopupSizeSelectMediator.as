@@ -8,36 +8,85 @@ package com.virid.fbcheckout.view
 	import controller.events.CustomEvent;
 	
 	import flash.events.Event;
+	import flash.events.TimerEvent;
+	import flash.utils.Timer;
+	
+	import org.osmf.events.TimeEvent;
 
 	public class PopupSizeSelectMediator
 	{
 		private var model:Model = Model.getInstance();
 		private var ui:PopupSizeSelect;
-		public function PopupSizeSelectMediator()
-		{
-			
-		}
 		
 		public function register(_ui:PopupSizeSelect):void
 		{
 			this.ui = _ui;
+
+			ui.addEventListener(PopupSizeSelect.UI_SIZE_CHANGED,ui_sizeChanged);
+			ui.addEventListener(PopupSizeSelect.UI_SHOWN,ui_shownOnScreen);
+			
+			this.model.addEventListener(Model.MainProductColorChanged,onProductColorChanged);
+			this.model.addEventListener(Model.MainProductSetup,onProductInit);
+
+			if(this.model.productSetup){
+				setupSizeList();
+			}
+			else{
+				
+				var reloadTimer:Timer = new Timer(300,1);
+				reloadTimer.addEventListener(TimerEvent.TIMER_COMPLETE,function (evt:TimerEvent):void{
+					setupSizeList();
+				});
+				reloadTimer.start();
+				
+			}
+
+		}
+		
+		protected function ui_shownOnScreen(event:Event):void
+		{
+			setupSizeList();
+		}
+		
+		protected function onProductInit(event:Event):void
+		{
+			//setupSizeList();
+			//make sure the model reflects the correct size etc
+			if( this.model.SelectedProduct.colorObj != null && this.model.SelectedProduct.colorObj.currentSize != null )
+			{
+				this.model.requestedSize =  this.model.SelectedProduct.colorObj.currentSize;
+				this.model.MainProductSKU =  this.model.SelectedProduct.colorObj.currentSize;
+			}
+		}
+		
+		protected function onProductColorChanged(event:Event):void
+		{
+			setupSizeList();
+			/*
+			if(this.model.SelectedProduct.colorObj != null){
+			this.ui.sizeSelect.dataProvider = this.model.SelectedProduct.colorObj.Sizes;
+			if( this.model.SelectedProduct.colorObj != null && this.model.SelectedProduct.colorObj.currentSize != null )
+			this.ui.sizeSelect.selectedItem = this.model.SelectedProduct.colorObj.currentSize;
+			}*/
+		}
+		
+		private function setupSizeList():void
+		{
 			if(this.model.SelectedProduct != null && this.model.SelectedProduct.colorObj != null)
 			{
 				this.ui.sizeSelect.dataProvider = this.model.SelectedProduct.colorObj.Sizes;
-				//this.ui.sizeSelect.selectedIndex = 0;
-				//this.model.MainProductSKU = this.model.SelectedProduct.colorObj.Sizes[0];
+				if( this.model.SelectedProduct.colorObj != null && this.model.SelectedProduct.colorObj.currentSize != null )
+				{
+					this.ui.sizeSelect.selectedItem = this.model.SelectedProduct.colorObj.currentSize;
+				}
 			}
-			
-			ui.addEventListener(PopupSizeSelect.UI_SIZE_CHANGED,ui_sizeChanged);
-			this.model.addEventListener(Model.MainProductColorChanged,onProductColorChanged);
-
-			
 		}
 		
 		protected function ui_sizeChanged(event:CustomEvent):void
 		{
 			if(event.data != null )
 			{
+				this.model.requestedSize = event.data as SizeVO;
 				this.model.MainProductSKU = event.data as SizeVO;
 				//this.model.MainProductColor.currentSize = event.data as SizeVO;
 			}
@@ -47,14 +96,7 @@ package com.virid.fbcheckout.view
 		}		
 		
 		
-		protected function onProductColorChanged(event:Event):void
-		{
-			
-			if(this.model.SelectedProduct.colorObj != null){
-				this.ui.sizeSelect.dataProvider = this.model.SelectedProduct.colorObj.Sizes;
-				//this.ui.sizeSelect.selectedIndex = 0;//this.model.SelectedProduct.colorObj.currentSKU.name;
-			}
-		}
+
 
 		
 	}

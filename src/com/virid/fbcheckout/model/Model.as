@@ -41,6 +41,7 @@ package com.virid.fbcheckout.model
 		public static const MainProductChanged:String = "MPC";
 		public static const MainProductSKUChanged:String = "MPSC";
 		public static const MainProductColorChanged:String = "MPCC";
+		public static const MainProductSetup:String = "MPSU";
 		public static const MainProductImageChanged:String = "MPIC";
 		public static const StatusUpdate:String = "SU";
 		public static const CheckoutModal:String = "CM";
@@ -54,7 +55,9 @@ package com.virid.fbcheckout.model
 		public var urlRoot:String = "http://www.journeys.com/";
 		public var httpService:HTTPService = new HTTPService();
 		public var productID:String = '201046';		//main root product id
-		private var lastError:String;
+		private var _productSetup:Boolean = false;
+		public var lastError:String;
+		public var requestedSize:SizeVO;
 		
 		public var AllSKUs:ArrayCollection = new ArrayCollection(); // basically all colors available - size/oids within
 		//public var SKUs:ArrayCollection = new ArrayCollection();
@@ -85,9 +88,24 @@ package com.virid.fbcheckout.model
 		{
 			_MainProduct = value;
 			_MainProductColor = _MainProduct.colorObj;
+			//_MainProductSKU = _MainProduct.colorObj.currentSize;
 			var e:Event = new Event(MainProductChanged,true,false);
 			this.dispatchEvent(e);
 		}
+		
+		public function get productSetup():Boolean
+		{
+			return _productSetup;
+		}
+		
+		public function set productSetup(value:Boolean):void
+		{
+			_productSetup = value;
+			var e:Event = new Event(MainProductSetup,true,false);
+			this.dispatchEvent(e);
+			
+		}		
+		
 		public function set MainProductColor(value:ColorVO):void
 		{
 			_MainProductColor= value;

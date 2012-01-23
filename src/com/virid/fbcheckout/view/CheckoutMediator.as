@@ -136,8 +136,8 @@ package com.virid.fbcheckout.view
 			paramsCart['qty'] = 1;
 			paramsCart['id'] = this.model.SelectedProduct.colorObj.currentSize.OID;
 			this.cartHTTPService.url = this.model.urlRoot + "api/cart.aspx";
-			this.cartHTTPService.addEventListener("result", onCartJSONResualt); 
-			this.cartHTTPService.send(paramsCart);
+			this.cartHTTPService.addEventListener("result", onCartJSONResult); 
+			this.cartHTTPService.send();
 		}
 		
 		protected function onCartJSONFault(event:FaultEvent):void
@@ -146,11 +146,11 @@ package com.virid.fbcheckout.view
 			
 		}
 		
-		protected function onCartJSONResualt(event:ResultEvent):void
+		protected function onCartJSONResult(event:ResultEvent):void
 		{
 			var obj:Object = JSON.decode(String(event.result));
 			
-			this.ui.cartPrice.text = "$" + obj.total + "USD";
+			this.ui.cartPrice.text = "$" + obj.total + " USD";
 		}
 		
 		

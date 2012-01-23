@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
 		 xmlns:s="library://ns.adobe.com/flex/spark" 
-		 xmlns:mx="library://ns.adobe.com/flex/mx" width="155" height="110" minHeight="85" show="popupShown(event)" creationComplete="componentCreationComplete(event)">
+		 xmlns:mx="library://ns.adobe.com/flex/mx" width="155" height="110" minHeight="85" show="popupShown(event)" initialize="componentCreationComplete(event)">
 	<fx:Script>
 		<![CDATA[
 			import com.virid.fbcheckout.model.vo.SizeVO;
@@ -19,9 +19,13 @@
 			*/
 			
 			public static const UI_SIZE_CHANGED:String = "sC";
+			public static const UI_SHOWN:String = "uiShown";
 			
 			protected function popupShown(event:FlexEvent):void
 			{
+				var e:CustomEvent = new CustomEvent(UI_SHOWN,null,false);
+				dispatchEvent( e );
+				
 				this.stageClickCount = 0;
 				this.stage.addEventListener(MouseEvent.CLICK,onStageClick);
 			}
@@ -63,7 +67,7 @@
 				if(event.newIndex >= 0){
 					var selItem:SizeVO = event.target.selectedItems[0] as SizeVO;
 					
-					if(selItem.qty <= 0)
+					if( !selItem.inStock )
 						return;
 					
 					e = new CustomEvent(UI_SIZE_CHANGED,selItem,false);
