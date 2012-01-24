@@ -20,8 +20,8 @@
 			/*
 			*Event Definition
 			*/
-			static var BILLING_SAME_AS:String="BSA";
-			static var CHECKOUT_PURCHASE:String = "FINAL_PURCHASE"
+			public static var BILLING_SAME_AS:String="BSA";
+			public static var CHECKOUT_PURCHASE:String = "FINAL_PURCHASE"
 			
 
 			protected function ratingChanged(event:IndexChangeEvent):void
@@ -157,7 +157,7 @@
 			
 			protected function onItemizedViewClicked1(event:MouseEvent):void
 			{
-				// TODO Auto-generated method stub
+				this.itemizedView.toggleUI();
 				
 			}
 			
@@ -239,14 +239,16 @@
 				<s:SolidColor color="0xffffff" />
 			</s:fill>
 		</s:Rect>
-		<view:PopupOrderOverview width="243" left="0" bottom="0"/>
+		<view:PopupOrderOverview id="itemizedView" width="243" height="50" bottom="-160"/>
 		<s:Group id="checkoutOptionButtons" width="100%" height="36">
 			<s:Group height="36" left="10">
 				<s:Label text="Final Price:" fontSize="11" styleName="lubalin" verticalCenter="0"/>
 				<s:Label id="cartPrice" text="$--.-- USD" x="60" fontSize="18" styleName="lubalin" verticalCenter="0"/>
 			</s:Group>
 			<s:Group width="56" height="22" left="175" y="3">
-				<s:Rect width="100%" height="100%"><s:stroke><s:SolidColorStroke color="0xcccccc" weight="1" /></s:stroke></s:Rect>
+				<s:Rect width="100%" height="100%"><s:stroke><s:SolidColorStroke color="0xcccccc" weight="1" /></s:stroke><s:fill>
+					<s:SolidColor color="0xffffff"/>
+				</s:fill></s:Rect>
 				<s:Label text="ITEMIZED&#13;VIEW" fontSize="9" color="0xcccccc" verticalCenter="1" horizontalCenter="0" textAlign="center" lineHeight="10" click="onItemizedViewClicked1(event)"/>
 			</s:Group>
 			

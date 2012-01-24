@@ -1,11 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
 <s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
 		 xmlns:s="library://ns.adobe.com/flex/spark" 
-		 xmlns:mx="library://ns.adobe.com/flex/mx" width="243" >
+		 xmlns:mx="library://ns.adobe.com/flex/mx" width="243"
+		 creationComplete="init(event)">
+	<fx:Script>
+		<![CDATA[
+			import mx.events.FlexEvent;
+			
+			private var ui_isopen:Boolean = false;
+			
+			protected function init(event:FlexEvent):void
+			{
+				// TODO Auto-generated method stub
+				
+			}
+			
+			public function toggleUI():void
+			{
+				
+				if(ui_isopen)
+					this.hide.play();
+				else
+					this.show.play();
+				ui_isopen = !ui_isopen;
+			}
+			
+		]]>
+	</fx:Script>
 	<fx:Declarations>
 		<!-- Place non-visual elements (e.g., services, value objects) here -->
+		<s:Power id="bigGame" />
+		<s:Animate target="{this}" id ="show" duration="500" >
+			<s:SimpleMotionPath property="bottom" valueTo="0"/>
+		</s:Animate>
+		<s:Animate target="{this}" id ="hide" duration="500" >
+			<s:SimpleMotionPath property="bottom" valueTo="-160"/>
+		</s:Animate>
 	</fx:Declarations>
-	<s:Group id="itemizedView" height="36" bottom="0" left="0">
-		<s:Image source="assets/checkout-bottom-wedge-panel.png" width="243" height="50" bottom="0" left="0"/>
+	<s:Group id="itemizedView" bottom="0" left="0" height="170">
+		<s:Image source="assets/checkout-bottom-wedge-panel.png" width="243" bottom="0" left="0"/>
+		
+		<s:Label text="Order Overview" styleName="lubalin" color="0xffffff" fontSize="16" top="10" left="5"/>
+		
+		<s:Group id="details" top="36" left="10" width="230" >
+			<s:Label id="productName" styleName="lubalin" text="Product Total" 
+					 color="0x353535" fontSize="12" y="0" x="0" width="180" lineHeight="12"/>
+			<s:Label id="productPriceDisplay" styleName="lubalin" text="$xx.xx" 
+					 color="0x353535" fontSize="14" right="5"/>		 
+			
+			<s:Label styleName="lubalin" text="Basic Ground" 
+					 color="0x353535" fontSize="12" y="20" x="0" width="180" lineHeight="12"/>
+			<s:Label styleName="lubalin" text="Sales tax" 
+					 color="0x353535" fontSize="12" y="40" x="0" width="290" />
+			<s:Label id="taxcharge" styleName="lubalin" text="$xx.xx" 
+					 color="0x353535" fontSize="14" y="20" right="5"/>	
+			<s:Label id="shipcahrge" styleName="lubalin" text="$xx.xx" 
+					 color="0x353535" fontSize="14" y="40" right="5"/>	
+		</s:Group>	 
+		
+		<s:Rect width="225" height="4" top="92" left="10" >
+			<s:fill>
+				<s:SolidColor color="0x888888" />
+			</s:fill>
+		</s:Rect>
+		
+		<s:Group id="charges" top="104" left="10" width="230" >
+			
+			<s:Label styleName="lubalin" text="Final Price" 
+					 color="0x000000" fontSize="12" y="0" x="0" width="290" />
+			<s:Label id="total" styleName="lubalin" text="$xx.xx" 
+					 color="0x000000" fontSize="14" y="0" right="5"/>	
+			
+		</s:Group>	 
+		
 	</s:Group>
 </s:Group>

@@ -40,10 +40,19 @@ package com.virid.fbcheckout.view
 				this.ui.productImage.source = this.model.SelectedProduct.colorObj.imageFS;	
 				this.ui.productName.text = model.SelectedProduct.name;
 				if(this.model.SelectedProduct.colorObj.currentSize != null){
-					this.ui.productDetail.text = "Size: " + model.SelectedProduct.colorObj.currentSize.name;
+					this.ui.productDetail.text = "Size: " + model.SelectedProduct.colorObj.currentSize.name + ' • ' + 'Color: ' + model.SelectedProduct.colorObj.name  ;
 					this.ui.productPriceDisplay.text = "$" + String(this.model.SelectedProduct.colorObj.currentSize.price) + " USD";
+					
+					if(this.ui.productDetail.text.length >= 34)
+					{
+						var truncatedStr:String = this.ui.productDetail.text;
+						truncatedStr = truncatedStr.substring(0,32);
+						truncatedStr += '...';
+						this.ui.productDetail.text = truncatedStr;
+					}
+						
 				}
-				this.ui.productColor.text = "Color: " + model.SelectedProduct.colorObj.name;
+				//this.ui.productColor.text = ;
 				
 			}
 		}

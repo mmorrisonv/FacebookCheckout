@@ -49,7 +49,7 @@ package com.virid.fbcheckout.model
 			
 			model.SelectedProduct = Product;
 			model.MainProductSKU = tsize;
-			model.productSetup = true;
+			model.productSetup = true; 
 			
 		}
 
