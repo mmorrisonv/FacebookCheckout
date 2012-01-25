@@ -2,8 +2,38 @@
 <s:ItemRenderer xmlns:fx="http://ns.adobe.com/mxml/2009" 
 				xmlns:s="library://ns.adobe.com/flex/spark" 
 				xmlns:mx="library://ns.adobe.com/flex/mx" 
-				autoDrawBackground="true">
+				autoDrawBackground="true"
+				creationComplete="onit(event)">
+	<fx:Script>
+		<![CDATA[
+			import com.virid.fbcheckout.model.vo.ShippingOptionVO;
+			import com.virid.fbcheckout.model.vo.SizeVO;
+			
+			import mx.events.FlexEvent;
+			
+			public var shipOpt:ShippingOptionVO = new ShippingOptionVO();
+			[Bindable]
+			private var colorbg_hovered : uint = 0xd8d8d8;
+			protected function onit(event:FlexEvent):void
+			{
+				
+				updateItemRenderer();
+				
+			}
+			override public function set data(value:Object):void { 
+				super.data = value; 
+				this.shipOpt = value as ShippingOptionVO;
+				
+				this.updateItemRenderer()
+			} 
+			public function updateItemRenderer(e:Event=null)  : void
+			{
+				this.shipOption.text = this.shipOpt.desc;
+			}
+			
+		]]>
+	</fx:Script>
 	
-	<s:Label text="{data.desc}"/>
+	<s:Label id="shipOption" verticalCenter="2" fontSize="10"/>
 	
 </s:ItemRenderer>

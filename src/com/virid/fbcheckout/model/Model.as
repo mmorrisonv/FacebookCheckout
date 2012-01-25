@@ -8,6 +8,7 @@ package com.virid.fbcheckout.model
 	import com.virid.fbcheckout.model.vo.ProductVO;
 	import com.virid.fbcheckout.model.vo.ShippingOptionVO;
 	import com.virid.fbcheckout.model.vo.SizeVO;
+	import com.virid.fbcheckout.view.smallviews.shippingOptionsItemRenderer;
 	
 	import flash.events.Event;
 	import flash.events.EventDispatcher;
@@ -49,6 +50,7 @@ package com.virid.fbcheckout.model
 		public static const DisplayCheckoutPanel:String = "SCOUT";
 		public static const StartProdDetail:String = "SPDETAIL";
 		public static const ShippingOptionsLoaded:String = "SOL";
+		public static const ChargeTotalsChanged:String = "CTC";
 		/*
 		 * */
 		//public var AltViews:ArrayCollection = new ArrayCollection(); - default alt views stored on the MainProduct
@@ -64,9 +66,9 @@ package com.virid.fbcheckout.model
 		public var requestedSize:SizeVO;
 		public var checkoutComplete:Boolean = false;
 		
-		public var chargeProduct:Number;
+		public var chargeProduct:Number = 0;
 		private var _chargeShipping:Number = 4.95;
-		
+		public var chargeShippingVO:ShippingOptionVO;
 		public function get chargeShipping():Number
 		{
 			return _chargeShipping;
@@ -76,13 +78,62 @@ package com.virid.fbcheckout.model
 		{
 			if(value <= 0 || isNaN(value) )
 				return;
+			
+			//correlate our new shipping option to one of the hardcoded values
+			for each( var shipOpt:ShippingOptionVO in this.AllShippingOptions)
+			{
+				if(shipOpt.price == value)
+					chargeShippingVO = shipOpt;
+			}
 			_chargeShipping = value;
+			updateChargeTotal();
 		}
 
-		public var chargeTax:Number;
-		public var chargeService:Number;
-		public var chargeTotal:Number;
+		private var _chargeTax:Number = 0;
+
+		public function get chargeTax():Number
+		{
+			return _chargeTax;
+		}
+
+		public function set chargeTax(value:Number):void
+		{
+			_chargeTax = value;
+			updateChargeTotal();
+		}
+
+		private var _chargeService:Number = 0;
+
+		public function get chargeService():Number
+		{
+			return _chargeService;
+		}
+
+		public function set chargeService(value:Number):void
+		{
+			if( isNaN(value) )
+				return;
+			_chargeService = value;
+			updateChargeTotal();
+		}
+
+		public var _chargeTotal:Number;
+		public function get chargeTotal():Number
+		{
+			return _chargeTotal;
+		}
 		
+		private function updateChargeTotal():void
+		{
+			_chargeTotal = chargeProduct + chargeTax + 	chargeService + chargeShipping;
+			var e:Event = new Event(ChargeTotalsChanged,true,false);
+			this.dispatchEvent(e);
+		}
+		
+		/*public function set chargeTotal(value:Number):void
+		{
+			return _chargeTotal;
+		}*/
 		public var AllShippingOptions:ArrayCollection = new ArrayCollection(); // basically every elligible shipping option as shippiongoptionVO setupin context
 		public var AllSKUs:ArrayCollection = new ArrayCollection(); // basically all colors available - size/oids within
 		//public var SKUs:ArrayCollection = new ArrayCollection();

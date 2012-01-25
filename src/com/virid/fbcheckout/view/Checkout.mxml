@@ -30,12 +30,29 @@
 				
 			private var checkoutBtnDisabled:Boolean = false;
 			
+			[Embed("assets/loaderswf.swf",mimetype="application/octest-stream")]
+			private var preloaderswf:Class;
 
+			private function loadSwf():void{
+				var ba : ByteArray = new preloaderswf() as ByteArray;
+				var l : Loader = new Loader();
+				l.loadBytes(ba); 
+				l.addEventListener(Event.ADDED_TO_STAGE, onTemplateAdd);
+				//addChild(l);
+				this.checkoutBtnLoadingAnimation.source=l;
+			}
+
+			
+			private function onTemplateAdd(evt:Event):void{
+				//templ  = evt.target.contentLoaderInfo.content;
+			}
+			
 			protected function ratingChanged(event:IndexChangeEvent):void
 			{
 				// TODO Auto-generated method stub
-				
 			}
+			
+			
 			
 			protected function creationComplete(event:FlexEvent):void
 			{
@@ -101,20 +118,18 @@
 					
 				}
 			}
-
-			protected function enableCheckoutBtn(newText:String = '',showLoadingScreen:Boolean = false):void
+			public function enableCheckoutBtn(newText:String = ''):void
 			{
 				this.checkoutBtnDisabled = false;
 				this.checkoutBtn.useHandCursor = true;
 				this.checkoutBtn.buttonMode = true;
 				if(newText != '' || newText != null)
 					this.checkoutBtnText.text = newText;
-				if(showLoadingScreen)
-				{
-					this.checkoutBtnLoadingAnimation.visible = false;
-					
-				}
+
+				this.checkoutBtnLoadingAnimation.visible = false;
+
 			}
+
 			
 			protected function sfname_changeHandler(event:TextOperationEvent):void
 			{
@@ -245,7 +260,7 @@
 			
 			
 			<s:Label styleName="lubalin" text="Shipping Method" fontSize="14" height="14" paddingTop="2" />
-			<s:DropDownList id="soptions" width="100%" contentBackgroundColor="0xaaaaaa" selectedIndex="0"
+			<s:DropDownList id="soptions" width="100%" contentBackgroundColor="0xaaaaaa" selectedIndex="0" labelField="desc"
 							useHandCursor="true" buttonMode="true" change="shippingOptionChanged(event)" itemRenderer="com.virid.fbcheckout.view.smallviews.shippingOptionsItemRenderer"
 							borderAlpha="0" borderVisible="false" skinClass="com.virid.fbcheckout.view.smallviews.skins.DropDownSkin" cornerRadius="0" verticalCenter="-1" >
 				<!-- <s:ArrayCollection>

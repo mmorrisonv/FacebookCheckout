@@ -107,8 +107,12 @@ package com.virid.fbcheckout.view
 			this.model.chargeProduct = Number(obj.subtotal);
 			this.model.chargeShipping = Number(obj.shipping);
 			this.model.chargeTax = Number(obj.taxes);
-			this.model.chargeService = Number(obj.service);
-			this.model.chargeTotal = Number(obj.total);
+			this.model.chargeService = Number(obj.services);
+			//make sure the total we are calculating equals the total the server has
+			/*if(this.model.chargeTotal != Number(obj.total))
+			{
+				trace('totals for cart not equal in rightcoloumnmediator');
+			}*/
 		}
 		
 		private function addCurrentSkuToCart():void

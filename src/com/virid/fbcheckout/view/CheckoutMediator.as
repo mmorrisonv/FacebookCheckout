@@ -2,6 +2,7 @@ package com.virid.fbcheckout.view
 {
 	import com.adobe.serialization.json.JSON;
 	import com.virid.fbcheckout.model.Model;
+	import com.virid.fbcheckout.model.vo.ShippingOptionVO;
 	
 	import controller.commands.checkoutArbiter;
 	
@@ -48,6 +49,7 @@ package com.virid.fbcheckout.view
 			this.model.addEventListener(Model.MainProductSKUChanged,onProdColorSKUChanged);
 			this.model.addEventListener(Model.CheckoutComplete,onCheckoutComplete);
 			this.model.addEventListener(Model.ShippingOptionsLoaded,onNewShippingOptions);
+			this.model.addEventListener(Model.ChargeTotalsChanged,onCartTotalsChanged);
 			
 			onNewShippingOptions(null);
 			onProdColorSKUChanged(null);//just in case event has already been thrown
@@ -59,6 +61,7 @@ package com.virid.fbcheckout.view
 	
 		}
 		
+		
 		protected function onNewShippingOptions(event:Event):void
 		{
 			this.ui.soptions.dataProvider = this.model.AllShippingOptions;
@@ -68,9 +71,11 @@ package com.virid.fbcheckout.view
 		
 		protected function onCurrentShippingOptionsChanged(event:Event):void
 		{
-			var shpOpt:Number = new Number();
-			shpOpt = this.ui.soptions.selectedIndex;
-			switch(shpOpt)
+			var shpOptPrice:Number = new Number();
+			var selectedShippingOption:ShippingOptionVO = this.ui.soptions.selectedItem;
+			this.model.chargeShipping = selectedShippingOption.price;
+			/*
+			switch(shpOptPrice)
 			{
 				case 0:
 					this.model._shippingAddress.Method = "STD";
@@ -83,8 +88,13 @@ package com.virid.fbcheckout.view
 					break;
 				
 			}
+			*/
 			
-			
+		}
+		
+		protected function onCartTotalsChanged(event:Event):void
+		{
+			updateCartDisplays();
 		}
 		
 		protected function onCheckoutComplete(event:Event):void
@@ -175,13 +185,18 @@ package com.virid.fbcheckout.view
 		protected function onCartJSONResult(event:ResultEvent):void
 		{
 			var obj:Object = JSON.decode(String(event.result));
-			
-			this.ui.cartPrice.text = "$" + obj.total + " USD";
+			updateCartDisplays();
+		}
+		
+		private function updateCartDisplays():void
+		{
+			this.ui.cartPrice.text = "$" + this.model.chargeTotal + " USD";
 		}
 		
 		
 		protected function ui_gotoCheckoutMode(event:Event):void
 		{
+			this.ui.enableCheckoutBtn('Complete Purchase');
 			updateCartTotals();
 			this.ui.visible = true;
 			this.ui.includeInLayout = true;
