@@ -5,9 +5,12 @@
 		 creationComplete="init(event)">
 	<fx:Script>
 		<![CDATA[
+			import com.virid.fbcheckout.model.Model;
 			import mx.events.FlexEvent;
 			
 			private var ui_isopen:Boolean = false;
+			
+			private var model:Model = Model.getInstance();
 			
 			protected function init(event:FlexEvent):void
 			{
@@ -21,8 +24,17 @@
 				if(ui_isopen)
 					this.hide.play();
 				else
-					this.show.play();
+					this.showPanel();
 				ui_isopen = !ui_isopen;
+			}
+			
+			private function showPanel():void
+			{
+				this.productPriceDisplay.text = '$' + this.model.chargeProduct;
+				this.shipcharge.text = '$' + this.model.chargeShipping;
+				this.taxcharge.text = '$' + this.model.chargeTax;
+				this.totalDisplay.text = "$" + this.model.chargeTotal;
+				this.show.play();
 			}
 			
 		]]>
@@ -38,7 +50,7 @@
 		</s:Animate>
 	</fx:Declarations>
 	<s:Group id="itemizedView" bottom="0" left="0" height="170">
-		<s:Image source="assets/checkout-bottom-wedge-panel.png" width="243" bottom="0" left="0"/>
+		<s:Image source="@Embed('assets/checkout-bottom-wedge-panel.png')" width="243" bottom="0" left="0"/>
 		
 		<s:Label text="Order Overview" styleName="lubalin" color="0xffffff" fontSize="16" top="10" left="5"/>
 		
@@ -48,13 +60,13 @@
 			<s:Label id="productPriceDisplay" styleName="lubalin" text="$xx.xx" 
 					 color="0x353535" fontSize="14" right="5"/>		 
 			
-			<s:Label styleName="lubalin" text="Basic Ground" 
+			<s:Label id="shipMethod" styleName="lubalin" text="Basic Ground" 
 					 color="0x353535" fontSize="12" y="20" x="0" width="180" lineHeight="12"/>
 			<s:Label styleName="lubalin" text="Sales tax" 
 					 color="0x353535" fontSize="12" y="40" x="0" width="290" />
-			<s:Label id="taxcharge" styleName="lubalin" text="$xx.xx" 
+			<s:Label id="shipcharge" styleName="lubalin" text="$xx.xx" 
 					 color="0x353535" fontSize="14" y="20" right="5"/>	
-			<s:Label id="shipcahrge" styleName="lubalin" text="$xx.xx" 
+			<s:Label id="taxcharge" styleName="lubalin" text="$xx.xx" 
 					 color="0x353535" fontSize="14" y="40" right="5"/>	
 		</s:Group>	 
 		
@@ -68,7 +80,7 @@
 			
 			<s:Label styleName="lubalin" text="Final Price" 
 					 color="0x000000" fontSize="12" y="0" x="0" width="290" />
-			<s:Label id="total" styleName="lubalin" text="$xx.xx" 
+			<s:Label id="totalDisplay" styleName="lubalin" text="$xx.xx" 
 					 color="0x000000" fontSize="14" y="0" right="5"/>	
 			
 		</s:Group>	 

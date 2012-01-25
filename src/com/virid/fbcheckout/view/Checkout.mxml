@@ -2,26 +2,33 @@
 <s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
 		 xmlns:s="library://ns.adobe.com/flex/spark" 
 		 xmlns:mx="library://ns.adobe.com/flex/mx" width="154" height="100%" xmlns:smallviews="com.virid.fbcheckout.view.smallviews.*"
-		 creationComplete="creationComplete(event)" xmlns:view="com.virid.fbcheckout.view.*">
+		 creationComplete="creationComplete(event)" xmlns:view="com.virid.fbcheckout.view.*" xmlns:gifImage="org.bytearray.gif.gifImage.*">
 	<fx:Script>
 		<![CDATA[
 			import com.adobe.serialization.json.JSON;
 			
 			import controller.commands.checkoutArbiter;
 			
+			import mx.core.IVisualElement;
 			import mx.events.FlexEvent;
 			import mx.rpc.events.FaultEvent;
 			import mx.rpc.events.ResultEvent;
 			import mx.rpc.http.HTTPService;
+			import mx.states.SetStyle;
+			
+			import org.bytearray.gif.*;
+			import org.bytearray.gif.player.GIFPlayer;
 			
 			import spark.events.IndexChangeEvent;
 			import spark.events.TextOperationEvent;
-			
 			/*
 			*Event Definition
 			*/
 			public static var BILLING_SAME_AS:String="BSA";
 			public static var CHECKOUT_PURCHASE:String = "FINAL_PURCHASE"
+			public static var SHIPPING_OPTION_CHANGED:String = "SOC";
+				
+			private var checkoutBtnDisabled:Boolean = false;
 			
 
 			protected function ratingChanged(event:IndexChangeEvent):void
@@ -68,15 +75,46 @@
 			
 			protected function checkoutClicked(event:MouseEvent):void
 			{
-				//build an address from form inputs
-			
-				//show the status modal
+				if(checkoutBtnDisabled)
+					return;
+				
+				disableCheckoutBtn('purchasing',true);
 				var e:Event = new Event(CHECKOUT_PURCHASE);
 				dispatchEvent(e);
 				
 			}
+			
+			protected function disableCheckoutBtn(newText:String = '',showLoadingScreen:Boolean = false):void
+			{
+				this.checkoutBtnDisabled = true;
+				this.checkoutBtn.useHandCursor = false;
+				this.checkoutBtn.buttonMode = false;
+				if(newText != '' || newText != null)
+					this.checkoutBtnText.text = newText;
+				if(showLoadingScreen)
+				{
+					this.checkoutBtnLoadingAnimation.visible = true;
+					/*var gifHolder:GIFPlayer = new GIFPlayer();
+					gifHolder.load(new URLRequest('assets/ajax-loader.gif'));
+					this.loadingGif.addChild(gifHolder);*/
+					
+					
+				}
+			}
 
-
+			protected function enableCheckoutBtn(newText:String = '',showLoadingScreen:Boolean = false):void
+			{
+				this.checkoutBtnDisabled = false;
+				this.checkoutBtn.useHandCursor = true;
+				this.checkoutBtn.buttonMode = true;
+				if(newText != '' || newText != null)
+					this.checkoutBtnText.text = newText;
+				if(showLoadingScreen)
+				{
+					this.checkoutBtnLoadingAnimation.visible = false;
+					
+				}
+			}
 			
 			protected function sfname_changeHandler(event:TextOperationEvent):void
 			{
@@ -108,9 +146,7 @@
 			}
 			private function enableAllBillingFields():void
 			{
-				// TODO Auto Generated method stub
 				this.baddress1.enabled = this.baddress2.enabled = this.bfname.enabled = this.blname.enabled = this.bstate.enabled = this.bcity.enabled = this.bzip.enabled = this.bcity.enabled = true;
-
 			}
 			
 			protected function slname_changeHandler(event:TextOperationEvent):void
@@ -161,6 +197,18 @@
 				
 			}
 			
+			public function showConfirmationPanel():void{
+				
+				this.confirmationPanel.showPanel();
+				
+			}
+			
+			protected function shippingOptionChanged(event:IndexChangeEvent):void
+			{
+				var e:Event = new Event(SHIPPING_OPTION_CHANGED);
+				dispatchEvent(e);
+			}
+			
 		]]>
 	</fx:Script>
 	<fx:Declarations>
@@ -197,12 +245,14 @@
 			
 			
 			<s:Label styleName="lubalin" text="Shipping Method" fontSize="14" height="14" paddingTop="2" />
-			<s:DropDownList id="soptions" width="100%" contentBackgroundColor="0xaaaaaa" selectedIndex="1" borderAlpha="0" borderVisible="false" skinClass="com.virid.fbcheckout.view.smallviews.skins.DropDownSkin" cornerRadius="0" verticalCenter="-1" >
-				<s:ArrayCollection>
+			<s:DropDownList id="soptions" width="100%" contentBackgroundColor="0xaaaaaa" selectedIndex="0"
+							useHandCursor="true" buttonMode="true" change="shippingOptionChanged(event)" itemRenderer="com.virid.fbcheckout.view.smallviews.shippingOptionsItemRenderer"
+							borderAlpha="0" borderVisible="false" skinClass="com.virid.fbcheckout.view.smallviews.skins.DropDownSkin" cornerRadius="0" verticalCenter="-1" >
+				<!-- <s:ArrayCollection>
 					<fx:String>$4.95 UPS Ground Shipping</fx:String>
 					<fx:String>$9.00 2-3 Day Air</fx:String>
 					<fx:String>$18.00 Next Day Air</fx:String>
-				</s:ArrayCollection>
+				</s:ArrayCollection> -->
 			</s:DropDownList>
 		</s:VGroup>
 		<s:VGroup width="50%" height="100%" gap="3"
@@ -249,17 +299,24 @@
 				<s:Rect width="100%" height="100%"><s:stroke><s:SolidColorStroke color="0xcccccc" weight="1" /></s:stroke><s:fill>
 					<s:SolidColor color="0xffffff"/>
 				</s:fill></s:Rect>
-				<s:Label text="ITEMIZED&#13;VIEW" fontSize="9" color="0xcccccc" verticalCenter="1" horizontalCenter="0" textAlign="center" lineHeight="10" click="onItemizedViewClicked1(event)"/>
+				<s:Label text="ITEMIZED&#13;VIEW" fontSize="9" color="0xcccccc" verticalCenter="1" horizontalCenter="0" textAlign="center" lineHeight="10" click="onItemizedViewClicked1(event)" useHandCursor="true" buttonMode="true"/>
 			</s:Group>
 			
-			<s:Group right="0" width="161" height="40" 
+			<s:Group right="0" width="161" height="40" id="checkoutBtn" 
 					 click="checkoutClicked(event)" buttonMode="true" useHandCursor="true">
-				<s:Image id="checkoutBtn" source="assets/buttons/checkout-complete.png" width="161" height="31" right="0" verticalCenter="-2"/>
-				<s:Label text="Complete Purchase" styleName="lubalin" color="0xffffff" fontSize="16" horizontalCenter="0" verticalCenter="-2"/>
+				<s:Image source="@Embed('assets/buttons/checkout-complete.png')" width="161" height="31" right="0" verticalCenter="-2"/>
+				<!-- <mx:UIComponent id="loadingGif" top="4" left="10" width="12" /> -->
+				<!-- <s:Image source="@Embed('assets/loading-orange.gif')" width="161" height="31" right="0" verticalCenter="-2"/> -->
+				<!-- <gifImage:AnimatedGIFImage source="assets/loading-orange.gif" width="161" height="31" right="0" verticalCenter="-2"/> -->
+				<s:Image id="checkoutBtnLoadingAnimation" source="assets/loaderswf.swf" width="20" left="10" top="-5" visible="false" />
+				<!-- <s:SWFLoader source="" /> -->
+				<s:Label id="checkoutBtnText" text="Complete Purchase" styleName="lubalin" color="0xffffff" fontSize="16" right="6" verticalCenter="-2"/>
 			</s:Group>
 			
 		</s:Group>
 		
 	</s:Group>
+	
+	<view:PanelCheckoutConfimation id="confirmationPanel" width="100%" height="300" y="300" x="0"/>
 
 </s:Group>

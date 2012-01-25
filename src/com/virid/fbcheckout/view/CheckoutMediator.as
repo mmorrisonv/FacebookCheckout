@@ -43,14 +43,55 @@ package com.virid.fbcheckout.view
 			this.ui = _ui;
 			this.ui.addEventListener(Checkout.BILLING_SAME_AS,billing_checkout);
 			this.ui.addEventListener(Checkout.CHECKOUT_PURCHASE,onPurchase);
+			this.ui.addEventListener(Checkout.SHIPPING_OPTION_CHANGED,onCurrentShippingOptionsChanged);
 			
 			this.model.addEventListener(Model.MainProductSKUChanged,onProdColorSKUChanged);
+			this.model.addEventListener(Model.CheckoutComplete,onCheckoutComplete);
+			this.model.addEventListener(Model.ShippingOptionsLoaded,onNewShippingOptions);
+			
+			onNewShippingOptions(null);
 			onProdColorSKUChanged(null);//just in case event has already been thrown
+			
 			//model listeners:ui
 			this.model.addEventListener(Model.DisplayCheckoutPanel,ui_gotoCheckoutMode);
 			this.model.addEventListener(Model.StartProdDetail,ui_gotoProdDetail);
 			mapUIFieldsToModel();
 	
+		}
+		
+		protected function onNewShippingOptions(event:Event):void
+		{
+			this.ui.soptions.dataProvider = this.model.AllShippingOptions;
+			this.ui.soptions.selectedItem = this.model.AllShippingOptions[0];
+			onCurrentShippingOptionsChanged(null);
+		}
+		
+		protected function onCurrentShippingOptionsChanged(event:Event):void
+		{
+			var shpOpt:Number = new Number();
+			shpOpt = this.ui.soptions.selectedIndex;
+			switch(shpOpt)
+			{
+				case 0:
+					this.model._shippingAddress.Method = "STD";
+					break;
+				case 1:
+					this.model._shippingAddress.Method = "2DAY";
+					break;
+				case 2:
+					this.model._shippingAddress.Method = "1DAY";
+					break;
+				
+			}
+			
+			
+		}
+		
+		protected function onCheckoutComplete(event:Event):void
+		{
+			// Checkout process is complete, show confirmation panel
+			this.ui.showConfirmationPanel();
+			
 		}
 		
 		protected function onPurchase(event:Event):void
@@ -76,23 +117,8 @@ package com.virid.fbcheckout.view
 			this.model._blillingAddress.email = this.model._shippingAddress.email = this.ui.email.text;
 			this.model._blillingAddress.phone = this.model._shippingAddress.phone = this.ui.phonenum.text;
 			
-			var shpOpt:Number = new Number();
-			shpOpt = this.ui.soptions.selectedIndex;
-			
-			//this.model._shippingAddress.Method = "STD"
-			switch(shpOpt)
-			{
-				case 0:
-					this.model._shippingAddress.Method = "STD";
-					break;
-				case 1:
-					this.model._shippingAddress.Method = "2DAY";
-					break;
-				case 2:
-					this.model._shippingAddress.Method = "1DAY";
-					break;
-					
-			}
+			onCurrentShippingOptionsChanged(null);
+
 			//record ccard info
 			this.model._ccard.number = this.ui.bcardnum.text;
 			this.model._ccard.ccv = this.ui.bcardcvv.text;
@@ -173,6 +199,8 @@ package com.virid.fbcheckout.view
 		protected function ui_gotoProdDetail(event:Event):void
 		{
 			this.ui.animateToProdDetail.play();
+			this.ui.confirmationPanel.hidePanel();
+			this.ui.itemizedView.hide.play();
 			
 		}
 

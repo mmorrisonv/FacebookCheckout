@@ -40,6 +40,7 @@ package com.virid.fbcheckout.view
 			this.model.addEventListener(Model.StartProdDetail,ui_gotoProductDetailMode);
 			this.model.addEventListener(Model.DisplayCheckoutPanel,ui_gotoCheckoutMode);
 			
+			this.model.addEventListener(Model.MainProductSetup,onProductColororSKUchanged);
 			this.model.addEventListener(Model.MainProductColorChanged,onProductColororSKUchanged);
 			this.model.addEventListener(Model.MainProductSKUChanged,onProductColororSKUchanged);
 			this.model.addEventListener(Model.MainProductImageChanged,changeAltView);
@@ -57,11 +58,12 @@ package com.virid.fbcheckout.view
 			
 			if(this.model.SelectedProduct.colorObj != null)
 				this.ui.productImage.source = this.model.SelectedProduct.colorObj.imageFS;
+			
 			//if we have a currentSize - use that price . else use a guestimate of the price based on color
 			if(this.model.SelectedProduct.colorObj != null && this.model.SelectedProduct.colorObj.currentSize != null)
 			{
 				this.ui.productPriceDisplay.text = '$' + String(this.model.SelectedProduct.colorObj.currentSize.price) + ' USD';
-				this.ui.productPriceDisplay.text = '$' + String(this.model.SelectedProduct.colorObj.priceOfSKUs) + ' USD';
+				//this.ui.productPriceDisplay.text = '$' + String(this.model.SelectedProduct.colorObj.priceOfSKUs) + ' USD';
 			}
 			else
 				;

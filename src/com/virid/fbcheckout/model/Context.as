@@ -3,8 +3,9 @@ package com.virid.fbcheckout.model
 
 	import com.adobe.serialization.json.JSON;
 	import com.virid.fbcheckout.model.vo.AltViewVO;
-	import com.virid.fbcheckout.model.vo.ProductVO;
 	import com.virid.fbcheckout.model.vo.ColorVO;
+	import com.virid.fbcheckout.model.vo.ProductVO;
+	import com.virid.fbcheckout.model.vo.ShippingOptionVO;
 	import com.virid.fbcheckout.model.vo.SizeVO;
 	
 	import controller.commands.extractColorOptions;
@@ -21,12 +22,10 @@ package com.virid.fbcheckout.model
 		private var model:Model = Model.getInstance();
 		public function Context()
 		{
-
+			buildShippingOptions();
 			buildProductColors();
-			/*buildSKUs();
-			buildMainProduct();*/
-			//build471219AltViews();
 		}
+		
 		
 		private function buildProductColors():void
 		{
@@ -39,34 +38,52 @@ package com.virid.fbcheckout.model
 		private function buildMainProduct(rawArray:Object):void
 		{//function gets called when data is returned on buildProductColors by extractColorOptions object
 			
-			var Product:ProductVO = new ProductVO();
-			
-			var tcolor: ColorVO = this.model.AllSKUs[0];
-			var tsize: SizeVO = tcolor.Sizes[0];
-			tcolor.currentSize = tsize;
-			Product.name = rawArray.NAME;
-			Product.colorObj = tcolor;
-			
-			model.SelectedProduct = Product;
-			model.MainProductSKU = tsize;
-			model.productSetup = true; 
-			
-		}
-
-		private function buildTestAltViews():void{
-			
-			//build some test data
-			for( var i:int = 2; i <= 4; i++)
+			//check to make sure the extracColorOptions Command setup the product and current color / sizes. if not setup defaults
+			if(model.productSetup == false)
 			{
-				var testView:AltViewVO = new AltViewVO();
-				testView.source = "assets/data/alt-view"+i+".jpg";
-				testView.thumb = testView.source;
-				model.SelectedProduct.altViews.addItem(testView);
+				var Product:ProductVO = new ProductVO();
+				
+				var tcolor: ColorVO = this.model.AllSKUs[0];
+				var tsize: SizeVO = tcolor.Sizes[0];
+				tcolor.currentSize = tsize;
+				Product.name = rawArray.NAME;
+				Product.colorObj = tcolor;
+				
+				model.SelectedProduct = Product;
+				model.MainProductSKU = tsize;
+				model.productSetup = true; 
 			}
 		}
-		
 
-		
+		private function buildShippingOptions():void
+		{
+			var tempSO:ShippingOptionVO = new ShippingOptionVO();
+			tempSO.id = 'STD';
+			tempSO.index = 0;
+			tempSO.desc = '$4.95 UPS Ground Shipping';
+			tempSO.name = 'Ground Shipping';
+			tempSO.price = 4.95;
+			
+			this.model.AllShippingOptions.addItem(tempSO);
+			
+			tempSO = new ShippingOptionVO();
+			tempSO.id = '2DAY';
+			tempSO.index = 1;
+			tempSO.desc = '$9.00 2-3 Day Air';
+			tempSO.name = '2 Day Air';
+			tempSO.price = 9.00;
+			
+			this.model.AllShippingOptions.addItem(tempSO);
+			
+			tempSO = new ShippingOptionVO();
+			tempSO.id = '1DAY';
+			tempSO.index = 2;
+			tempSO.desc = '$18.00 Next Day Air';
+			tempSO.name = 'Next Day Air';
+			tempSO.price = 18.00;
+			
+			this.model.AllShippingOptions.addItem(tempSO);			
+		}
 
 		protected function buildColorHTTPFault(event:FaultEvent):void
 		{
@@ -81,38 +98,7 @@ package com.virid.fbcheckout.model
 			
 			trace(result);
 		}
-		
-		private function build471219AltViews(color:ColorVO):void
-		{
-			var thumbs:Array = new Array('assets/data/alt-views/1_201046_SW.JPG','assets/data/alt-views/1_201046_SW_BACK.JPG','assets/data/alt-views/1_201046_SW_FRONT.JPG','assets/data/alt-views/1_201046_SW_SIDE.JPG','assets/data/alt-views/1_201046_SW_TOP.JPG');
-			var fullsize:Array = new Array('assets/data/alt-views/1_201046_FS.JPG','assets/data/alt-views/1_201046_FS_BACK.JPG','assets/data/alt-views/1_201046_FS_FRONT.JPG','assets/data/alt-views/1_201046_FS_SIDE.JPG','assets/data/alt-views/1_201046_FS_TOP.JPG');
-			for(var i:uint = 0; i < thumbs.length; i++)
-			{
-				var newAltView:AltViewVO = new AltViewVO();
-				newAltView.thumb = thumbs[i];
-				newAltView.source = fullsize[i];
-				color.AltViews.addItem(newAltView);
-			}
-		}
-		
-		private function buildSKUs():void
-		{
-			var sizes:Array = new Array('XS','S','M','L','XL');
-			for each(var c:ColorVO in model.AllSKUs)
-			{
-				for( var i:Number = 0; i < 5; i++){
-					var nSKU:SizeVO = new SizeVO();
-					nSKU.index = i;
-					nSKU.name = sizes[i];
-					nSKU.size = nSKU.name;
-					nSKU.style_id = i + '_' + c.styleid;
-					nSKU.price = (i==0)?50.49:74.99;
-					c.Sizes.addItem(nSKU);
-				}
-				
-				c.currentSize = c.Sizes[0];
-			}
-		}
+
 		
 	}
 }

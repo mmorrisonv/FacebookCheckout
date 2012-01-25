@@ -25,7 +25,7 @@
 			<s:SolidColor color="0xffffff"/>
 		</s:fill>
 	</s:Rect>
-	<s:Image id="productImage" source="@Embed('assets/data/prodimage.jpg')"
+	<s:Image id="productImage" source="@Embed('assets/loaderswf.swf')"
 			  x="0" top="0" verticalCenter="-10" width="247"/>
 	<s:Image source="@Embed('assets/prodareaback.png')"
 			 x="0" top="0" width="247" height="298" />

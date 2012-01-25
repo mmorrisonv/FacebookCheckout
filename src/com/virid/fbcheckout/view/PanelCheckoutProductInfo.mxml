@@ -37,7 +37,7 @@
 				<s:SolidColor color="0xe07400" />
 			</s:fill>
 		</s:Rect>
-		<s:Label styleName="lubalin" color="0x353535" fontSize="22" right="12" text="You are about to buy" verticalAlign="middle" verticalCenter="-1" height="30"/>
+		<s:Label id="callToAction" styleName="lubalin" color="0x353535" fontSize="22" right="12" text="You are about to buy" verticalAlign="middle" verticalCenter="-1" height="30"/>
 	</s:Group>
 
 	<s:Group id="details" x="-400" >

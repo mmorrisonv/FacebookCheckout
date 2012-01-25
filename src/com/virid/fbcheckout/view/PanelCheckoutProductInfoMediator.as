@@ -27,10 +27,16 @@ package com.virid.fbcheckout.view
 			
 			this.model.addEventListener(Model.StartProdDetail,ui_ShowProDetail);
 			this.model.addEventListener(Model.DisplayCheckoutPanel,ui_ShowCheckout);
+			this.model.addEventListener(Model.CheckoutComplete,onCheckoutComplete);
 			
 			ui.addEventListener(PanelCheckoutProductInfo.SHOWPRODDETAIL,initateProDetail );
 			this.model.addEventListener(Model.MainProductChanged,onProductChange);
 			onProductChange(null);
+		}
+		
+		protected function onCheckoutComplete(event:Event):void
+		{
+			this.ui.callToAction.text = "You Have Purchased:"
 		}
 		
 		protected function onProductChange(event:Event):void

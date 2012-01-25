@@ -76,6 +76,16 @@
 				dispatchEvent( e );
 			}
 			
+			protected function onListClicked(event:MouseEvent):void
+			{
+				//allows us to close the panel on every valid click, even if nothing actually changed
+				if( event.target.hasOwnProperty('imageDisplay') && event.target.imageDisplay != null ||  event.target.parent.hasOwnProperty('imageDisplay') && event.target.parent.imageDisplay != null )
+				{
+					this.visible = false;
+					this.stage.removeEventListener(MouseEvent.CLICK,onStageClick);
+				}
+			}
+			
 		]]>
 	</fx:Script>
 	<fx:Declarations>
@@ -93,7 +103,7 @@
 
 		<s:List id="colorSelect" 
 				width="100%"
-				top="16" left="8" right="8" bottom="8"  change="colorChanged(event)"
+				top="16" left="8" right="8" bottom="8"  change="colorChanged(event)" click="onListClicked(event)"
 				itemRenderer="com.virid.fbcheckout.view.smallviews.ColorItemRenderer">
 			<s:layout>
 				<s:TileLayout columnWidth="45" />

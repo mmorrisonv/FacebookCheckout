@@ -3,8 +3,11 @@ package controller.commands
 	import com.adobe.serialization.json.JSON;
 	import com.virid.fbcheckout.model.Model;
 	
+	import flash.events.Event;
+	
 	import mx.controls.Alert;
 	import mx.events.CloseEvent;
+	import mx.events.FlexEvent;
 	import mx.rpc.events.FaultEvent;
 	import mx.rpc.events.ResultEvent;
 	import mx.rpc.http.HTTPService;
@@ -239,7 +242,13 @@ package controller.commands
 			{
 				errorStr += err.message;
 			}
-			Alert.show('Purchase Complete - Errors:' + errorStr,'Step5');
+			if( errorStr == '' || obj.errors.length <= 1)
+			{
+				
+				this.model.onCheckoutComplete(null);
+								
+			}
+			//Alert.show('Purchase Complete - Errors:' + errorStr,'Step5');
 		}
 		
 		protected function onPurchase_Fault(event:FaultEvent):void
@@ -252,8 +261,13 @@ package controller.commands
 		
 		public function HaltAlert(msg:String,title:String,fxok:Function):void
 		{
-			Alert.show(msg,title,Alert.OK,null,alertListner,null,Alert.OK );
+			//this function is used a way of controling the flow of the checkoutprocess
+			/*
 			this.fxCallback = fxok;
+			Alert.show(msg,title,Alert.OK,null,alertListner,null,Alert.OK );
+			*/
+			
+			fxok();
 		}
 		
 		private function alertListner(eventObj:CloseEvent):void {

@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx" height="300">
+	<fx:Script>
+		<![CDATA[
+			import com.virid.fbcheckout.model.Model;
+			import mx.events.FlexEvent;
+			
+			private var ui_isopen:Boolean = false;
+			
+			private var model:Model = Model.getInstance();
+			
+			public function toggleUI():void
+			{
+				
+				if(ui_isopen)
+					this.hide.play();
+				else
+					this.showPanel();
+				ui_isopen = !ui_isopen;
+			}
+			
+			public function showPanel():void
+			{				
+				
+				this.productPriceDisplay.text = '$' + this.model.chargeProduct;
+				this.shipcahrge.text = '$' + this.model.chargeShipping;
+				this.taxcharge.text = '$' + this.model.chargeTax;
+				this.total.text = "$" + this.model.chargeTotal;
+				this.show.play();
+				
+			}
+			
+			public function hidePanel():void
+			{
+				this.hide.play();
+			}			
+		]]>
+	</fx:Script>
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+		<s:Power id="bigGame" />
+		<s:Animate target="{this}" id ="show" duration="500" >
+			<s:SimpleMotionPath property="y" valueTo="0"/>
+		</s:Animate>
+		<s:Animate target="{this}" id ="hide" duration="500" >
+			<s:SimpleMotionPath property="y" valueTo="300"/>
+		</s:Animate>
+	</fx:Declarations>
+	<s:Rect width="100%" height="100%">
+		<s:fill>
+			<s:SolidColor color="0x222222" />
+		</s:fill>
+	</s:Rect>
+	
+	
+	<s:Label styleName="lubalin" color="0xffffff" fontSize="22" text="CHECKOUT COMPLETE" left="8" 
+			 height="30" paddingTop="6" paddingLeft="2"/>
+	<s:Label styleName="lubalin" color="0xffffff" fontSize="16" text="Thank You For Your Order at Journeys.com!" top="20" left="8" 
+			 height="30" paddingTop="6" paddingLeft="2"/>
+
+	
+	
+	<s:Group top="44" left="10" width="190" height="200">
+		<s:Rect width="100%" height="100%"> <s:fill><s:SolidColor color="0xaaaaaa" /></s:fill> </s:Rect>
+		<s:Label text="Next Steps:" styleName="lubalin" color="0x353535" fontSize="20" top="4" left="5" width="100%"/>
+		
+		<s:Label text="You will receive an order confirmation to your email address shortly " 
+				 styleName="Arial" color="0x353535" fontSize="10" top="26" left="5" width="170"/>
+
+		<s:Rect width="100%" height="1" top="50" x="0" > <s:fill><s:SolidColor color="0x888888" /></s:fill> </s:Rect>
+		
+		<s:Label text="For questions about your order, please contact Customer Support:&#13;1-888-324-6356 &#13;1-866-322-9099 (para español)" 
+				 styleName="Arial" color="0x353535" fontSize="10" top="54" left="5" width="170"/>
+		
+		<s:Rect width="100%" height="1" top="104" x="0" > <s:fill><s:SolidColor color="0x888888" /></s:fill> </s:Rect>
+		
+		<s:Label text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been " 
+				 styleName="Arial" color="0x353535" fontSize="10" top="108" left="5" width="170"/>
+				
+	</s:Group>
+	
+	
+	
+	<s:Group top="44" right="10" width="200" height="200">
+		<s:Rect width="100%" height="100%"> <s:fill><s:SolidColor color="0xaaaaaa" /></s:fill> </s:Rect>
+		<s:Label text="Order Overview" styleName="lubalin" color="0xffffff" fontSize="16" top="20" left="5"/>
+		
+		<s:Group id="details" top="46" left="5" width="190" >
+			<s:Label id="productName" styleName="lubalin" text="Product Total" color="0x353535" fontSize="12" y="0" x="0" width="180" lineHeight="12"/>
+			<s:Label id="productPriceDisplay" styleName="lubalin" text="$xx.xx" color="0x353535" fontSize="14" right="5"/>		 
+			
+			<s:Label styleName="lubalin" text="Basic Ground" color="0x353535" fontSize="12" y="20" x="0" width="180" lineHeight="12"/>
+			<s:Label styleName="lubalin" text="Sales tax" color="0x353535" fontSize="12" y="40" x="0" width="290" />
+			<s:Label id="taxcharge" styleName="lubalin" text="$xx.xx" color="0x353535" fontSize="14" y="20" right="5"/>	
+			<s:Label id="shipcahrge" styleName="lubalin" text="$xx.xx" color="0x353535" fontSize="14" y="40" right="5"/>	
+			
+			<s:Rect width="100%" height="2" top="60" x="0" > <s:fill><s:SolidColor color="0x888888" /></s:fill> </s:Rect>
+			
+			<s:Label id="total" styleName="lubalin" text="$xx.xx" color="0x000000" fontSize="30" y="70" right="5"/>	
+			<s:Label styleName="lubalin" text="Final Price" color="0x000000" fontSize="12" y="70" x="0" width="290" />
+			
+		</s:Group>	 
+		
+	</s:Group>
+
+	
+</s:Group>

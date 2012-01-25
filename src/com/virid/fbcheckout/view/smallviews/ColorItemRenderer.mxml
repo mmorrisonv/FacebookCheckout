@@ -23,6 +23,6 @@
 		]]>
 	</fx:Script>
 	
-	<s:Image id="img"  width="45" height="45"/>
+	<s:Image id="img"  width="45" height="45"  useHandCursor="true" buttonMode="true" />
 	
 </s:ItemRenderer>

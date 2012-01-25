@@ -14,6 +14,7 @@ package controller.commands
 	import mx.rpc.events.ResultEvent;
 	import mx.rpc.http.HTTPService;
 	import com.virid.fbcheckout.model.Model;
+	import com.virid.fbcheckout.model.vo.ProductVO;
 
 	public class extractColorOptions
 	{
@@ -78,8 +79,12 @@ package controller.commands
 			// TODO Auto-generated method stub
 			var rawArray:Object;
 			var rawData:String = String(event.result);
-			rawArray = JSON.decode(rawData);
-			
+			try{
+				rawArray = JSON.decode(rawData,false);
+			}
+			catch( e:Error){
+				trace(e.message);
+			}
 			
 			createAllSKUs(rawArray);
 			
@@ -131,8 +136,25 @@ package controller.commands
 				{				
 					if(matchedSKU_Color.colorcode == newSize.color_code)
 					{
-						/*if(newSize.isdefault)
-							matchedSKU_Color.currentSize = newSize;*/
+						if(newSize.isdefault){
+							
+							matchedSKU_Color.currentSize = newSize;
+							
+							//create product
+							var Product:ProductVO = new ProductVO();
+							
+							var tcolor: ColorVO = matchedSKU_Color;
+							var tsize: SizeVO = newSize;
+							tcolor.currentSize = tsize;
+							Product.name = rawArray.NAME;
+							Product.colorObj = tcolor;
+							
+							model.SelectedProduct = Product;
+							model.MainProductSKU = tsize;
+							model.productSetup = true; 
+						
+							
+						}
 						//add it to our list of SKUs, and correlate these sizes to a SKU/Color
 						matchedSKU_Color.priceOfSKUs = newSize.price; //make sure we can guess a price
 						matchedSKU_Color.Sizes.addItem(newSize);

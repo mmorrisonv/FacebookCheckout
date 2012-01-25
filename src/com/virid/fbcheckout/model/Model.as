@@ -43,10 +43,12 @@ package com.virid.fbcheckout.model
 		public static const MainProductColorChanged:String = "MPCC";
 		public static const MainProductSetup:String = "MPSU";
 		public static const MainProductImageChanged:String = "MPIC";
+		public static const CheckoutComplete:String = "CHOCMPLT";
 		public static const StatusUpdate:String = "SU";
 		public static const CheckoutModal:String = "CM";
 		public static const DisplayCheckoutPanel:String = "SCOUT";
 		public static const StartProdDetail:String = "SPDETAIL";
+		public static const ShippingOptionsLoaded:String = "SOL";
 		/*
 		 * */
 		//public var AltViews:ArrayCollection = new ArrayCollection(); - default alt views stored on the MainProduct
@@ -56,9 +58,32 @@ package com.virid.fbcheckout.model
 		public var httpService:HTTPService = new HTTPService();
 		public var productID:String = '201046';		//main root product id
 		private var _productSetup:Boolean = false;
+		
+		//extra app data
 		public var lastError:String;
 		public var requestedSize:SizeVO;
+		public var checkoutComplete:Boolean = false;
 		
+		public var chargeProduct:Number;
+		private var _chargeShipping:Number = 4.95;
+		
+		public function get chargeShipping():Number
+		{
+			return _chargeShipping;
+		}
+
+		public function set chargeShipping(value:Number):void
+		{
+			if(value <= 0 || isNaN(value) )
+				return;
+			_chargeShipping = value;
+		}
+
+		public var chargeTax:Number;
+		public var chargeService:Number;
+		public var chargeTotal:Number;
+		
+		public var AllShippingOptions:ArrayCollection = new ArrayCollection(); // basically every elligible shipping option as shippiongoptionVO setupin context
 		public var AllSKUs:ArrayCollection = new ArrayCollection(); // basically all colors available - size/oids within
 		//public var SKUs:ArrayCollection = new ArrayCollection();
 		private var _MainProductImage:AltViewVO = new AltViewVO();
@@ -66,6 +91,7 @@ package com.virid.fbcheckout.model
 		private var _MainProductColor:ColorVO = new ColorVO();
 		private var _MainProductSKU:SizeVO = new SizeVO();
 		
+
 		
 		/*
 		 * Checkout Based info*/
@@ -77,6 +103,10 @@ package com.virid.fbcheckout.model
 		
 		/*
 		 * Setters and Getters for Main Elements*/
+
+		
+
+
 
 		
 		public function get SelectedProduct():ProductVO
@@ -163,6 +193,12 @@ package com.virid.fbcheckout.model
 		public function set showStatus(value:Object):void
 		{
 			var e:Event = new Event(StatusUpdate,true,false);
+			this.dispatchEvent(e);
+		}		
+		//show confirmation panel
+		public function onCheckoutComplete(value:Object):void{
+			this.checkoutComplete=true;
+			var e:Event = new Event(CheckoutComplete,true,false);
 			this.dispatchEvent(e);
 		}		
 		//show chekcout options modal
