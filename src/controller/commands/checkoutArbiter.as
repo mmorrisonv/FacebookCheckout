@@ -22,7 +22,14 @@ package controller.commands
 		private var billAddressService:HTTPService = new HTTPService();
 		private var paymentService:HTTPService = new HTTPService();
 		private var finalPurchaseService:HTTPService = new HTTPService();
+		
 		private var fxCallback:Function;
+		
+		private var contCheckout:Boolean;
+		private var addCartErrors:Object;
+		private var shippingErrors:Object;
+		private var billingErrors:Object;
+		private var ccardDetailErrors:Object;
 		
 		public function checkoutArbiter():void
 		{
@@ -33,6 +40,9 @@ package controller.commands
 			//set billing ::https://www.journeys.com/api/setbilling.aspx?
 			//set payment ::https://www.journeys.com/api/setpayment.aspx?
 			//final checkout ::https://www.journeys.com/api/checkout.aspx
+			
+			//reset the checkout process
+			contCheckout = true;
 			
 			//add current sku to cart
 			this.cartAddService.resultFormat="text";
@@ -48,6 +58,8 @@ package controller.commands
 		
 		public function sendShippingAddress():void
 		{
+			
+
 			//set shipping address
 			this.shipAddressService.resultFormat="text";
 			this.shipAddressService.addEventListener("fault", onAddressShippingAdd_Fault);
@@ -64,7 +76,7 @@ package controller.commands
 			paramsShip['country'] = "US";
 			paramsShip['email'] = this.model._shippingAddress.email;
 			paramsShip['phone'] = this.model._shippingAddress.phone;
-			paramsShip['Method'] = this.model._shippingAddress.Method;
+			paramsShip['Method'] = this.model.chargeShippingVO.id;
 			
 			this.shipAddressService.addEventListener("result", onAddressShippingAdd); 
 			this.shipAddressService.send(paramsShip);
@@ -130,11 +142,8 @@ package controller.commands
 			catch(e:Error){
 				Alert.show('Error Parsing JSON');
 			}
-			/*Alert.show('Adding Product','Step1');
-			sendShippingAddress();*/
-			trace(event.result);
-			if(obj != null)
-				this.HaltAlert('Product Added - numItems:' + obj.cart.length,'Step1',sendShippingAddress);
+			
+			this.continueToNextStep(true,sendShippingAddress);
 		}
 		protected function onAddedToCart_Fault(event:FaultEvent):void
 		{
@@ -152,15 +161,14 @@ package controller.commands
 				Alert.show('Error Parsing JSON');
 			}
 			trace(event.result);
-			/*Alert.show('Adding Shipping Address','Step2');
-			sendBillingAddress();*/
-			
-			var errorStr:String = "";
-			for each( var err:Object in obj.errors )
+
+			if( obj != null && obj.hasOwnProperty('errors') && obj.errors.length > 0 )
 			{
-				errorStr += err.message;
+				this.contCheckout = false;
+				this.shippingErrors = obj.errors;
 			}
-			this.HaltAlert('Adding Shipping Address - Errors:' + ( obj.errors[0]  || 'none' ) ,'Step2',sendBillingAddress);
+
+			this.continueToNextStep( true ,sendBillingAddress);
 		}		
 		
 		protected function onAddressShippingAdd_Fault(event:FaultEvent):void
@@ -180,16 +188,14 @@ package controller.commands
 			catch(e:Error){
 				Alert.show('Error Parsing JSON');
 			}
-			trace(event.result);
-			/*Alert.show('Adding Billing Address','Step3',Alert.OK,null,alertListner,null,Alert.OK );
-			
-			sendPaymentInfo();*/
-			var errorStr:String = "";
-			for each( var err:Object in obj.errors )
+
+			if( obj != null && obj.hasOwnProperty('errors') && obj.errors.length > 0 )
 			{
-				errorStr += err.message;
+				this.contCheckout = false;
+				this.billingErrors = obj.errors;
 			}
-			this.HaltAlert('Adding Billing Address - Errors:' + (obj.errors[0]  || 'none' ),'Step3',sendPaymentInfo);
+
+			this.continueToNextStep( true,sendPaymentInfo);//dontHalt here keep going on errors
 		}
 		
 
@@ -210,15 +216,24 @@ package controller.commands
 			catch(e:Error){
 				Alert.show('Error Parsing JSON');
 			}
-			trace(event.result);
-			var errorStr:String = "";
-			for each( var err:Object in obj.errors )
+			
+			if( obj != null && obj.hasOwnProperty('errors') && obj.errors.length > 0 )
 			{
-				errorStr += err.message;
+				this.contCheckout = false;
+				this.ccardDetailErrors = obj.errors;
 			}
-			this.HaltAlert('Adding Credit Card Info - Errors:' + ( errorStr || 'none' ),'Step4',finalCheckout);
+			
+			this.showAllErrors();
+
+			this.continueToNextStep(( obj.errors.length == 0 || contCheckout ),finalCheckout);
 		}
-		
+		protected function showAllErrors():void
+		{
+			this.model.handleCheckoutAddCartErrors(this.addCartErrors);
+			this.model.handleCheckoutShippingAddressErrors(this.shippingErrors);
+			this.model.handleCheckoutBillingAddressErrors(this.billingErrors);
+			this.model.handleCheckoutCCardErrors(this.ccardDetailErrors);
+		}
 		protected function onPaymentAdd_Fault(event:FaultEvent):void
 		{
 			Alert.show('Adding Payment Info Failed','Please try again later');
@@ -236,19 +251,8 @@ package controller.commands
 				Alert.show('Error Parsing JSON');
 			}
 			
-			trace(event.result);
-			var errorStr:String = "";
-			for each( var err:Object in obj.errors )
-			{
-				errorStr += err.message;
-			}
-			if( errorStr == '' || obj.errors.length <= 1)
-			{
-				
-				this.model.onCheckoutComplete(null);
-								
-			}
-			//Alert.show('Purchase Complete - Errors:' + errorStr,'Step5');
+			if( obj != null && obj.hasOwnProperty('errors') && obj.errors.length > 0 )
+				this.model.handleCheckoutPurchaseErrors(obj.errors);
 		}
 		
 		protected function onPurchase_Fault(event:FaultEvent):void
@@ -259,15 +263,15 @@ package controller.commands
 		
 
 		
-		public function HaltAlert(msg:String,title:String,fxok:Function):void
+		public function continueToNextStep(LastStepSuccesful:Boolean,fxok:Function):void
 		{
 			//this function is used a way of controling the flow of the checkoutprocess
 			/*
 			this.fxCallback = fxok;
 			Alert.show(msg,title,Alert.OK,null,alertListner,null,Alert.OK );
 			*/
-			
-			fxok();
+			if(LastStepSuccesful)
+				fxok();
 		}
 		
 		private function alertListner(eventObj:CloseEvent):void {

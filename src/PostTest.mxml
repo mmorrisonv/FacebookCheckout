@@ -55,15 +55,20 @@
 			
 			protected function onLogoClick(event:MouseEvent):void
 			{
+				var urlR:URLRequest
 				if(this.model.checkoutComplete)
 				{
-					var urlR:URLRequest = new URLRequest(this.model.urlRoot + '/product.aspx?id=' + this.model.productID);
+					urlR = new URLRequest(this.model.urlRoot + '/product.aspx?id=' + this.model.productID);
 					navigateToURL(urlR, '_blank');
 				}
 				else{
+					urlR = new URLRequest(this.model.urlRoot);
+					navigateToURL(urlR, '_blank');
+					//take user to product detail
+					/*
 					var obj:Object = new Object();
 					obj.start = "NOW";
-					this.model.initiateProdDetail = obj;
+					this.model.initiateProdDetail = obj;*/
 				}
 			}
 			

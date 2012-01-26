@@ -45,12 +45,19 @@ package com.virid.fbcheckout.model
 		public static const MainProductSetup:String = "MPSU";
 		public static const MainProductImageChanged:String = "MPIC";
 		public static const CheckoutComplete:String = "CHOCMPLT";
+		public static const CheckoutFailed:String = "COFAIL";
 		public static const StatusUpdate:String = "SU";
 		public static const CheckoutModal:String = "CM";
 		public static const DisplayCheckoutPanel:String = "SCOUT";
 		public static const StartProdDetail:String = "SPDETAIL";
 		public static const ShippingOptionsLoaded:String = "SOL";
 		public static const ChargeTotalsChanged:String = "CTC";
+		//checkout errors
+		public static const CheckoutErrorsInAddCart:String = "EAC";
+		public static const CheckoutErrorsInShipping:String = "ESA";
+		public static const CheckoutErrorsInBilling:String = "EBA";
+		public static const CheckoutErrorsInCCard:String = "ECC";
+		public static const CheckoutErrorsInPurchase:String = "EPP";
 		/*
 		 * */
 		//public var AltViews:ArrayCollection = new ArrayCollection(); - default alt views stored on the MainProduct
@@ -156,10 +163,6 @@ package com.virid.fbcheckout.model
 		 * Setters and Getters for Main Elements*/
 
 		
-
-
-
-		
 		public function get SelectedProduct():ProductVO
 		{
 			return _MainProduct;
@@ -227,6 +230,58 @@ package com.virid.fbcheckout.model
 			_MainProductImage = value;
 			var e:Event = new Event(MainProductImageChanged,true,false);
 			this.dispatchEvent(e);
+		}
+		
+		/*
+			Checkout Error Handelers		
+		*/
+		
+		public var lastCheckoutErrors:Object;
+		
+		public function handleCheckoutAddCartErrors(errors:Object):void
+		{
+			this.lastCheckoutErrors = errors;
+			var e:Event = new Event(CheckoutErrorsInAddCart,true,false);
+			this.dispatchEvent(e);
+			var ef:Event = new Event(CheckoutFailed,true,false);
+			this.dispatchEvent(ef);
+		}
+
+		public function handleCheckoutBillingAddressErrors(errors:Object):void
+		{
+			
+			this.lastCheckoutErrors = errors;
+			var e:Event = new Event(CheckoutErrorsInBilling,true,false);
+			this.dispatchEvent(e);
+			var ef:Event = new Event(CheckoutFailed,true,false);
+			this.dispatchEvent(ef);
+		}
+
+		public function handleCheckoutShippingAddressErrors(errors:Object):void
+		{
+			this.lastCheckoutErrors = errors;
+			var e:Event = new Event(CheckoutErrorsInShipping,true,false);
+			this.dispatchEvent(e);
+			var ef:Event = new Event(CheckoutFailed,true,false);
+			this.dispatchEvent(ef);
+		}
+		
+		public function handleCheckoutCCardErrors(errors:Object):void
+		{
+			this.lastCheckoutErrors = errors;
+			var e:Event = new Event(CheckoutErrorsInCCard,true,false);
+			this.dispatchEvent(e);
+			var ef:Event = new Event(CheckoutFailed,true,false);
+			this.dispatchEvent(ef);
+		}
+		
+		public function handleCheckoutPurchaseErrors(errors:Object):void
+		{
+			this.lastCheckoutErrors = errors;
+			var e:Event = new Event(CheckoutErrorsInPurchase,true,false);
+			this.dispatchEvent(e);
+			var ef:Event = new Event(CheckoutFailed,true,false);
+			this.dispatchEvent(ef);
 		}
 		
 		/*

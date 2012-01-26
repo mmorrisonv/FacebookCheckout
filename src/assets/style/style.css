@@ -15,7 +15,10 @@ s|TextInput{
 	focusColor:#bbbbbb;
 	fontSize:9px;
 }
-
+s|TextInput.errorField{
+	contentBackgroundColor:#aa2222;
+	fontColor:#ffffff;
+}
 .modalLabel{
 	fontFamily:"Helv";
 	fontSize:15px;

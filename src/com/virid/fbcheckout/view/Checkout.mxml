@@ -10,7 +10,9 @@
 			import controller.commands.checkoutArbiter;
 			
 			import mx.core.IVisualElement;
+			import mx.core.UIComponent;
 			import mx.events.FlexEvent;
+			import mx.events.IndexChangedEvent;
 			import mx.rpc.events.FaultEvent;
 			import mx.rpc.events.ResultEvent;
 			import mx.rpc.http.HTTPService;
@@ -27,6 +29,7 @@
 			public static var BILLING_SAME_AS:String="BSA";
 			public static var CHECKOUT_PURCHASE:String = "FINAL_PURCHASE"
 			public static var SHIPPING_OPTION_CHANGED:String = "SOC";
+			public static var SEND_SHIPPING:String = "SS";
 				
 			private var checkoutBtnDisabled:Boolean = false;
 			
@@ -118,7 +121,7 @@
 					
 				}
 			}
-			public function enableCheckoutBtn(newText:String = ''):void
+			public function enableCheckoutBtn(newText:String = 'Complete Purchase'):void
 			{
 				this.checkoutBtnDisabled = false;
 				this.checkoutBtn.useHandCursor = true;
@@ -131,11 +134,7 @@
 			}
 
 			
-			protected function sfname_changeHandler(event:TextOperationEvent):void
-			{
-				if(this.sameAsShipping.selected)
-					this.bfname.text = this.sfname.text;
-			}
+	
 			
 			protected function checkbox1_changeHandler(event:Event):void
 			{
@@ -164,45 +163,9 @@
 				this.baddress1.enabled = this.baddress2.enabled = this.bfname.enabled = this.blname.enabled = this.bstate.enabled = this.bcity.enabled = this.bzip.enabled = this.bcity.enabled = true;
 			}
 			
-			protected function slname_changeHandler(event:TextOperationEvent):void
-			{
-				if(this.sameAsShipping.selected)
-					this.blname.text = this.slname.text;
-				
-			}
+	
 			
-			protected function saddress1_changeHandler(event:TextOperationEvent):void
-			{
-				if(this.sameAsShipping.selected)
-					this.baddress1.text = this.saddress1.text;
-			}
-			
-			protected function saddress2_changeHandler(event:TextOperationEvent):void
-			{
-				if(this.sameAsShipping.selected)
-					this.baddress2.text = this.saddress2.text;
-			}
-			
-			protected function sstate_changeHandler(event:TextOperationEvent):void
-			{
-				if(this.sameAsShipping.selected)
-					this.bstate.text = this.sstate.text;
-				
-			}
-			
-			protected function szip_changeHandler(event:TextOperationEvent):void
-			{
-				if(this.sameAsShipping.selected)
-					this.bzip.text = this.szip.text;
-				
-			}
-			
-			protected function scity_changeHandler(event:TextOperationEvent):void
-			{
-				if(this.sameAsShipping.selected)
-					this.bcity.text = this.scity.text;
-				
-			}
+
 			
 
 			
@@ -222,6 +185,82 @@
 			{
 				var e:Event = new Event(SHIPPING_OPTION_CHANGED);
 				dispatchEvent(e);
+			}
+			
+			protected function handleTextInputChanged(event:TextOperationEvent):void
+			{
+				var target:UIComponent = event.target as UIComponent;
+				
+				switch(target.id)
+				{
+					case "":
+						break;
+					
+					case "sfname":
+						removeFieldError(target);
+						if(this.sameAsShipping.selected)
+							this.bfname.text = this.sfname.text;
+						break;
+					
+					case "slname":
+						removeFieldError(target);
+						if(this.sameAsShipping.selected)
+							this.blname.text = this.slname.text;
+						break;
+					
+					case "saddress1":
+						removeFieldError(target);
+						if(this.sameAsShipping.selected)
+							this.baddress1.text = this.saddress1.text;
+						break;
+					
+					case "saddress2":
+						removeFieldError(target);
+						if(this.sameAsShipping.selected)
+							this.baddress2.text = this.saddress2.text;
+						break;
+					
+					case "sstate":
+						removeFieldError(target);
+						if(this.sameAsShipping.selected)
+							this.bstate.text = this.sstate.text;
+						break;
+					
+					case "szip":
+						removeFieldError(target);
+						if(this.sameAsShipping.selected)
+							this.bzip.text = this.szip.text;
+						break;
+					
+					case "scity":
+						removeFieldError(target);
+						if(this.sameAsShipping.selected)
+							this.bcity.text = this.scity.text;
+						break;
+					
+					default:
+						removeFieldError(target);
+						break;
+						
+				}
+				
+			}
+			
+			
+			private function removeFieldError(uiElement:UIComponent):void
+			{
+				uiElement.toolTip = '';
+				uiElement.styleName = "";
+			}
+			
+			protected function shipping_focusOutHandler(event:FocusEvent):void
+			{
+				//introspect all shipping fields and see if we should send shipping information so we can updated tax totals
+				if( this.sfname.text != '' && this.slname.text != '' && this.saddress1.text != '' && this.sstate.text != '' && this.szip.text != '' && this.scity.text != '')
+				{
+					var e:Event = new Event(SEND_SHIPPING);
+					dispatchEvent(e);
+				}
 			}
 			
 		]]>
@@ -246,15 +285,15 @@
 			
 			<s:Label styleName="lubalin" text="Shipping Address" fontSize="14" height="14"/>
 			<s:HGroup width="100%">
-				<s:TextInput id="sfname" prompt="First Name" width="100%" change="sfname_changeHandler(event)"/>
-				<s:TextInput id="slname" prompt="Last Name" width="100%" change="slname_changeHandler(event)"/>
+				<s:TextInput id="sfname" prompt="First Name" width="100%" change="handleTextInputChanged(event)" focusOut="shipping_focusOutHandler(event)"/>
+				<s:TextInput id="slname" prompt="Last Name" width="100%" change="handleTextInputChanged(event)" focusOut="shipping_focusOutHandler(event)"/>
 			</s:HGroup>
-			<s:TextInput id="saddress1" prompt="Address 1" width="100%" change="saddress1_changeHandler(event)"/>
-			<s:TextInput id="saddress2" prompt="Address 2" width="100%" change="saddress2_changeHandler(event)"/>
+			<s:TextInput id="saddress1" prompt="Address 1" width="100%" change="handleTextInputChanged(event)" focusOut="shipping_focusOutHandler(event)"/>
+			<s:TextInput id="saddress2" prompt="Address 2" width="100%" change="handleTextInputChanged(event)" focusOut="shipping_focusOutHandler(event)"/>
 			<s:HGroup width="100%">
-				<s:TextInput id="scity" prompt="City" width="60%" change="scity_changeHandler(event)"/>
-				<s:TextInput id="sstate" prompt="ST" width="18%" maxChars="2" change="sstate_changeHandler(event)"/>
-				<s:TextInput id="szip" prompt="Zip" width="22%" maxChars="5" change="szip_changeHandler(event)"/>
+				<s:TextInput id="scity" prompt="City" width="60%" change="handleTextInputChanged(event)" focusOut="shipping_focusOutHandler(event)"/>
+				<s:TextInput id="sstate" prompt="ST" width="18%" maxChars="2" change="handleTextInputChanged(event)" focusOut="shipping_focusOutHandler(event)"/>
+				<s:TextInput id="szip" prompt="Zip" width="22%" maxChars="5" change="handleTextInputChanged(event)" focusOut="shipping_focusOutHandler(event)"/>
 			</s:HGroup>		
 			<s:TextInput id="email" prompt="Email Address for receipt" width="100%"/>
 			
@@ -277,23 +316,23 @@
 				<s:CheckBox id="sameAsShipping" styleName="lubalin" label="Same As Shipping" fontSize="10" color="0xffffff" selected="true" x="90" y="-3" alignmentBaseline="ideographicCenter" change="checkbox1_changeHandler(event)"/>
 			</s:Group>
 			<s:HGroup width="100%">
-				<s:TextInput id="bfname" prompt="First Name" width="100%"/>
-				<s:TextInput id="blname" prompt="Last Name" width="100%"/>
+				<s:TextInput id="bfname" prompt="First Name" width="100%" change="handleTextInputChanged(event)"/>
+				<s:TextInput id="blname" prompt="Last Name" width="100%" change="handleTextInputChanged(event)"/>
 			</s:HGroup>
-			<s:TextInput id="baddress1" prompt="Address 1" width="100%"/>
-			<s:TextInput id="baddress2" prompt="Address 2" width="100%"/>
+			<s:TextInput id="baddress1" prompt="Address 1" width="100%" change="handleTextInputChanged(event)"/>
+			<s:TextInput id="baddress2" prompt="Address 2" width="100%" change="handleTextInputChanged(event)"/>
 			<s:HGroup width="100%">
-				<s:TextInput id="bcity" prompt="City" width="60%" toolTip="test"/>
-				<s:TextInput id="bstate" prompt="ST" width="18%" maxChars="2"/>
-				<s:TextInput id="bzip" prompt="Zip" width="22%" maxChars="5"/>
+				<s:TextInput id="bcity" prompt="City" width="60%" toolTip="test" change="handleTextInputChanged(event)"/>
+				<s:TextInput id="bstate" prompt="ST" width="18%" maxChars="2" change="handleTextInputChanged(event)"/> 
+				<s:TextInput id="bzip" prompt="Zip" width="22%" maxChars="5" change="handleTextInputChanged(event)"/>
 			</s:HGroup>	
-			<s:TextInput id="phonenum" prompt="Phone Number" width="100%"/>
+			<s:TextInput id="phonenum" prompt="Phone Number" width="100%" change="handleTextInputChanged(event)"/>
 			<s:Label styleName="lubalin" text="Card Details" fontSize="14" height="14" paddingTop="2"/>
 			<s:HGroup width="100%">
-				<s:TextInput id="bcardnum" prompt="Card Number" width="50%"/>
-				<s:TextInput id="bcardmonth" prompt="MM" width="15%" maxChars="2"/>
-				<s:TextInput id="bcardyear" prompt="YYYY" width="20%" maxChars="4"/>
-				<s:TextInput id="bcardcvv" prompt="CVV" width="15%" maxChars="3"/>
+				<s:TextInput id="bcardnum" prompt="Card Number" width="50%" change="handleTextInputChanged(event)"/>
+				<s:TextInput id="bcardmonth" prompt="MM" width="15%" maxChars="2" change="handleTextInputChanged(event)"/>
+				<s:TextInput id="bcardyear" prompt="YYYY" width="20%" maxChars="4" change="handleTextInputChanged(event)"/>
+				<s:TextInput id="bcardcvv" prompt="CVV" width="15%" maxChars="3" change="handleTextInputChanged(event)"/>
 			</s:HGroup>	
 		</s:VGroup>
 	</s:HGroup>

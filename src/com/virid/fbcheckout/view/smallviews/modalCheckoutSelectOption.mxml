@@ -46,7 +46,7 @@
 			<s:SolidColor color="0xfaded3" />
 		</s:fill>
 	</s:Rect>
-	<s:Image left="0" source="assets/selectDivet.png" verticalCenter="-2"/>
+	<s:Image left="0" source="@Embed('assets/selectDivet.png')" verticalCenter="-2"/>
 	<s:Label left="10" id="num" styleName="lubalin" color="0xffffff" width="30" fontSize="20" verticalCenter="0"/>
 	<s:Label id="text" styleName="modalLabel" width="100%" verticalCenter="0"/>
 	

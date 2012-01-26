@@ -52,6 +52,8 @@ package com.virid.fbcheckout.view
 			onProductChange(null);
 		}
 		
+	
+		
 		protected function ui_OnCheckAVailClicked(event:Event):void
 		{
 			var urlR:URLRequest = new URLRequest(this.model.urlRoot + '/product.aspx?id=' + this.model.productID);
@@ -165,20 +167,30 @@ package com.virid.fbcheckout.view
 		protected function onProductChange(event:Event):void
 		{
 			if(this.model.SelectedProduct.colorObj != null){
+				
 				ui.prodName.text = model.SelectedProduct.name;
 				ui.selectedColor.text = model.SelectedProduct.colorObj.name;
 				if(model.SelectedProduct.colorObj.currentSize != null)
 				{
+			
 					ui.selectedSize.text = model.SelectedProduct.colorObj.currentSize.name;
 					ui.buyItNowBtnBackground.color = 0xe07400;
 					ui.buyItNowBtn.enabled = true;
 				}
 				else
 				{
+				
 					ui.selectedSize.text = "Select a Size";
 					ui.buyItNowBtnBackground.color = 0xeeeeee;
 					ui.buyItNowBtn.enabled = false;
 				}
+			}
+			else
+			{
+	
+				ui.selectedSize.text = "Select a Size";
+				ui.buyItNowBtnBackground.color = 0xeeeeee;
+				ui.buyItNowBtn.enabled = false;
 			}
 		}
 		protected function onProdColorChanged(event:Event):void

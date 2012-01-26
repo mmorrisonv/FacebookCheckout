@@ -25,6 +25,18 @@
 				dispatchEvent(e);
 			}
 			
+			protected function rollOverHandler(event:MouseEvent):void
+			{
+				if(event.type == "rollOver")
+				{
+					this.productSwitchToDetail.setStyle('color',0xcccccc);
+				}
+				else{
+					this.productSwitchToDetail.setStyle('color',0x353535);
+				}
+				
+			}
+			
 		]]>
 	</fx:Script>
 	<fx:Declarations>
@@ -49,7 +61,7 @@
 				 color="0x353535" fontSize="10" y="72" x="75" width="290" />
 		<!--<s:Label id="productColor" styleName="lubalin" text="Color:" 
 				 color="0x353535" fontSize="10" y="72" x="112" width="150" />-->
-		<s:Label id="productSwitchToDetail" styleName="lubalin" text="Change Size/Color" 
+		<s:Label id="productSwitchToDetail" styleName="lubalin" text="Change Size/Color" rollOver="rollOverHandler(event)" rollOut="rollOverHandler(event)"
 				 color="0x353535" fontSize="9" bottom="6" x="75" click="switchToProductView(event)" buttonMode="true"/>
 		
 		<s:Label id="productPriceDisplay" styleName="lubalin" text="$xx.xx USD" 

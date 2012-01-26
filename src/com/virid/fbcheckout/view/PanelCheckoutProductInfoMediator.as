@@ -36,7 +36,9 @@ package com.virid.fbcheckout.view
 		
 		protected function onCheckoutComplete(event:Event):void
 		{
-			this.ui.callToAction.text = "You Have Purchased:"
+			this.ui.callToAction.text = "You Have Purchased:";
+			this.ui.productSwitchToDetail.visible = false;
+			this.ui.productPriceDisplay.visible = false;
 		}
 		
 		protected function onProductChange(event:Event):void
@@ -80,21 +82,21 @@ package com.virid.fbcheckout.view
 			m.property = 'y'; m.valueTo = 0;
 			v = new Vector.<MotionPath>();v.push(m);
 			a1.motionPaths = v;
-			var p2:Sequence = new Sequence();
-			p2.addChild(a1);
-			p2.play();
+			var p1:Sequence = new Sequence();
+			p1.addChild(a1);
+			p1.play();
 			
 
 			
 			this.ui.visible = true;
-			var a1:Animate = new Animate();
-			a1.target = this.ui.details; a1.duration = 300;
+			var a2:Animate = new Animate();
+			a2.target = this.ui.details; a2.duration = 300;
 			m = new SimpleMotionPath();
 			m.property = 'x'; m.valueTo = 0;
 			v = new Vector.<MotionPath>();v.push(m);
-			a1.motionPaths = v;
+			a2.motionPaths = v;
 			var p2:Sequence = new Sequence();
-			p2.addChild(a1);
+			p2.addChild(a2);
 			p2.play();
 		}
 		
@@ -114,15 +116,15 @@ package com.virid.fbcheckout.view
 			
 			
 			this.ui.visible = true;
-			var a1:Animate = new Animate();
-			a1.target = this.ui.details; a1.duration = 300;
+			var a2:Animate = new Animate();
+			a2.target = this.ui.details; a2.duration = 300;
 			m = new SimpleMotionPath();
 			m.property = 'x'; m.valueTo = -500;
 			v = new Vector.<MotionPath>();v.push(m);
-			a1.motionPaths = v;
-			var p2:Sequence = new Sequence();
-			p2.addChild(a1);
-			p2.play();
+			a2.motionPaths = v;
+			var p3:Sequence = new Sequence();
+			p3.addChild(a2);
+			p3.play();
 		}
 		
 		protected function colorChanged(event:CustomEvent):void

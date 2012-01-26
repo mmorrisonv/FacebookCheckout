@@ -30,11 +30,11 @@
 			
 			private function showPanel():void
 			{
-				this.productPriceDisplay.text = '$' + this.model.chargeProduct;
+				this.productPriceDisplay.text = '$' + this.model.chargeProduct.toFixed(2);
 				this.shipcharge.text = '$' + this.model.chargeShipping.toFixed(2);
 				this.shipMethod.text = this.model.chargeShippingVO.name;
 				this.taxcharge.text = '$' + this.model.chargeTax.toFixed(2);
-				this.totalDisplay.text = "$" + this.model.chargeTotal;
+				this.totalDisplay.text = "$" + this.model.chargeTotal.toFixed(2);
 				this.show.play();
 			}
 			

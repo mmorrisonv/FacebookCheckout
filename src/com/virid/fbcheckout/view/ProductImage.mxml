@@ -27,6 +27,8 @@
 	</s:Rect>
 	<s:Image id="productImage" source="@Embed('assets/loaderswf.swf')"
 			  x="0" top="0" verticalCenter="-10" width="247"/>
+	<s:Image id="loadingImage" source="assets/loaderswf.swf"
+			 verticalCenter="0" horizontalCenter="0" width="32"/>
 	<s:Image source="@Embed('assets/prodareaback.png')"
 			 x="0" top="0" width="247" height="298" />
 	<s:Label id="productPriceDisplay" styleName="lubalin" text="$--.-- USD" 

@@ -44,9 +44,15 @@ package com.virid.fbcheckout.view
 			this.model.addEventListener(Model.MainProductColorChanged,onProductColororSKUchanged);
 			this.model.addEventListener(Model.MainProductSKUChanged,onProductColororSKUchanged);
 			this.model.addEventListener(Model.MainProductImageChanged,changeAltView);
+			this.model.addEventListener(Model.MainProductSetup,onProductLoaded);
 			onProductColororSKUchanged(null);
+			onProductLoaded(null);
 		}		
 		
+		protected function onProductLoaded(event:Event):void
+		{
+			this.ui.loadingImage.visible = false;
+		}		
 		
 		protected function changeAltView(event:Event):void
 		{
