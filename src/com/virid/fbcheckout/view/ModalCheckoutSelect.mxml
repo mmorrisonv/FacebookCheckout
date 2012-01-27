@@ -22,6 +22,7 @@
 			
 			public static const DISPLAY_CHECKOUT:String = "dC";
 			public static const GOTO_JOURNEYSCHECKOUT:String = "jC";
+			public static const CLOSE_MODAL:String = "C";
 			
 			protected function componentCreationComplete(event:FlexEvent):void
 			{
@@ -93,6 +94,13 @@
 				dispatchEvent( e );
 			}
 			
+			protected function closeClicked(event:MouseEvent):void
+			{
+				var e:CustomEvent 
+				e = new CustomEvent(CLOSE_MODAL,null,false);
+				dispatchEvent( e );
+			}
+			
 		]]>
 	</fx:Script>
 	<fx:Declarations>
@@ -116,14 +124,17 @@
 		<s:Label text="How would you like to &#13;purchase this product?" 
 				 left="14" height="60" verticalAlign="middle" top="1"
 				 fontSize="22" lineHeight="20" styleName="lubalin" />
-		<s:Group top="60" width="100%" height="165" left="12">
+		<s:Label text="close x" 
+				 right="10" height="20" top="20" useHandCursor="true" buttonMode="true" click="closeClicked(event)"
+				 fontSize="14" lineHeight="20" styleName="lubalin" color="0xffffff" />
+		<s:Group top="60" width="100%" height="165" left="22">
 			<s:VGroup top="25" width="100%" gap="40">
 				<!--<smallviews:modalCheckoutSelectOption buttonMode="true" width="100%" index="1"
 													  click="useLogin_clickHandler(event)" label="I have a Journey.com account and would &#13;like to login and use that here." />-->
 				<smallviews:modalCheckoutSelectOption buttonMode="true" width="100%" index="1"
 													  click="creditcard_clickHandler(event)" label="Buy Here (Credit Card only)" />
 				<smallviews:modalCheckoutSelectOption  buttonMode="true" width="100%" index="2"
-													   click="gotoJourneys_clickHandler(event)" label="Buy on Journeys.com."/>
+													   click="gotoJourneys_clickHandler(event)" label="Buy on Journeys.com"/>
 <!--				<smallviews:modalCheckoutSelectOption  buttonMode="true" width="100%" index="4"
 													   click="paypal_clickHandler(event)" label="Use paypal." />-->
 			</s:VGroup>

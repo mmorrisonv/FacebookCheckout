@@ -32,7 +32,7 @@
 					this.productSwitchToDetail.setStyle('color',0xcccccc);
 				}
 				else{
-					this.productSwitchToDetail.setStyle('color',0x353535);
+					this.productSwitchToDetail.setStyle('color',0xbbbbbb);
 				}
 				
 			}
@@ -58,11 +58,16 @@
 		<s:Label id="productName" styleName="lubalin" text="Product Name" 
 				 color="0x353535" fontSize="14" y="36" x="75" width="180" lineHeight="12"/>
 		<s:Label id="productDetail" styleName="lubalin" text="Size:" 
-				 color="0x353535" fontSize="10" y="72" x="75" width="290" />
+				 color="0x353535" fontSize="10" y="70" x="75" width="290" />
 		<!--<s:Label id="productColor" styleName="lubalin" text="Color:" 
 				 color="0x353535" fontSize="10" y="72" x="112" width="150" />-->
-		<s:Label id="productSwitchToDetail" styleName="lubalin" text="Change Size/Color" rollOver="rollOverHandler(event)" rollOut="rollOverHandler(event)"
-				 color="0x353535" fontSize="9" bottom="6" x="75" click="switchToProductView(event)" buttonMode="true"/>
+		<s:Group bottom="5" left="75" width="112" height="12" useHandCursor="true" buttonMode="true"  click="switchToProductView(event)">
+			<s:Rect width="100%" height="100%"><s:stroke><s:SolidColorStroke color="0xcccccc" weight="1" /></s:stroke><s:fill><s:SolidColor color="0xffffff"/></s:fill></s:Rect>
+			<s:Label id="productSwitchToDetail" styleName="" text="CHANGE SIZE/COLOR"
+					 color="0xbbbbbb" fontSize="8" horizontalCenter="0" verticalCenter="1"
+					 rollOver="rollOverHandler(event)" rollOut="rollOverHandler(event)" buttonMode="true" />
+		</s:Group>
+
 		
 		<s:Label id="productPriceDisplay" styleName="lubalin" text="$xx.xx USD" 
 				 color="0x353535" fontSize="16" bottom="12" x="248"/>		

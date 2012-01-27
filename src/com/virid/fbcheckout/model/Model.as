@@ -65,7 +65,7 @@ package com.virid.fbcheckout.model
 		public var urlRootSecure:String = "https://www.journeys.com/";
 		public var urlRoot:String = "http://www.journeys.com/";
 		public var httpService:HTTPService = new HTTPService();
-		public var productID:String = '201046';		//main root product id
+		public var productID:String = '37707';		//main root product id
 		private var _productSetup:Boolean = false;
 		
 		//extra app data
@@ -73,6 +73,24 @@ package com.virid.fbcheckout.model
 		public var requestedSize:SizeVO;
 		public var checkoutComplete:Boolean = false;
 		
+		
+		public function updateCartTotalsInOneFunction(jsonDecodedCartTotals:Object):void
+		{
+			var newShippingCharge:Number = jsonDecodedCartTotals.shipping as Number;
+			var newTaxCharge:Number = jsonDecodedCartTotals.taxes as Number;
+			var newServicesCharge:Number = jsonDecodedCartTotals.services as Number;
+			var newProductCharge:Number = jsonDecodedCartTotals.subtotal as Number;
+			
+			if( newShippingCharge && newShippingCharge != 0 && !isNaN(newShippingCharge) )
+				this._chargeShipping = Number(newShippingCharge);
+			if( newTaxCharge && newTaxCharge != 0 && !isNaN(newTaxCharge) )
+				this._chargeTax = Number(newTaxCharge);
+			
+			this.chargeProduct = Number(jsonDecodedCartTotals.subtotal);
+			this._chargeService = Number(jsonDecodedCartTotals.services);
+			updateChargeTotal();
+			
+		}
 		public var chargeProduct:Number = 0;
 		private var _chargeShipping:Number = 4.95;
 		public var chargeShippingVO:ShippingOptionVO;
@@ -241,6 +259,8 @@ package com.virid.fbcheckout.model
 		public function handleCheckoutAddCartErrors(errors:Object):void
 		{
 			this.lastCheckoutErrors = errors;
+			if(errors == null || errors.length == 0)
+				return
 			var e:Event = new Event(CheckoutErrorsInAddCart,true,false);
 			this.dispatchEvent(e);
 			var ef:Event = new Event(CheckoutFailed,true,false);
@@ -251,6 +271,8 @@ package com.virid.fbcheckout.model
 		{
 			
 			this.lastCheckoutErrors = errors;
+			if(errors == null || errors.length == 0)
+				return
 			var e:Event = new Event(CheckoutErrorsInBilling,true,false);
 			this.dispatchEvent(e);
 			var ef:Event = new Event(CheckoutFailed,true,false);
@@ -260,6 +282,8 @@ package com.virid.fbcheckout.model
 		public function handleCheckoutShippingAddressErrors(errors:Object):void
 		{
 			this.lastCheckoutErrors = errors;
+			if(errors == null || errors.length == 0)
+				return;
 			var e:Event = new Event(CheckoutErrorsInShipping,true,false);
 			this.dispatchEvent(e);
 			var ef:Event = new Event(CheckoutFailed,true,false);
@@ -269,6 +293,8 @@ package com.virid.fbcheckout.model
 		public function handleCheckoutCCardErrors(errors:Object):void
 		{
 			this.lastCheckoutErrors = errors;
+			if(errors == null || errors.length == 0)
+				return;
 			var e:Event = new Event(CheckoutErrorsInCCard,true,false);
 			this.dispatchEvent(e);
 			var ef:Event = new Event(CheckoutFailed,true,false);

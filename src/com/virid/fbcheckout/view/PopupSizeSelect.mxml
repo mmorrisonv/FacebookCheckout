@@ -88,6 +88,19 @@
 				}
 			}
 			
+			public function setupTallView(gotoTallView:Boolean = true):void
+			{
+				if(gotoTallView)
+				{
+					this.height = 130;
+				}
+				else//smallview
+				{
+					this.height = 85;
+				}
+				
+			}
+			
 		]]>
 	</fx:Script>
 	<fx:Declarations>
@@ -112,7 +125,7 @@
 			borderAlpha="0" contentBackgroundAlpha="0" click="on_ListClicked(event)"
 			change="ui_sizeChanged(event)" itemRenderer="com.virid.fbcheckout.view.smallviews.SizeItemRenderer">
 			<s:layout>
-				<s:TileLayout columnWidth="21" horizontalGap="2" verticalGap="2"/>
+				<s:TileLayout rowHeight="21" horizontalGap="2" verticalGap="2"/>
 			</s:layout>
 		</s:List>
 	</s:VGroup>

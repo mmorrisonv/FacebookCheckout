@@ -36,9 +36,24 @@ package com.virid.fbcheckout.view
 			this.ui = _ui;
 			this.ui.addEventListener(ModalCheckoutSelect.DISPLAY_CHECKOUT,ui_OnCheckout);
 			this.ui.addEventListener(ModalCheckoutSelect.GOTO_JOURNEYSCHECKOUT,gotoJourneys);
-			
+			this.ui.addEventListener(ModalCheckoutSelect.CLOSE_MODAL,onClose);
 			//model listeners:ui
 			this.model.addEventListener(Model.CheckoutModal,ui_HandleCheckout);
+		}
+		
+		protected function onClose(event:Event):void
+		{
+			if(p2)
+				p2.stop();
+			var a1:Animate = new Animate();
+			a1.target = this.ui; a1.duration = 300;
+			m = new SimpleMotionPath();
+			m.property = 'horizontalCenter'; m.valueTo = 500;
+			v = new Vector.<MotionPath>();v.push(m);
+			a1.motionPaths = v;
+			var p2:Sequence = new Sequence();
+			p2.addChild(a1);
+			p2.play();
 		}
 		
 		protected function gotoJourneys(event:Event):void

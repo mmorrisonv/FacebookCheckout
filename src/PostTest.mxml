@@ -2,15 +2,17 @@
 <s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" 
 			   xmlns:s="library://ns.adobe.com/flex/spark" 
 			   xmlns:mx="library://ns.adobe.com/flex/mx" width="397" height="298" xmlns:view="com.virid.fbcheckout.view.*" 
-			   addedToStage="component_addedToStageHandler(event)" creationComplete="creationComplete(event)">
+			   addedToStage="component_addedToStageHandler(event)" initialize="creationComplete(event)">
 	
 	<fx:Script>
 		<![CDATA[
 			import com.virid.fbcheckout.model.Context;
 			import com.virid.fbcheckout.model.Model;
 			
+			import mx.controls.Alert;
+			import mx.core.FlexGlobals;
 			import mx.events.FlexEvent;
-			public var mainContext :Context = new Context();
+			public var mainContext :Context;
 			public var model:Model = Model.getInstance();
 
 			private function toggleFullScreen(e:Event):void {
@@ -49,10 +51,26 @@
 			
 			protected function creationComplete(event:FlexEvent):void
 			{
+				
 				this.model.addEventListener(Model.DisplayCheckoutPanel,gotoCheckout);
 				
+				//look through flashvars
+				for each(var flashvar:Object in FlexGlobals.topLevelApplication.parameters as Object)
+				{
+					if( flashvar.hasOwnProperty('name') && flashvar.name != null && flashvar.name == 'sku')
+					{
+						Alert.show('flashvar.value - ' + flashvar.value);
+						this.model.productID = flashvar.value;
+					}
+					else if(flashvar != null && flashvar != '')
+						Alert.show('flashvar as string - ' + flashvar as String);//this.model.productID = flashvar as String;
+					
+					Alert.show('model shows - ' + this.model.productID);
+					//trace(this.model.productID);
+				}
+				this.mainContext = new Context();
 			}
-			
+
 			protected function onLogoClick(event:MouseEvent):void
 			{
 				var urlR:URLRequest

@@ -3,7 +3,7 @@
 				xmlns:s="library://ns.adobe.com/flex/spark" 
 				xmlns:mx="library://ns.adobe.com/flex/mx" 
 				autoDrawBackground="false"
-				width="21" height="21" creationComplete="onit(event)">
+				height="21" width="21" creationComplete="onit(event)">
 	<fx:Script>
 		<![CDATA[
 			import com.virid.fbcheckout.model.vo.SizeVO;
@@ -34,7 +34,6 @@
 					return;
 				this.sizeDisplay.text = this.size.name;
 				if( !this.size.inStock)
-					
 				{
 					this.backColor.color = colorbg_disabled;
 					this.colorbg_hovered = colorbg_disabled;
@@ -43,13 +42,23 @@
 					this.buttonMode = true; this.useHandCursor = true;
 					this.toolTip = "Out of Stock";
 				}
-				else{
+				else{//instock
 					this.backColor.color = 0xd5d5d5;
 					this.colorbg_hovered = 0xd8d8d8;
 					this.alpha = 1;
 					this.enabled = true;
 					this.buttonMode = true; this.useHandCursor = true;
 					this.toolTip = size.name;
+				}
+				
+				if(this.size.name.length > 4)
+				{
+					//trace('yo');
+					this.width = 116;
+				}
+				else
+				{
+					this.width = 21;
 				}
 			}
 			

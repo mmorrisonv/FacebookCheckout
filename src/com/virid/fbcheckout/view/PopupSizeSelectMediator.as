@@ -33,9 +33,9 @@ package com.virid.fbcheckout.view
 			}
 			else{
 				
-				var reloadTimer:Timer = new Timer(300,1);
+				var reloadTimer:Timer = new Timer(700,1);
 				reloadTimer.addEventListener(TimerEvent.TIMER_COMPLETE,function (evt:TimerEvent):void{
-					setupSizeList();
+					register(_ui);
 				});
 				reloadTimer.start();
 				
@@ -79,6 +79,16 @@ package com.virid.fbcheckout.view
 				{
 					this.ui.sizeSelect.selectedItem = this.model.SelectedProduct.colorObj.currentSize;
 				}
+			}
+			
+			//check height of the list - if its beyond a certain size, increase the height of the ui
+			if( this.ui.sizeSelect.dataProvider.length > 4 && this.ui.sizeSelect.dataProvider[0].name.length > 5)
+			{
+				this.ui.setupTallView();	
+			}
+			else
+			{
+				this.ui.setupTallView(false);
 			}
 		}
 		

@@ -14,6 +14,7 @@ package com.virid.fbcheckout.model
 	
 	import mx.collections.ArrayCollection;
 	import mx.controls.Alert;
+	import mx.core.FlexGlobals;
 	import mx.rpc.events.FaultEvent;
 	import mx.rpc.events.ResultEvent;
 
@@ -26,7 +27,7 @@ package com.virid.fbcheckout.model
 			buildProductColors();
 		}
 		
-		
+
 		private function buildProductColors():void
 		{
 			//use ajax to get SKU / image / price information for the current productID
@@ -69,18 +70,18 @@ package com.virid.fbcheckout.model
 			tempSO = new ShippingOptionVO();
 			tempSO.id = '2DAY';
 			tempSO.index = 1;
-			tempSO.desc = '$9.00 2-3 Day Air';
+			tempSO.desc = '$13.95 2-3 Day Air';
 			tempSO.name = '2 Day Air';
-			tempSO.price = 9.00;
+			tempSO.price = 13.95;
 			
 			this.model.AllShippingOptions.addItem(tempSO);
 			
 			tempSO = new ShippingOptionVO();
 			tempSO.id = '1DAY';
 			tempSO.index = 2;
-			tempSO.desc = '$18.00 Next Day Air';
+			tempSO.desc = '$22.95 Next Day Air';
 			tempSO.name = 'Next Day Air';
-			tempSO.price = 18.00;
+			tempSO.price = 22.95;
 			
 			this.model.AllShippingOptions.addItem(tempSO);			
 		}

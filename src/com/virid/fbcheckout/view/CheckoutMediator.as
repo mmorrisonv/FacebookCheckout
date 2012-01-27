@@ -48,7 +48,7 @@ package com.virid.fbcheckout.view
 			this.ui.addEventListener(Checkout.BILLING_SAME_AS,onBillingSameAsShippingClicked);
 			this.ui.addEventListener(Checkout.CHECKOUT_PURCHASE,onPurchase);
 			this.ui.addEventListener(Checkout.SHIPPING_OPTION_CHANGED,onCurrentShippingOptionsChanged);
-			this.ui.addEventListener(Checkout.SEND_SHIPPING,trySendingShippingAddress);
+			this.ui.addEventListener(Checkout.SHIPPING_ADDRESS_CHANGED,trySendingShippingAddress);
 			
 			this.model.addEventListener(Model.MainProductSKUChanged,onProdColorSKUChanged);
 			this.model.addEventListener(Model.CheckoutComplete,onCheckoutComplete);
@@ -147,7 +147,7 @@ package com.virid.fbcheckout.view
 			this.model._blillingAddress.email = this.model._shippingAddress.email = this.ui.email.text;
 			this.model._blillingAddress.phone = this.model._shippingAddress.phone = this.ui.phonenum.text;
 			
-			onCurrentShippingOptionsChanged(null);
+			//onCurrentShippingOptionsChanged(null);
 			
 			//record ccard info
 			this.model._ccard.number = this.ui.bcardnum.text;
@@ -203,15 +203,12 @@ package com.virid.fbcheckout.view
 		protected function onCartJSONResult(event:ResultEvent):void
 		{
 			try{
-				var obj:Object = JSON.decode(String(event.result),false);
+				var jsonDecodedCartTotals:Object = JSON.decode(String(event.result),false);
 			}
 			catch(e:Error){
 				trace('Error Parsing JSON');
 			}
-			this.model.chargeProduct = Number(obj.subtotal);
-			this.model.chargeShipping = Number(obj.shipping);
-			this.model.chargeTax = Number(obj.taxes);
-			this.model.chargeService = Number(obj.services);
+			this.model.updateCartTotalsInOneFunction(jsonDecodedCartTotals);
 			
 			updateCartDisplays();
 		}

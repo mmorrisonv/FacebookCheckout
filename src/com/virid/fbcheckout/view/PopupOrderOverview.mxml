@@ -63,7 +63,7 @@
 			
 			<s:Label id="shipMethod" styleName="lubalin" text="Basic Ground" 
 					 color="0x353535" fontSize="12" y="20" x="0" width="180" lineHeight="12"/>
-			<s:Label styleName="lubalin" text="Sales tax" 
+			<s:Label styleName="lubalin" text="Sales tax (est)" 
 					 color="0x353535" fontSize="12" y="40" x="0" width="290" />
 			<s:Label id="shipcharge" styleName="lubalin" text="$xx.xx" 
 					 color="0x353535" fontSize="14" y="20" right="5"/>	

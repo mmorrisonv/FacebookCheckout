@@ -225,7 +225,7 @@ package controller.commands
 			
 			this.showAllErrors();
 
-			this.continueToNextStep(( obj.errors.length == 0 || contCheckout ),finalCheckout);
+			this.continueToNextStep(( obj.errors.length == 0 && contCheckout ),finalCheckout);
 		}
 		protected function showAllErrors():void
 		{
