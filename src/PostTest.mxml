@@ -10,6 +10,7 @@
 			import com.virid.fbcheckout.model.Model;
 			
 			import mx.controls.Alert;
+			import mx.core.Application;
 			import mx.core.FlexGlobals;
 			import mx.events.FlexEvent;
 			public var mainContext :Context;
@@ -55,17 +56,23 @@
 				this.model.addEventListener(Model.DisplayCheckoutPanel,gotoCheckout);
 				
 				//look through flashvars
-				for each(var flashvar:Object in FlexGlobals.topLevelApplication.parameters as Object)
+				var params:Object = FlexGlobals.topLevelApplication.parameters;
+				/*Alert.show(mx.core.Application.application.parameters as String);
+				Alert.show(mx.core.Application.application.parameters as String);*/
+				for(var key:Object in params as Object)
 				{
-					if( flashvar.hasOwnProperty('name') && flashvar.name != null && flashvar.name == 'sku')
-					{
-						Alert.show('flashvar.value - ' + flashvar.value);
-						this.model.productID = flashvar.value;
-					}
-					else if(flashvar != null && flashvar != '')
-						Alert.show('flashvar as string - ' + flashvar as String);//this.model.productID = flashvar as String;
+					var value:Object = params[key];
+					Alert.show(key.toString(), value.toString());
 					
-					Alert.show('model shows - ' + this.model.productID);
+					if( key == 'sku')
+					{
+						Alert.show('flashvar.value - ' + value);
+						this.model.productID = value as String;
+					}
+					/*else if(params != null && params != '')
+						Alert.show('flashvar as string - ' + params as String);*/
+					
+					//Alert.show('model shows - ' + this.model.productID);
 					//trace(this.model.productID);
 				}
 				this.mainContext = new Context();

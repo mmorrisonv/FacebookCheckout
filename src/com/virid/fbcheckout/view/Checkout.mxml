@@ -32,7 +32,7 @@
 			public static var SHIPPING_ADDRESS_CHANGED:String = "SS";
 				
 			private var checkoutBtnDisabled:Boolean = false;
-			private var checkShippingTimer:Timer = new Timer(2000);
+			private var checkShippingTimer:Timer = new Timer(2000,1);
 			
 			
 			[Embed("assets/loaderswf.swf",mimetype="application/octest-stream")]
@@ -195,7 +195,7 @@
 			{
 				var target:UIComponent = event.target as UIComponent;
 				
-				trace('timer stop, restarted, started');
+				//trace('timer stop, restarted, started');
 				//this.checkShippingTimer.stop();
 				//this.checkShippingTimer.reset();
 				this.checkShippingTimer.start();
