@@ -56,7 +56,7 @@ package com.virid.fbcheckout.view
 		
 		protected function ui_OnCheckAVailClicked(event:Event):void
 		{
-			var urlR:URLRequest = new URLRequest(this.model.urlRoot + '/product.aspx?id=' + this.model.productID);
+			var urlR:URLRequest = new URLRequest(this.model.urlRootTracking + '/product.aspx?id=' + this.model.productID);
 			navigateToURL(urlR, '_blank');
 			
 			
@@ -64,7 +64,7 @@ package com.virid.fbcheckout.view
 		
 		protected function ui_OnSeeMoreClicked(event:Event):void
 		{
-			var urlR:URLRequest = new URLRequest(this.model.urlRoot + '/product.aspx?id=' + this.model.productID);
+			var urlR:URLRequest = new URLRequest(this.model.urlRootTracking + '/product.aspx?id=' + this.model.productID);
 			navigateToURL(urlR, '_blank');
 			
 		}		

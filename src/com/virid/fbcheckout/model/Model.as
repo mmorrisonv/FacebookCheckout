@@ -62,8 +62,10 @@ package com.virid.fbcheckout.model
 		 * */
 		//public var AltViews:ArrayCollection = new ArrayCollection(); - default alt views stored on the MainProduct
 		
-		public var urlRootSecure:String = "https://www.journeys.com/";
+		
 		public var urlRoot:String = "http://www.journeys.com/";
+		public var urlRootSecure:String = "https://www.journeys.com/";
+		public var urlRootTracking:String = "http://www.journeys.com/pagetrack.aspx?campaignid=1182&action=VIEW&link=/"
 		public var httpService:HTTPService = new HTTPService();
 		public var productID:String = '56064';		//main root product id
 		private var _productSetup:Boolean = false;
