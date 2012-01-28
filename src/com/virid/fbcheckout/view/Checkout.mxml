@@ -71,6 +71,7 @@
 				this.checkShippingTimer.addEventListener(TimerEvent.TIMER_COMPLETE,checkShippingAddress);
 				
 				//setup demo info
+				/*
 				bfname.text = "Toby";
 				sfname.text = "Toby";
 				blname.text = "Johnson"; 
@@ -92,7 +93,7 @@
 				this.bcardnum.text ="4111-1111-1111-1111";
 				this.bcardcvv.text = "123";
 				bcardmonth.text = "4";
-				bcardyear.text = "2012";
+				bcardyear.text = "2012";*/
 				
 			}
 			

@@ -66,7 +66,7 @@
 					
 					if( key == 'sku')
 					{
-						Alert.show('flashvar.value - ' + value);
+						Alert.show('flashvar.sku - ' + value);
 						this.model.productID = value as String;
 					}
 					/*else if(params != null && params != '')
