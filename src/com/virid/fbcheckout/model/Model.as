@@ -14,6 +14,7 @@ package com.virid.fbcheckout.model
 	import flash.events.EventDispatcher;
 	
 	import mx.collections.ArrayCollection;
+	import mx.controls.Alert;
 	import mx.rpc.http.HTTPService;
 
 	[Event(name="MainProductChanged", type="flash.events.Event")]
@@ -306,10 +307,18 @@ package com.virid.fbcheckout.model
 		public function handleCheckoutPurchaseErrors(errors:Object):void
 		{
 			this.lastCheckoutErrors = errors;
-			var e:Event = new Event(CheckoutErrorsInPurchase,true,false);
-			this.dispatchEvent(e);
-			var ef:Event = new Event(CheckoutFailed,true,false);
-			this.dispatchEvent(ef);
+			if(errors.length <= 1)
+			{
+				var e:Event = new Event(CheckoutComplete,true,false);
+				this.dispatchEvent(e);
+			}
+			else
+			{
+				var e:Event = new Event(CheckoutErrorsInPurchase,true,false);
+				this.dispatchEvent(e);
+				var ef:Event = new Event(CheckoutFailed,true,false);
+				this.dispatchEvent(ef);
+			}
 		}
 		
 		/*
