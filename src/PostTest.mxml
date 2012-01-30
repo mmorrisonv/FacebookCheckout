@@ -83,7 +83,7 @@
 				var urlR:URLRequest
 				if(this.model.checkoutComplete)
 				{
-					urlR = new URLRequest(this.model.urlRoot + '/product.aspx?id=' + this.model.productID);
+					urlR = new URLRequest(this.model.urlRootTracking + '/product.aspx?id=' + this.model.productID);
 					navigateToURL(urlR, '_blank');
 				}
 				else{
