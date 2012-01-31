@@ -132,10 +132,10 @@
 				<!--<smallviews:modalCheckoutSelectOption buttonMode="true" width="100%" index="1"
 													  click="useLogin_clickHandler(event)" label="I have a Journey.com account and would &#13;like to login and use that here." />-->
 				<smallviews:modalCheckoutSelectOption buttonMode="true" width="100%" index="1"
-													  click="creditcard_clickHandler(event)" label="Buy Here (Credit Card only)" />
+													  click="creditcard_clickHandler(event)" label="Buy Here (Credit Card only)" showLock="true" />
 				<smallviews:modalCheckoutSelectOption  buttonMode="true" width="100%" index="2"
 													   click="gotoJourneys_clickHandler(event)" label="Buy on Journeys.com"/>
-				<s:Image id="checkoutBtnLoadingAnimation" source="@Embed('assets/lock.png')" width="9" right="10" bottom="18" visible="true" />
+				
 <!--				<smallviews:modalCheckoutSelectOption  buttonMode="true" width="100%" index="4"
 													   click="paypal_clickHandler(event)" label="Use paypal." />-->
 			</s:VGroup>

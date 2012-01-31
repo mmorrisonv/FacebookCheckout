@@ -44,10 +44,10 @@
 		<!-- Place non-visual elements (e.g., services, value objects) here -->
 		<s:Power id="bigGame" />
 		<s:Animate target="{this}" id ="show" duration="500" >
-			<s:SimpleMotionPath property="bottom" valueTo="0"/>
+			<s:SimpleMotionPath property="bottom" valueTo="-10"/>
 		</s:Animate>
 		<s:Animate target="{this}" id ="hide" duration="500" >
-			<s:SimpleMotionPath property="bottom" valueTo="-160"/>
+			<s:SimpleMotionPath property="bottom" valueTo="-167"/>
 		</s:Animate>
 	</fx:Declarations>
 	<s:Group id="itemizedView" bottom="0" left="0" height="170">
@@ -80,7 +80,7 @@
 		<s:Group id="charges" top="104" left="10" width="230" >
 			
 			<s:Label styleName="lubalin" text="Final Price" 
-					 color="0x000000" fontSize="12" y="0" x="0" width="290" />
+					 color="0x000000" fontSize="12" y="2" x="0" width="290" />
 			<s:Label id="totalDisplay" styleName="lubalin" text="$xx.xx" 
 					 color="0x000000" fontSize="14" y="0" right="5"/>	
 			

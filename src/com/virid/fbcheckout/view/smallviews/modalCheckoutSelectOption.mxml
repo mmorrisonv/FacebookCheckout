@@ -9,7 +9,15 @@
 			
 			private var _label:String = new String();
 			private var _index:String = new String();
+			private var _showLock:Boolean = false;
 
+			
+			public function set showLock(value:Boolean):void
+			{
+				_showLock = value;
+				this.lockImage.visible = _showLock;
+			}
+			
 			public function set index(value:String):void
 			{
 				_index = value;
@@ -49,5 +57,5 @@
 	<s:Image left="0" source="@Embed('assets/selectDivet.png')" verticalCenter="-2"/>
 	<s:Label left="10" id="num" styleName="lubalin" color="0xffffff" width="30" fontSize="20" verticalCenter="0"/>
 	<s:Label id="text" styleName="modalLabel" width="100%" verticalCenter="0"/>
-	
+	<s:Image id="lockImage" source="@Embed('assets/lock.png')" width="9" right="20" verticalCenter="-2" visible="false" />
 </s:Group>
