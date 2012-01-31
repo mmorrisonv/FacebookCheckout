@@ -295,11 +295,12 @@
 		</s:fill>
 	</s:Rect>
 
-	<s:HGroup id="addressForms" width="100%" paddingTop="3" paddingRight="3" paddingBottom="3" paddingLeft="3">
-		<s:VGroup width="50%" height="100%" paddingTop="3" paddingRight="3" paddingBottom="3" paddingLeft="3"
+	<s:HGroup id="addressForms" width="333" paddingTop="3" paddingRight="3" paddingBottom="3" paddingLeft="3">
+		<s:Label styleName="lubalin" text="Ship To" fontSize="14" height="14" rotation="-90"/>
+		<s:VGroup width="160" height="100%" paddingTop="3" paddingRight="3" paddingBottom="3" paddingLeft="3"
 				  gap="3">
 			
-			<s:Label styleName="lubalin" text="Shipping Address" fontSize="14" height="14"/>
+			
 			<s:HGroup width="100%">
 				<s:TextInput id="sfname" prompt="First Name" width="100%" change="handleTextInputChanged(event)" focusOut="shipping_focusOutHandler(event)"/>
 				<s:TextInput id="slname" prompt="Last Name" width="100%" change="handleTextInputChanged(event)" focusOut="shipping_focusOutHandler(event)"/>
@@ -325,12 +326,13 @@
 				</s:ArrayCollection> -->
 			</s:DropDownList>
 		</s:VGroup>
-		<s:VGroup width="50%" height="100%" gap="3"
+		<s:Label styleName="lubalin" text="Bill To" fontSize="14" height="14" rotation="-90"/>
+		<s:VGroup width="160" height="100%" gap="3"
 				  paddingTop="3" paddingRight="3" paddingBottom="3" paddingLeft="3">
-			<s:Group height="14">
-				<s:Label styleName="lubalin" text="Billing Info" fontSize="14" height="14"/>
-				<s:CheckBox id="sameAsShipping" styleName="lubalin" label="Same As Shipping" fontSize="10" color="0xffffff" selected="true" x="90" y="-3" alignmentBaseline="ideographicCenter" change="checkbox1_changeHandler(event)"/>
-			</s:Group>
+			
+			
+			<s:CheckBox id="sameAsShipping" styleName="lubalin" label="Same As Shipping" fontSize="10" color="0xffffff" selected="true" x="90" y="-3" alignmentBaseline="ideographicCenter" change="checkbox1_changeHandler(event)"/>
+			
 			<s:HGroup width="100%">
 				<s:TextInput id="bfname" prompt="First Name" width="100%" change="handleTextInputChanged(event)"/>
 				<s:TextInput id="blname" prompt="Last Name" width="100%" change="handleTextInputChanged(event)"/>

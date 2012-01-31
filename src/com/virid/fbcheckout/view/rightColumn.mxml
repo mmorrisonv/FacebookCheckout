@@ -99,9 +99,9 @@
 		</s:fill>
 	</s:Rect>
 	
-	<s:VGroup width="100%" y="54" >
+	<s:VGroup width="100%" y="36" >
 		
-		<s:Group minHeight="150" width="100%">
+		<s:Group minHeight="128" width="100%">
 			<s:List width="80" x="20" y="0" minHeight="20"
 					borderVisible="false" contentBackgroundAlpha="0"
 					itemRenderer="com.virid.fbcheckout.view.smallviews.ratingItemRenderer"
@@ -111,13 +111,13 @@
 				</s:layout>
 			</s:List>
 
-			<s:Image source="@Embed('assets/large-horiz-carrot.png')" x="3" y="15" />
-			<s:Label id="prodName" y="20" x="20" maxWidth="120"
+			<s:Image source="@Embed('assets/large-horiz-carrot.png')" x="3" y="5" />
+			<s:Label id="prodName" y="10" x="20" maxWidth="120"
 					 text="---" 
 					 fontSize="12" color="0xffffff" styleName="lubalin"/>	
 			
 			
-			<s:Group  y="70" width="100%">
+			<s:Group  y="54" width="100%">
 				
 				<s:Group click="colorSelectClick(event)" width="100%"  useHandCursor="true" buttonMode="true" >
 					<smallviews:OpaqueFullWidthHeading text="Select a Color" 
@@ -128,7 +128,7 @@
 					<s:Image source="@Embed('assets/small-vertical-carrot.png')" x="10" y="23" />
 				</s:Group>
 				
-				<s:Group click="sizeSelectClick(event)" width="100%" y="44"  useHandCursor="true" buttonMode="true" >
+				<s:Group click="sizeSelectClick(event)" width="100%" y="40"  useHandCursor="true" buttonMode="true" >
 					<smallviews:OpaqueFullWidthHeading text="Select a Size" 
 													   textColor="0x000000" backColor="0xffffff"											  
 													   width="100%" height="14" x="3" marginLeftContent="23" />
@@ -158,12 +158,12 @@
 						 verticalCenter="2" horizontalCenter="-3" />
 			</s:Group>			
 
-			<smallviews:OpaqueFullWidthHeading text="See More Like This" 
+			<smallviews:OpaqueFullWidthHeading text="See This On Journeys.com" 
 											   textColor="0xffffff" backColor="0x000000" fontSize="11" marginLeftContent="8"  										  
-											   width="130" height="18" horizontalCenter="0" y="35" click="onMoreLikeThisClicked(event)" useHandCursor="true" buttonMode="true" />
-			<smallviews:OpaqueFullWidthHeading text="Check Store Availability" 
+											   width="134" height="18" horizontalCenter="0" y="34.5" click="onMoreLikeThisClicked(event)" useHandCursor="true" buttonMode="true" />
+			<smallviews:OpaqueFullWidthHeading text="Check Store Availability" visible="false"
 											   textColor="0xffffff" backColor="0x000000" fontSize="11" click="onStoreAvailabilityClicked(event)" marginLeftContent="8"											  
-											   width="130" height="18" horizontalCenter="0" y="58"  useHandCursor="true" buttonMode="true"/>
+											   width="130" height="18" horizontalCenter="0" y="58"/>
 
 		</s:Group>
 		

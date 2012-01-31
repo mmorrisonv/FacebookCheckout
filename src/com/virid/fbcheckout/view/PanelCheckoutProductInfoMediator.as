@@ -48,7 +48,7 @@ package com.virid.fbcheckout.view
 				this.ui.productImage.source = this.model.SelectedProduct.colorObj.imageFS;	
 				this.ui.productName.text = model.SelectedProduct.name;
 				if(this.model.SelectedProduct.colorObj.currentSize != null){
-					this.ui.productDetail.text = "Size: " + model.SelectedProduct.colorObj.currentSize.name + ' • ' + 'Color: ' + model.SelectedProduct.colorObj.name  ;
+					this.ui.productDetail.text = "Size: " + model.SelectedProduct.colorObj.currentSize.name ;//+ ' • ' + 'Color: ' + model.SelectedProduct.colorObj.name  ;
 					this.ui.productPriceDisplay.text = "$" + String(this.model.SelectedProduct.colorObj.currentSize.price) + " USD";
 					
 					if(this.ui.productDetail.text.length >= 34)
@@ -119,7 +119,7 @@ package com.virid.fbcheckout.view
 			var a2:Animate = new Animate();
 			a2.target = this.ui.details; a2.duration = 300;
 			m = new SimpleMotionPath();
-			m.property = 'x'; m.valueTo = -500;
+			m.property = 'x'; m.valueTo = 500;
 			v = new Vector.<MotionPath>();v.push(m);
 			a2.motionPaths = v;
 			var p3:Sequence = new Sequence();

@@ -13,6 +13,7 @@
 			{
 				var mediator:ProductImageMediator = new ProductImageMediator();
 				mediator.register(this);
+				trace(this.height);
 				
 			}
 		]]>
@@ -27,10 +28,10 @@
 	</s:Rect>
 	<s:Image id="productImage" source="@Embed('assets/loaderswf.swf')"
 			  x="0" top="0" verticalCenter="-10" width="247"/>
-	<s:Image id="loadingImage" source="assets/loaderswf.swf"
+	<s:Image id="loadingImage" source="@Embed('assets/loaderswf.swf')"
 			 verticalCenter="0" horizontalCenter="0" width="32"/>
 	<s:Image source="@Embed('assets/prodareaback.png')"
-			 x="0" top="0" width="247" height="298" />
+			 x="0" y="0"  />
 	<s:Label id="productPriceDisplay" styleName="lubalin" text="$--.-- USD" 
-			 color="0x353535" fontSize="16" bottom="12" right="12"/>
+			 color="0x353535" fontSize="18" bottom="30" right="12"/>
 </s:Group>

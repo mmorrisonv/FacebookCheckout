@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" 
 			   xmlns:s="library://ns.adobe.com/flex/spark" 
-			   xmlns:mx="library://ns.adobe.com/flex/mx" width="397" height="298" xmlns:view="com.virid.fbcheckout.view.*" 
+			   xmlns:mx="library://ns.adobe.com/flex/mx" width="403" height="227" xmlns:view="com.virid.fbcheckout.view.*" 
 			   addedToStage="component_addedToStageHandler(event)" initialize="creationComplete(event)">
 	
 	<fx:Script>
@@ -88,12 +88,12 @@
 				}
 				else{
 					urlR = new URLRequest(this.model.urlRoot);
-					navigateToURL(urlR, '_blank');
+					//navigateToURL(urlR, '_blank');
 					//take user to product detail
-					/*
+					
 					var obj:Object = new Object();
 					obj.start = "NOW";
-					this.model.initiateProdDetail = obj;*/
+					this.model.initiateProdDetail = obj;
 				}
 			}
 			
@@ -113,10 +113,10 @@
 	</s:Rect>
 	<s:Group  width="100%" height="100%">
 		
-		<view:ProductImage id="mainProdImage" left="0" y="0" width="247" height="250"/>
-		<view:PanelCheckoutProductInfo id="checkoutInfo" left="0" y="0" width="247" height="100" visible="false"/>
+		<view:ProductImage id="mainProdImage" left="0" y="0" width="247" height="227"/>
+		<view:PanelCheckoutProductInfo id="checkoutInfo" x="190" y="0" width="147" height="100" visible="false"/>
 		
-		<view:AltViews y="300" left="0" height="51" />
+		<view:AltViews y="250" left="0" height="51" />
 		
 		<view:rightColumn right="0" width="153" height="100%"/>
 		<s:Image width="147" height="61"  right="3" y="-1" source="@Embed('assets/logo.png')" click="onLogoClick(event)"
@@ -126,7 +126,7 @@
 	</s:Group>
 	
 	
-	<view:ModalCheckoutSelect verticalCenter="0" horizontalCenter="500" width="90%" height="80%" visible="true"/>
+	<view:ModalCheckoutSelect verticalCenter="0" horizontalCenter="500" width="90%" height="155" visible="true"/>
 	<view:ModalStatusUpdate verticalCenter="0" horizontalCenter="500" width="80%" height="80%" visible="true"/>
 	
 	
