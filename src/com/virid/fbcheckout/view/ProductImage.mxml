@@ -30,7 +30,7 @@
 			  x="0" top="0" verticalCenter="-10" width="247"/>
 	<s:Image id="loadingImage" source="@Embed('assets/loaderswf.swf')"
 			 verticalCenter="0" horizontalCenter="0" width="32"/>
-	<s:Image source="@Embed('assets/prodareaback.png')"
+	<s:Image id="productBackground" source="@Embed('assets/prodareaback.png')"
 			 x="0" y="0"  />
 	<s:Label id="productPriceDisplay" styleName="lubalin" text="$--.-- USD" 
 			 color="0x353535" fontSize="18" bottom="30" right="12"/>

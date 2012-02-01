@@ -80,6 +80,7 @@ package com.virid.fbcheckout.view
 		
 		protected function ui_gotoCheckoutMode(event:Event):void
 		{
+			this.ui.productBackground.visible = false;
 			//move main prouduct image over to the left
 			a1 = new Animate();
 			a1.target = this.ui.productImage; a1.duration = 180; a1.easer = bigease;
@@ -113,6 +114,7 @@ package com.virid.fbcheckout.view
 		
 		protected function ui_gotoProductDetailMode(event:Event):void
 		{
+			this.ui.productBackground.visible = true;
 			//move main proudctImage back
 			a1 = new Animate();
 			a1.target = this.ui.productImage; a1.duration = 500;

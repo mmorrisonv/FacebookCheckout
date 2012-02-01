@@ -12,10 +12,14 @@
 			import mx.controls.Alert;
 			import mx.core.Application;
 			import mx.core.FlexGlobals;
+			import mx.events.EffectEvent;
 			import mx.events.FlexEvent;
 			public var mainContext :Context;
 			public var model:Model = Model.getInstance();
 
+			
+			private var logoSrc:Class;
+			
 			private function toggleFullScreen(e:Event):void {
 				try {
 					switch ( stage.displayState ) {
@@ -45,15 +49,23 @@
 			}
 			
 			public function gotoCheckout(e:Event):void{
+				this.logoSrc = Resource.LogoCheckout;
+				this.animateLogoOut.play();
 				
 			}
 			
-			
+			protected function gotoProductDetail(event:Event):void
+			{
+				this.logoSrc = Resource.Logo;
+				this.animateLogoOut.play();
+				
+			}
 			
 			protected function creationComplete(event:FlexEvent):void
 			{
 				
 				this.model.addEventListener(Model.DisplayCheckoutPanel,gotoCheckout);
+				this.model.addEventListener(Model.StartProdDetail,gotoProductDetail);
 				
 				//look through flashvars
 				var params:Object = FlexGlobals.topLevelApplication.parameters;
@@ -62,11 +74,11 @@
 				for(var key:Object in params as Object)
 				{
 					var value:Object = params[key];
-					Alert.show(key.toString(), value.toString());
+					//Alert.show(key.toString(), value.toString());
 					
 					if( key == 'sku')
 					{
-						Alert.show('flashvar.sku - ' + value);
+						//Alert.show('flashvar.sku - ' + value);
 						this.model.productID = value as String;
 					}
 					/*else if(params != null && params != '')
@@ -97,11 +109,26 @@
 				}
 			}
 			
+
+			
+			protected function onLogoOut(event:EffectEvent):void
+			{
+				this.logoImage.source = this.logoSrc;
+				this.animateLogoIn.play();
+				
+			}
+			
 		]]>
 	</fx:Script>
 	
 	<fx:Declarations>
-		<!-- Place non-visual elements (e.g., services, value objects) here -->
+		<s:Power id="bigThing"/>
+		<s:Animate id="animateLogoOut" target="{this.logoImage}" duration="150" easer="{bigThing}" effectEnd="onLogoOut(event)">
+			<s:SimpleMotionPath  property="y" valueTo="-100" />
+		</s:Animate>
+		<s:Animate id="animateLogoIn" target="{this.logoImage}" duration="300" easer="{bigThing}"> 
+			<s:SimpleMotionPath  property="y" valueTo="-1"/>
+		</s:Animate>
 	</fx:Declarations>
 	<fx:Style source="assets/style/fonts.css" />
 	<fx:Style source="assets/style/style.css" />
@@ -114,13 +141,13 @@
 	<s:Group  width="100%" height="100%">
 		
 		<view:ProductImage id="mainProdImage" left="0" y="0" width="247" height="227"/>
-		<view:PanelCheckoutProductInfo id="checkoutInfo" x="190" y="40" width="147" height="100" visible="false"/>
+		<view:PanelCheckoutProductInfo id="checkoutInfo" x="190" y="40" width="147" height="100" visible="true"/>
 		
 		<view:AltViews y="250" left="0" height="51" />
 		
 		<view:rightColumn right="0" width="153" height="100%"/>
-		<s:Image width="147" height="61"  right="3" y="-1" source="@Embed('assets/logo.png')" click="onLogoClick(event)"
-				 useHandCursor="true" buttonMode="true" smooth="true" smoothingQuality="high" visible="false"/>
+		<s:Image id="logoImage" width="215"  right="3" y="-1" source="@Embed('assets/logo.png')" click="onLogoClick(event)"
+				 useHandCursor="true" buttonMode="true" smooth="true" smoothingQuality="high"/>
 		
 		<view:Checkout visible="false" includeInLayout="false" y="1000" width="100%" height="100%"/>
 	</s:Group>

@@ -108,12 +108,15 @@ package com.virid.fbcheckout.view
 		protected function onCheckoutFailed(event:Event):void
 		{
 			this.ui.enableCheckoutBtn();
+			this.ui.hideConfirmationStatusPanel();
 			
 		}	
 		protected function onPurchase(event:Event):void
 		{
 			//updateCartTotals();
 			
+			this.ui.disableCheckoutBtn('purchasing',true);
+			this.ui.showConfirmationStatusPanel();
 			clearAllFormErrors();
 
 			setCheckoutFieldsOnModel();

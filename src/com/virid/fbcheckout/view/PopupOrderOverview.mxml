@@ -44,7 +44,7 @@
 		<!-- Place non-visual elements (e.g., services, value objects) here -->
 		<s:Power id="bigGame" />
 		<s:Animate target="{this}" id ="show" duration="500" >
-			<s:SimpleMotionPath property="bottom" valueTo="-10"/>
+			<s:SimpleMotionPath property="bottom" valueTo="-50"/>
 		</s:Animate>
 		<s:Animate target="{this}" id ="hide" duration="500" >
 			<s:SimpleMotionPath property="bottom" valueTo="-167"/>
