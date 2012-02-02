@@ -307,7 +307,7 @@ package com.virid.fbcheckout.model
 		public function handleCheckoutPurchaseErrors(errors:Object):void
 		{
 			this.lastCheckoutErrors = errors;
-			if(errors.length <= 1)
+			if(errors.length > 0)
 			{
 				var e:Event = new Event(CheckoutComplete,true,false);
 				this.dispatchEvent(e);

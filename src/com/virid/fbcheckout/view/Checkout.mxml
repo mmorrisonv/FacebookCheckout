@@ -71,7 +71,7 @@
 				this.checkShippingTimer.addEventListener(TimerEvent.TIMER_COMPLETE,checkShippingAddress);
 				
 				//setup demo info
-				
+				/*
 				bfname.text = "Toby";
 				sfname.text = "Toby";
 				blname.text = "Johnson"; 
@@ -93,7 +93,7 @@
 				this.bcardnum.text ="4111-1111-1111-1111";
 				this.bcardcvv.text = "123";
 				bcardmonth.text = "4";
-				bcardyear.text = "2012";
+				bcardyear.text = "2012";*/
 				
 			}
 			
@@ -386,7 +386,7 @@
 		</s:Rect>
 		
 		<s:Group id="checkoutOptionButtons" width="100%" height="36">
-			<s:Group height="30" right="120" y="5">
+			<s:Group height="30" right="117" y="5">
 				<s:Label text="Final Price:" fontSize="9" styleName="lubalin" y="2" />
 				<s:Label id="cartPrice" text="$--.-- USD" x="0" fontSize="18" styleName="lubalin" bottom="0"/>
 			</s:Group>

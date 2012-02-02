@@ -99,13 +99,13 @@
 					navigateToURL(urlR, '_blank');
 				}
 				else{
-					urlR = new URLRequest(this.model.urlRoot);
-					//navigateToURL(urlR, '_blank');
+					urlR = new URLRequest(this.model.urlRootTracking);
+					navigateToURL(urlR, '_blank');
 					//take user to product detail
-					
+					/*
 					var obj:Object = new Object();
 					obj.start = "NOW";
-					this.model.initiateProdDetail = obj;
+					this.model.initiateProdDetail = obj;*/
 				}
 			}
 			

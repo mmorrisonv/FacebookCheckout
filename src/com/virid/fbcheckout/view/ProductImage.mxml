@@ -32,6 +32,9 @@
 			 verticalCenter="0" horizontalCenter="0" width="32"/>
 	<s:Image id="productBackground" source="@Embed('assets/prodareaback.png')"
 			 x="0" y="0"  />
+	<s:Image source="@Embed('assets/price_gradient.png')"
+			 bottom="30" right="12"/>
 	<s:Label id="productPriceDisplay" styleName="lubalin" text="$--.-- USD" 
 			 color="0x353535" fontSize="18" bottom="30" right="12"/>
+
 </s:Group>
