@@ -2,6 +2,7 @@ package controller.commands
 {
 	import com.adobe.serialization.json.JSON;
 	import com.virid.fbcheckout.model.Model;
+	import com.virid.fbcheckout.view.smallviews.Alert2;
 	
 	import flash.events.Event;
 	
@@ -140,14 +141,14 @@ package controller.commands
 				var obj:Object = JSON.decode(String(event.result));
 			}
 			catch(e:Error){
-				Alert.show('Error Parsing JSON');
+				Alert2.show('Error Parsing JSON');
 			}
 			
 			this.continueToNextStep(true,sendShippingAddress);
 		}
 		protected function onAddedToCart_Fault(event:FaultEvent):void
 		{
-			Alert.show('Adding Product To Cart Failed','Please try again later');
+			Alert2.show('Adding Product To Cart Failed','Please try again later');
 			
 		}
 		
@@ -158,7 +159,7 @@ package controller.commands
 				var obj:Object = JSON.decode(String(event.result));
 			}
 			catch(e:Error){
-				Alert.show('Error Parsing JSON');
+				Alert2.show('Error Parsing JSON');
 			}
 			trace(event.result);
 
@@ -174,7 +175,7 @@ package controller.commands
 		protected function onAddressShippingAdd_Fault(event:FaultEvent):void
 		{
 			
-			Alert.show('Adding Address Failed','Please try again later');
+			Alert2.show('Adding Address Failed','Please try again later');
 			
 		}
 		
@@ -186,7 +187,7 @@ package controller.commands
 				var obj:Object = JSON.decode(String(event.result));
 			}
 			catch(e:Error){
-				Alert.show('Error Parsing JSON');
+				Alert2.show('Error Parsing JSON');
 			}
 
 			if( obj != null && obj.hasOwnProperty('errors') && obj.errors.length > 0 )
@@ -202,7 +203,7 @@ package controller.commands
 		
 		protected function onAddressBillingAdd_Fault(event:FaultEvent):void
 		{
-			Alert.show('Adding Billing Address Failed','Please try again later');
+			Alert2.show('Adding Billing Address Failed','Please try again later');
 			
 		}
 		
@@ -214,7 +215,7 @@ package controller.commands
 				var obj:Object = JSON.decode(String(event.result));
 			}
 			catch(e:Error){
-				Alert.show('Error Parsing JSON');
+				Alert2.show('Error Parsing JSON');
 			}
 			
 			if( obj != null && obj.hasOwnProperty('errors') && obj.errors.length > 0 )
@@ -236,7 +237,7 @@ package controller.commands
 		}
 		protected function onPaymentAdd_Fault(event:FaultEvent):void
 		{
-			Alert.show('Adding Payment Info Failed','Please try again later');
+			Alert2.show('Adding Payment Info Failed','Please try again later');
 			
 		}
 		
@@ -248,7 +249,7 @@ package controller.commands
 				var obj:Object = JSON.decode(String(event.result));
 			}
 			catch(e:Error){
-				Alert.show('Error Parsing JSON');
+				Alert2.show('Error Parsing JSON');
 			}
 			
 			if( obj != null && obj.hasOwnProperty('errors') && obj.errors.length > 0 )
@@ -257,7 +258,7 @@ package controller.commands
 		
 		protected function onPurchase_Fault(event:FaultEvent):void
 		{
-			Alert.show('Purchasing Failed','Please try again later');
+			Alert2.show('Purchasing Failed','Please try again later');
 			
 		}
 		
@@ -268,7 +269,7 @@ package controller.commands
 			//this function is used a way of controling the flow of the checkoutprocess
 			/*
 			this.fxCallback = fxok;
-			Alert.show(msg,title,Alert.OK,null,alertListner,null,Alert.OK );
+			Alert2.show(msg,title,Alert.OK,null,alertListner,null,Alert.OK );
 			*/
 			if(LastStepSuccesful)
 				fxok();

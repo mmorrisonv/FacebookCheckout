@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
 		 xmlns:s="library://ns.adobe.com/flex/spark" 
-		 xmlns:mx="library://ns.adobe.com/flex/mx"
+		 xmlns:mx="library://ns.adobe.com/flex/mx" 
 		 show="popupShown(event)" creationComplete="componentCreationComplete(event)" xmlns:smallviews="com.virid.fbcheckout.view.smallviews.*">
 	<fx:Script>
 		<![CDATA[
@@ -11,6 +11,7 @@
 			
 			import mx.core.UIComponent;
 			import mx.events.FlexEvent;
+			import mx.events.ResizeEvent;
 			
 			import spark.events.IndexChangeEvent;
 			
@@ -101,6 +102,7 @@
 				dispatchEvent( e );
 			}
 			
+		
 		]]>
 	</fx:Script>
 	<fx:Declarations>

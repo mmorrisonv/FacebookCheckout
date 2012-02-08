@@ -3,6 +3,7 @@ package com.virid.fbcheckout.view
 	import com.adobe.serialization.json.JSON;
 	import com.virid.fbcheckout.model.Model;
 	import com.virid.fbcheckout.model.vo.ShippingOptionVO;
+	import com.virid.fbcheckout.view.smallviews.Alert2;
 	
 	import controller.commands.checkoutArbiter;
 	
@@ -338,7 +339,7 @@ package com.virid.fbcheckout.view
 				switch(err.field)
 				{
 					case "general":
-						Alert.show( sanitzeErrorsBeforeAlert( err.message ) );
+						Alert2.show( sanitzeErrorsBeforeAlert( err.message ) ); 
 						break;
 					case "":
 					{
@@ -359,7 +360,7 @@ package com.virid.fbcheckout.view
 				switch(err.field)
 				{
 					case "general":
-						Alert.show( sanitzeErrorsBeforeAlert( err.message ) );
+						Alert2.show( sanitzeErrorsBeforeAlert( err.message ) );
 						break;
 					case "cardnum":
 						convertFieldToError(this.ui.bcardnum,err.message);
@@ -387,7 +388,7 @@ package com.virid.fbcheckout.view
 				switch(err.field)
 				{
 					case "general":
-						Alert.show( sanitzeErrorsBeforeAlert( err.message ) );
+						Alert2.show( sanitzeErrorsBeforeAlert( err.message ) );
 						break;
 					
 					case "firstname":
@@ -440,7 +441,7 @@ package com.virid.fbcheckout.view
 						break;
 					
 					case "general":
-						Alert.show( sanitzeErrorsBeforeAlert( err.message ) );
+						Alert2.show( sanitzeErrorsBeforeAlert( err.message ) );
 						break;
 					
 					case "firstname":

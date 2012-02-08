@@ -1,8 +1,11 @@
 package controller.commands
 {
 	import com.adobe.serialization.json.JSON;
+	import com.virid.fbcheckout.model.Model;
 	import com.virid.fbcheckout.model.vo.ColorVO;
+	import com.virid.fbcheckout.model.vo.ProductVO;
 	import com.virid.fbcheckout.model.vo.SizeVO;
+	import com.virid.fbcheckout.view.smallviews.Alert2;
 	
 	import flash.events.HTTPStatusEvent;
 	import flash.events.IOErrorEvent;
@@ -13,8 +16,6 @@ package controller.commands
 	import mx.rpc.events.FaultEvent;
 	import mx.rpc.events.ResultEvent;
 	import mx.rpc.http.HTTPService;
-	import com.virid.fbcheckout.model.Model;
-	import com.virid.fbcheckout.model.vo.ProductVO;
 
 	public class extractColorOptions
 	{
@@ -53,7 +54,7 @@ package controller.commands
 		
 		protected function onHTTPFault(event:FaultEvent):void
 		{
-			Alert.show('HTTP FAULT' + event.message.toString() );
+			Alert2.show('HTTP FAULT' + event.message.toString() );
 			//trace( event.message.toString() );
 			//trace( event.statusCode );
 			

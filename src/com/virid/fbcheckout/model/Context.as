@@ -7,6 +7,7 @@ package com.virid.fbcheckout.model
 	import com.virid.fbcheckout.model.vo.ProductVO;
 	import com.virid.fbcheckout.model.vo.ShippingOptionVO;
 	import com.virid.fbcheckout.model.vo.SizeVO;
+	import com.virid.fbcheckout.view.smallviews.Alert2;
 	
 	import controller.commands.extractColorOptions;
 	
@@ -89,7 +90,7 @@ package com.virid.fbcheckout.model
 		protected function buildColorHTTPFault(event:FaultEvent):void
 		{
 			var faultString:String = event.fault.faultString;
-			Alert.show(faultString);
+			Alert2.show(faultString); var e:Alert2;
 		}
 		
 		protected function buildColorHTTPResult(event:ResultEvent):void

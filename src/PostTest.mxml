@@ -8,6 +8,7 @@
 		<![CDATA[
 			import com.virid.fbcheckout.model.Context;
 			import com.virid.fbcheckout.model.Model;
+			import com.virid.fbcheckout.view.smallviews.Alert2;
 			
 			import mx.controls.Alert;
 			import mx.core.Application;
@@ -19,6 +20,9 @@
 
 			
 			private var logoSrc:Class;
+			public static const NO_SCALE:String = "exactFit";
+			
+		
 			
 			private function toggleFullScreen(e:Event):void {
 				try {
@@ -36,11 +40,19 @@
 					// ignore
 				}
 			}
-			
+			private function onStageResize(e:Event):void {
+				var widthScale:Number = stage.stageWidth / 403; // 800 is the original width of the swf, you should replace it with your width
+				scaleX = scaleY = widthScale;
+			}
 			
 			protected function component_addedToStageHandler(event:Event):void
 			{
+				
+				Alert2.stage = this.stageItems;
+				/* Alert2.show( stage.width.toString() ); */
+				this.stage.scaleMode = NO_SCALE;
 				this.stage.addEventListener(MouseEvent.CLICK,stageOnClick);
+				this.stage.addEventListener(Event.RESIZE, onStageResize);
 			}
 			
 			protected function stageOnClick(event:MouseEvent):void
@@ -67,24 +79,26 @@
 				this.model.addEventListener(Model.DisplayCheckoutPanel,gotoCheckout);
 				this.model.addEventListener(Model.StartProdDetail,gotoProductDetail);
 				
+				
+				
+				
 				//look through flashvars
 				var params:Object = FlexGlobals.topLevelApplication.parameters;
-				/*Alert.show(mx.core.Application.application.parameters as String);
-				Alert.show(mx.core.Application.application.parameters as String);*/
+				
 				for(var key:Object in params as Object)
 				{
 					var value:Object = params[key];
-					//Alert.show(key.toString(), value.toString());
+					//Alert2.show(key.toString(), value.toString());
 					
 					if( key == 'sku')
 					{
-						//Alert.show('flashvar.sku - ' + value);
+						//Alert2.show('flashvar.sku - ' + value);
 						this.model.productID = value as String;
 					}
 					/*else if(params != null && params != '')
-						Alert.show('flashvar as string - ' + params as String);*/
+						Alert2.show('flashvar as string - ' + params as String);*/
 					
-					//Alert.show('model shows - ' + this.model.productID);
+					//Alert2.show('model shows - ' + this.model.productID);
 					//trace(this.model.productID);
 				}
 				this.mainContext = new Context();
@@ -138,7 +152,7 @@
 			<s:SolidColor color="0xffffff"/>
 		</s:fill>
 	</s:Rect>
-	<s:Group  width="100%" height="100%">
+	<s:Group id="stageItems" width="403" height="227">
 		
 		<view:ProductImage id="mainProdImage" left="0" y="0" width="247" height="227"/>
 		<view:PanelCheckoutProductInfo id="checkoutInfo" x="190" y="40" width="147" height="100" visible="true"/>
@@ -153,8 +167,8 @@
 	</s:Group>
 	
 	
-	<view:ModalCheckoutSelect verticalCenter="0" horizontalCenter="500" width="90%" height="155" visible="true"/>
-	<view:ModalStatusUpdate verticalCenter="0" horizontalCenter="500" width="80%" height="80%" visible="true"/>
+	<view:ModalCheckoutSelect y="0" x="500" width="360" height="155" visible="true"/>
+	
 	
 	
 </s:Application>

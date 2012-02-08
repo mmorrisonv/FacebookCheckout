@@ -2,6 +2,7 @@ package com.virid.fbcheckout.view
 {
 	import com.adobe.serialization.json.JSON;
 	import com.virid.fbcheckout.model.Model;
+	import com.virid.fbcheckout.view.smallviews.Alert2;
 	
 	import flash.events.Event;
 	import flash.net.URLRequest;
@@ -135,7 +136,7 @@ package com.virid.fbcheckout.view
 		
 		protected function onHTTPFault(event:FaultEvent):void
 		{
-			Alert.show('HTTP Response Failed' + event.message,'Please try again later');	
+			Alert2.show('HTTP Response Failed' + event.message,'Please try again later');
 		}
 		
 		protected function onAddedToCart(event:ResultEvent):void

@@ -6,6 +6,7 @@ package com.virid.fbcheckout.view
 	import flash.net.URLRequest;
 	import flash.net.navigateToURL;
 	
+	import mx.controls.Alert;
 	import mx.effects.Sequence;
 	
 	import spark.effects.Animate;
@@ -43,12 +44,15 @@ package com.virid.fbcheckout.view
 		
 		protected function onClose(event:Event):void
 		{
+			//Alert2.show(this.ui.parentApplication.scaleX);
+		
+			this.ui.y = 25;// (( this.ui.parentApplication.height / 2 ) - ( this.ui.height / 2 )* this.ui.parentApplication.scaleX );
 			if(p2)
 				p2.stop();
 			var a1:Animate = new Animate();
 			a1.target = this.ui; a1.duration = 300;
 			m = new SimpleMotionPath();
-			m.property = 'horizontalCenter'; m.valueTo = 500;
+			m.property = 'x'; m.valueTo = 500;
 			v = new Vector.<MotionPath>();v.push(m);
 			a1.motionPaths = v;
 			var p2:Sequence = new Sequence();
@@ -67,12 +71,15 @@ package com.virid.fbcheckout.view
 		
 		protected function ui_HandleCheckout(event:Event):void
 		{
+			//Alert2.show(this.ui.parentApplication.scaleX);
+			//this.ui.y = (( this.ui.parentApplication.height / 2 ) - ( this.ui.height / 2 ) * this.ui.parentApplication.scaleX);
+			this.ui.y = 25;
 			var e:Elastic = new Elastic();
 		
 			var a1:Animate = new Animate();
 			a1.target = this.ui; a1.duration = 800;a1.easer = e;
 			m = new SimpleMotionPath();
-			m.property = 'horizontalCenter'; m.valueTo = 0;
+			m.property = 'x'; m.valueTo = 15;//m.valueTo = (( this.ui.parentApplication.width / 2 ) - (this.ui.width / 2) * this.ui.parentApplication.scaleX);
 			v = new Vector.<MotionPath>();v.push(m);
 			a1.motionPaths = v;
 			p2 = new Sequence();
@@ -83,12 +90,13 @@ package com.virid.fbcheckout.view
 		
 		protected function ui_OnCheckout(event:Event):void
 		{
+			this.ui.y = 25;// (( this.ui.parentApplication.height / 2 ) - ( this.ui.height / 2 ) * this.ui.parentApplication.scaleX );
 			if(p2)
 				p2.stop();
 			var a1:Animate = new Animate();
 			a1.target = this.ui; a1.duration = 300;
 			m = new SimpleMotionPath();
-			m.property = 'horizontalCenter'; m.valueTo = 500;
+			m.property = 'x'; m.valueTo = 500;
 			v = new Vector.<MotionPath>();v.push(m);
 			a1.motionPaths = v;
 			var p2:Sequence = new Sequence();
