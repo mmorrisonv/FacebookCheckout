@@ -62,7 +62,7 @@ package com.virid.fbcheckout.view
 		
 		protected function gotoJourneys(event:Event):void
 		{
-			var urlR:URLRequest = new URLRequest(this.model.urlRootTracking + '/basket.aspx');
+			var urlR:URLRequest = new URLRequest(this.model.urlRootTracking + 'basket.aspx');
 			navigateToURL(urlR, '_blank');
 		}		
 		
