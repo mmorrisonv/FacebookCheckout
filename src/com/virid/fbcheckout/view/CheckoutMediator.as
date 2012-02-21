@@ -360,10 +360,14 @@ package com.virid.fbcheckout.view
 				switch(err.field)
 				{
 					case "general":
-						Alert2.show( sanitzeErrorsBeforeAlert( err.message ) );
+						if(err.message == "Billing Address has not been set.")
+							err.message = "Please correct all highlighted fields"
+						Alert2.show( sanitzeErrorsBeforeAlert( err.message ) );//sanitzeErrorsBeforeAlert( err.message ) );
 						break;
+					case "cardnumber":
 					case "cardnum":
 						convertFieldToError(this.ui.bcardnum,err.message);
+						break;
 					case "cardcvv":
 						convertFieldToError(this.ui.bcardcvv,err.message);
 						break;
@@ -381,8 +385,27 @@ package com.virid.fbcheckout.view
 		
 		protected function onErrorsCheckoutBilling(event:Event):void
 		{
-			if(this.ui.sameAsShipping.selected)//we never want to show errors if billing is just duplicates of shipping
-				return
+			if(this.ui.sameAsShipping.selected)//we never want to show errors if billing is just duplicates of shipping - but there are some special errors we need to check
+			{
+				for each( var err:Object in this.model.lastCheckoutErrors )
+				{
+					switch(err.field)
+					{
+						case "phone":
+							convertFieldToError(this.ui.phonenum,err.message);
+							break;
+						
+						case "email":
+							convertFieldToError(this.ui.email,err.message);
+							break;
+						default:
+							;
+							break;
+					}
+				}
+				return;
+			}
+			
 			for each( var err:Object in this.model.lastCheckoutErrors )
 			{
 				switch(err.field)
@@ -472,10 +495,9 @@ package com.virid.fbcheckout.view
 						convertFieldToError(this.ui.phonenum,err.message);
 						break;
 					
-					case "phone":
+					case "email":
 						convertFieldToError(this.ui.email,err.message);
 						break;
-					
 					default:
 						;
 						break;
