@@ -28,7 +28,7 @@
 			} 
 			public function updateItemRenderer(e:Event=null)  : void
 			{
-				this.shipOption.text = this.shipOpt.desc;
+				this.shipOption.text = '$' + this.shipOpt.price.toFixed(2) + ' ' + this.shipOpt.desc;
 			}
 			
 		]]>

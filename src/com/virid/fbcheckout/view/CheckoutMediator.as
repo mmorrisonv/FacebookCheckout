@@ -55,6 +55,7 @@ package com.virid.fbcheckout.view
 			this.model.addEventListener(Model.CheckoutComplete,onCheckoutComplete);
 			this.model.addEventListener(Model.CheckoutFailed,onCheckoutFailed);
 			this.model.addEventListener(Model.ShippingOptionsLoaded,onNewShippingOptions);
+			this.model.addEventListener(Model.ShippingOptionsModified,onShippingOptionPricesORSettingsModified);
 			this.model.addEventListener(Model.ChargeTotalsChanged,onCartTotalsChanged);
 			//checkouterrors
 			this.model.addEventListener(Model.CheckoutErrorsInAddCart,onErrorsCheckoutAddingToCart);
@@ -79,7 +80,11 @@ package com.virid.fbcheckout.view
 			
 		}		
 	
-	
+		protected function onShippingOptionPricesORSettingsModified(event:Event):void
+		{
+			this.ui.soptions.selectedIndex = -1;//just in case shipping options changed
+			this.ui.soptions.selectedIndex = 0;//just in case shipping options changed
+		}
 		
 		protected function onNewShippingOptions(event:Event):void
 		{
@@ -238,6 +243,11 @@ package com.virid.fbcheckout.view
 			var p:Sequence = new Sequence();
 			p.addChild(a1);
 			p.play( );
+			
+			/*this.ui.soptions.selectedIndex = -1;//just in case shipping options changed
+			this.ui.soptions.selectedIndex = 0;//just in case shipping options changed*/
+			//this.ui.soptions.dataProvider = 
+			//this.ui.soptions.labelFunction(this.ui.soptions.selectedItem);
 		}
 		
 		

@@ -283,6 +283,12 @@
 				}
 			}
 			
+			protected function shippingDropdownLabelFunc(item:Object):String
+			{
+				// TODO Auto Generated method stub
+				return "$" + item.price.toFixed(2) + " " + item.desc;
+			}
+			
 		]]>
 	</fx:Script>
 	<fx:Declarations>
@@ -363,7 +369,7 @@
 	<s:VGroup width="200" x="192" y="110" gap="1">
 		
 		<s:Label styleName="lubalin" text="Shipping Method" fontSize="14" height="14" paddingTop="2" />
-		<s:DropDownList id="soptions" width="100%" contentBackgroundColor="0xaaaaaa" selectedIndex="0" labelField="desc"
+		<s:DropDownList id="soptions" width="100%" contentBackgroundColor="0xaaaaaa" selectedIndex="0" labelFunction="shippingDropdownLabelFunc"
 						useHandCursor="true" buttonMode="true" change="shippingOptionChanged(event)" itemRenderer="com.virid.fbcheckout.view.smallviews.shippingOptionsItemRenderer"
 						borderAlpha="0" borderVisible="false" skinClass="com.virid.fbcheckout.view.smallviews.skins.DropDownSkin" cornerRadius="0" verticalCenter="-1" />
 			

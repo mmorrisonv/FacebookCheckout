@@ -61,28 +61,29 @@ package com.virid.fbcheckout.model
 		{
 			var tempSO:ShippingOptionVO = new ShippingOptionVO();
 			tempSO.id = 'STD';
-			tempSO.index = 0;
-			tempSO.desc = '$4.95 UPS Ground Shipping';
+			tempSO.index = 0.00;
+			tempSO.desc = 'UPS Ground Shipping';
 			tempSO.name = 'Ground Shipping';
-			tempSO.price = 4.95;
+			tempSO.price = tempSO.fullPrice = 4.95;
+			tempSO.discountPrice = 0.00;
 			
 			this.model.AllShippingOptions.addItem(tempSO);
 			
 			tempSO = new ShippingOptionVO();
 			tempSO.id = '2DAY';
 			tempSO.index = 1;
-			tempSO.desc = '$13.95 2-3 Day Air';
+			tempSO.desc = '2-3 Day Air';
 			tempSO.name = '2 Day Air';
-			tempSO.price = 13.95;
+			tempSO.price = tempSO.fullPrice = 13.95;
 			
 			this.model.AllShippingOptions.addItem(tempSO);
 			
 			tempSO = new ShippingOptionVO();
 			tempSO.id = '1DAY';
 			tempSO.index = 2;
-			tempSO.desc = '$22.95 Next Day Air';
+			tempSO.desc = 'Next Day Air';
 			tempSO.name = 'Next Day Air';
-			tempSO.price = 22.95;
+			tempSO.price = tempSO.fullPrice = 22.95;
 			
 			this.model.AllShippingOptions.addItem(tempSO);			
 		}

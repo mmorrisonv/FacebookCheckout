@@ -53,6 +53,7 @@ package com.virid.fbcheckout.model
 		public static const StartProdDetail:String = "SPDETAIL";
 		public static const ShippingOptionsLoaded:String = "SOL";
 		public static const ChargeTotalsChanged:String = "CTC";
+		public static const ShippingOptionsModified:String = "SOMD";
 		//checkout errors
 		public static const CheckoutErrorsInAddCart:String = "EAC";
 		public static const CheckoutErrorsInShipping:String = "ESA";
@@ -84,12 +85,30 @@ package com.virid.fbcheckout.model
 			var newServicesCharge:Number = jsonDecodedCartTotals.services as Number;
 			var newProductCharge:Number = jsonDecodedCartTotals.subtotal as Number;
 			
+			this.chargeProduct = Number(jsonDecodedCartTotals.subtotal);
+			//if product price is over 49.99 change shipping option 0 to be free
+			if( this.chargeProduct >= 49.99 )
+			{
+				
+				this.AllShippingOptions[0].discountMode = true;
+				this._chargeShipping = newShippingCharge = 0;
+				var e:Event = new Event(ShippingOptionsModified,true,false);
+				this.dispatchEvent(e);
+			}
+			else
+			{
+				this.AllShippingOptions[0].discountMode = false;
+				var e:Event = new Event(ShippingOptionsModified,true,false);
+				this.dispatchEvent(e);
+			}
+				
 			if( newShippingCharge && newShippingCharge != 0 && !isNaN(newShippingCharge) )
 				this._chargeShipping = Number(newShippingCharge);
 			if( newTaxCharge && newTaxCharge != 0 && !isNaN(newTaxCharge) )
 				this._chargeTax = Number(newTaxCharge);
 			
-			this.chargeProduct = Number(jsonDecodedCartTotals.subtotal);
+
+			
 			this._chargeService = Number(jsonDecodedCartTotals.services);
 			updateChargeTotal();
 			
@@ -104,7 +123,7 @@ package com.virid.fbcheckout.model
 
 		public function set chargeShipping(value:Number):void
 		{
-			if(value <= 0 || isNaN(value) )
+			if( ( value <= 0 && this.AllShippingOptions[0].discountMode == false )|| isNaN(value) )
 				return;
 			
 			//correlate our new shipping option to one of the hardcoded values
@@ -258,6 +277,7 @@ package com.virid.fbcheckout.model
 		*/
 		
 		public var lastCheckoutErrors:Object;
+		
 		
 		public function handleCheckoutAddCartErrors(errors:Object):void
 		{
