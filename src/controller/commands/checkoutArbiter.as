@@ -252,7 +252,7 @@ package controller.commands
 				Alert2.show('Error Parsing JSON');
 			}
 			
-			if( obj != null && obj.hasOwnProperty('errors') && obj.errors.length > 0 )
+			if( obj != null && obj.hasOwnProperty('errors')  )
 				this.model.handleCheckoutPurchaseErrors(obj.errors);
 		}
 		

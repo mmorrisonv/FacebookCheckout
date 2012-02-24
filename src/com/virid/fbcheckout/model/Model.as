@@ -69,7 +69,7 @@ package com.virid.fbcheckout.model
 		public var urlRootSecure:String = "https://www.journeys.com/";
 		public var urlRootTracking:String = "http://www.journeys.com/pagetrack.aspx?campaignid=1182&action=VIEW&link=/"
 		public var httpService:HTTPService = new HTTPService();
-		public var productID:String = '189282';//'56064';		//main root product id
+		public var productID:String = '218701';//'56064';		//main root product id
 		private var _productSetup:Boolean = false;
 		
 		//extra app data
