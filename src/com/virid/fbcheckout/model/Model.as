@@ -69,7 +69,7 @@ package com.virid.fbcheckout.model
 		public var urlRootSecure:String = "https://www.journeys.com/";
 		public var urlRootTracking:String = "http://www.journeys.com/pagetrack.aspx?campaignid=1182&action=VIEW&link=/"
 		public var httpService:HTTPService = new HTTPService();
-		public var productID:String = '218701';//'56064';		//main root product id
+		public var productID:String = '208584';//'56064';		//main root product id
 		private var _productSetup:Boolean = false;
 		
 		//extra app data
@@ -86,8 +86,8 @@ package com.virid.fbcheckout.model
 			var newProductCharge:Number = jsonDecodedCartTotals.subtotal as Number;
 			
 			this.chargeProduct = Number(jsonDecodedCartTotals.subtotal);
-			//if product price is over 49.99 change shipping option 0 to be free
-			if( this.chargeProduct >= 49.99 )
+			//if product price is over x change shipping option 0 to be free
+			if( this.chargeProduct >= 100.00 )
 			{
 				
 				this.AllShippingOptions[0].discountMode = true;
