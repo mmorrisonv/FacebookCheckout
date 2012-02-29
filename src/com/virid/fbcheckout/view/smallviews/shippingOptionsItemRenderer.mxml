@@ -34,6 +34,6 @@
 		]]>
 	</fx:Script>
 	
-	<s:Label id="shipOption" verticalCenter="2" fontSize="10"/>
+	<s:Label id="shipOption" verticalCenter="2" fontSize="10" x="6"/>
 	
 </s:ItemRenderer>
