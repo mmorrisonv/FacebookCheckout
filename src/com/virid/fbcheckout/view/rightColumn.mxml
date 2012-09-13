@@ -154,7 +154,7 @@
 						<s:SolidColor id="buyItNowBtnBackground" color="0xe07400" />
 					</s:fill>
 				</s:Rect>
-				<s:Label text="BUY IT NOW" color="0xffffff" styleName="lubalin" fontSize="19"
+				<s:Label id="btn_buyItNowText" text="BUY IT NOW" color="0xffffff" styleName="lubalin" fontSize="19"
 						 verticalCenter="2" horizontalCenter="-3" />
 			</s:Group>			
 

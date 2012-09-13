@@ -49,6 +49,7 @@ package com.virid.fbcheckout.model
 				var tsize: SizeVO = tcolor.Sizes[0];
 				tcolor.currentSize = tsize;
 				Product.name = rawArray.NAME;
+				
 				Product.colorObj = tcolor;
 				
 				model.SelectedProduct = Product;

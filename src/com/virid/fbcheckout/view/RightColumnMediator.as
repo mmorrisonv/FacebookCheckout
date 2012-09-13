@@ -80,6 +80,12 @@ package com.virid.fbcheckout.view
 		
 		protected function ui_OnBuyItNowClicked(event:Event):void
 		{
+			if( !this.model.SelectedProduct.isPurchasable )
+			{
+				var urlR:URLRequest = new URLRequest(this.model.urlRootTracking + 'product.aspx?id=' + this.model.productID);
+				navigateToURL(urlR, '_blank');
+				return;
+			}
 			clearCartThenAddCurrentItem();
 			
 			
@@ -193,6 +199,17 @@ package com.virid.fbcheckout.view
 				ui.buyItNowBtnBackground.color = 0xeeeeee;
 				ui.buyItNowBtn.enabled = false;
 			}
+			
+			//check to see if product is purchaseable
+			if(this.model.SelectedProduct.isPurchasable == true){
+				
+				this.ui_OnPurchasable();
+			}
+			else{
+				
+				this.ui_OnUnpurchasable();
+			
+			}
 		}
 		protected function onProdColorChanged(event:Event):void
 		{
@@ -233,6 +250,17 @@ package com.virid.fbcheckout.view
 			
 		}
 		
+		private function ui_OnPurchasable():void
+		{
+			this.ui.btn_buyItNowText.text = "BUY IT NOW";
+			this.ui.buyItNowBtnBackground.color = 0xe07400;
+		}
+		
+		private function ui_OnUnpurchasable():void
+		{
+			this.ui.btn_buyItNowText.text = "IN STORE ONLY";
+			this.ui.buyItNowBtnBackground.color = 0x00b0da;
+		}
 
 	}
 }

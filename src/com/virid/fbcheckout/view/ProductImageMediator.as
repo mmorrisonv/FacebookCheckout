@@ -65,6 +65,11 @@ package com.virid.fbcheckout.view
 			if(this.model.SelectedProduct.colorObj != null)
 				this.ui.productImage.source = this.model.SelectedProduct.colorObj.imageFS;
 			
+			if(!this.model.SelectedProduct.isPurchasable)
+				this.ui.productPriceDisplay.visible = false;
+			else
+				this.ui.productPriceDisplay.visible = true;
+			
 			//if we have a currentSize - use that price . else use a guestimate of the price based on color
 			if(this.model.SelectedProduct.colorObj != null && this.model.SelectedProduct.colorObj.currentSize != null)
 			{

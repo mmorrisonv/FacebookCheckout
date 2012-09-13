@@ -15,6 +15,8 @@ package com.virid.fbcheckout.model.vo
 		//public var price    : String;
 		public var altViews : ArrayCollection = new ArrayCollection();
 		
+		public var isPurchasable	: Boolean = true;
+		
 		//meta
 		public var rating:Number;
 		
