@@ -79,7 +79,7 @@ package controller.commands
 		{
 			// TODO Auto-generated method stub
 			var rawArray:Object;
-			var rawData:String = String(event.result);
+			var rawData:String = String(event.result);trace(rawData)
 			try{
 				rawArray = JSON.decode(rawData,false);
 			}
@@ -121,6 +121,7 @@ package controller.commands
 				newSize.color_code	= jsonSize.COLOR_CODE;
 				newSize.price 		= jsonSize.PRICE; //todo : what to do with LPRICE
 				
+				
 				newSize.size 		= jsonSize.SIZE1_VALUE;
 				newSize.size_code	= jsonSize.SIZE1_VALUE;
 				newSize.size2 		= jsonSize.SIZE2_VALUE;
@@ -149,6 +150,10 @@ package controller.commands
 							tcolor.currentSize = tsize;
 							Product.name = rawArray.NAME;
 							Product.colorObj = tcolor;
+							//trace( rawArray.isPurchasable );
+							//rawArray.isPurchasable = false;
+							Product.isPurchasable = ( rawArray.isPurchasable == undefined) ? true : rawArray.isPurchasable;
+							//trace(Product.isPurchasable);
 							
 							model.SelectedProduct = Product;
 							model.MainProductSKU = tsize;
